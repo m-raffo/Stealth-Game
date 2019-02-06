@@ -5,6 +5,7 @@
  * @type {Number}
  */
 const MOVE_SPEED_WALK = 0.14;
+
 /**
  * Numer of milliseconds needed to get to full walking speed
  * @constant
@@ -37,11 +38,43 @@ var player = {
     var deltaTime = 1000.0 / frameRate();
 
     if (deltaTime === Infinity)
-    return
+      return
 
+
+    // TODO: Improve readability of this section/add comments (if you want to)
     // Adjust speeds based on arrows pressed
-    if (keyIsDown(RIGHT_ARROW) && Math.abs(this.speedX) < MOVE_SPEED_WALK) {
+    if (keyIsDown(LEFT_ARROW) && Math.abs(this.speedX) < MOVE_SPEED_WALK) {
       this.speedX -= MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
+    } else if (keyIsDown(RIGHT_ARROW) &&  Math.abs(this.speedX) < MOVE_SPEED_WALK) {
+      this.speedX += MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
+    } else if (((!keyIsDown(RIGHT_ARROW) && !keyIsDown(LEFT_ARROW)) ||
+      (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW))) && this.speedX != 0) {
+        if (this.speedX < 0) {
+          this.speedX += MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
+        } else {
+          this.speedX -= MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
+        }
+
+        // If speed is close enough to zero, just stop
+        if (Math.abs(this.speedX) < 0.02)
+          this.speedX = 0;
+    }
+
+    if (keyIsDown(UP_ARROW) && Math.abs(this.speedY) < MOVE_SPEED_WALK) {
+      this.speedY -= MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
+    } else if (keyIsDown(DOWN_ARROW) &&  Math.abs(this.speedY) < MOVE_SPEED_WALK) {
+      this.speedY += MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
+    } else if (((!keyIsDown(DOWN_ARROW) && !keyIsDown(UP_ARROW)) ||
+      (keyIsDown(DOWN_ARROW) && keyIsDown(UP_ARROW))) && this.speedY != 0) {
+        if (this.speedY < 0) {
+          this.speedY += MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
+        } else {
+          this.speedY -= MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
+        }
+
+        // If speed is close enough to zero, just stop
+        if (Math.abs(this.speedY) < 0.02)
+          this.speedY = 0;
     }
 
     // Move character given current speeds
