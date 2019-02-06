@@ -68,19 +68,14 @@ function drawItem(item) {
 
 
       // these variables are not totally necessay, created to improve readability
-      var imageWidth = item.width;
-      var imageHeight = item.height;
+      var imageWidth = item.width / cam.width * width;
+      var imageHeight = item.height / cam.height * height;
 
-
-      console.log("Drawing image!!!");
-      console.log(item.x - cam.originX());
-      console.log();
 
 
       image(item.image, (item.x - cam.originX()) - (imageWidth / 2), (item.y - cam.originY()) - (imageWidth / 2), imageWidth, imageHeight);
 
   } else {
-    console.log("Offscreen");
     return null;
   }
 
