@@ -1,13 +1,6 @@
 var canvas;
-var guy = {
-  // image : loadImage("guy.png"),
-  x : 0,
-  y : 0,
-  width: 100,
-  height : 100
-}
 
-
+// 1 PIXEL/WORLD UNIT = 1 CM
 
 function setup() {
   canvas = createCanvas(windowWidth,windowHeight);
@@ -16,7 +9,7 @@ function setup() {
   document.documentElement.style.overflow = 'hidden';  // firefox, chrome
   document.body.scroll = "no"; // ie only
 
-  guy.image = loadImage("guy.png");
+  player.image = loadImage("guy.png");
 
 }
 
@@ -25,23 +18,31 @@ function setup() {
 function draw() {
   background("#363636");
 
-  drawItem(guy);
+  // TODO: update the width and height of the camera based on screen size
 
 
 
+
+
+  // Get player movements
+  player.move();
+
+
+
+  drawItem(player);
 }
 
 
 
-// Takes in an item with x and y variables, uses cam variable
-// display it in the correct location onscreen
+/**
+ * Draws an item on the scree
+ * @param  {object} item the item to be drawn
+ * @return {undefined}      no return value
+ */
 function drawItem(item) {
 
   // if offscreen, return null
-  if (cam.onScreen(item.x - (item.width/2), item.y - (item.height/2)) ||
-      cam.onScreen(item.x + (item.width/2), item.y - (item.height/2)) ||
-      cam.onScreen(item.x - (item.width/2), item.y + (item.height/2)) ||
-      cam.onScreen(item.x + (item.width/2), item.y + (item.height/2)) ) {
+  if (cam.objectOnScreen(item)) {
 
 
       // these variables are not totally necessay, created to improve readability
@@ -50,10 +51,8 @@ function drawItem(item) {
 
 
 
-      image(item.image, (item.x - cam.originX()) - (imageWidth / 2), (item.y - cam.originY()) - (imageWidth / 2), imageWidth, imageHeight);
+      image(item.image, ((item.x - cam.originX()) / cam.width * width) - (imageWidth / 2), ((item.y - cam.originY()) / cam.height * height) - (imageWidth / 2), imageWidth, imageHeight);
 
-  } else {
-    return null;
   }
 
 }
