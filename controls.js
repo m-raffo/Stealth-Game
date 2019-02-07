@@ -5,6 +5,10 @@
  * @type {Object}
  */
 var controls = {
+  /**
+   * Contains the key bindings for all of the controls of the game
+   * @type {Object}
+   */
   bindings : {
     "MOVE_UP" : [38, 87],  // up arrow and 'w' key
     "MOVE_LEFT" : [37, 65],  // left arrow and 'a' key
