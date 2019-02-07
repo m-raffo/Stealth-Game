@@ -42,13 +42,19 @@ var player = {
 
 
     // TODO: Improve readability of this section/add comments (if you want to)
-    // Adjust speeds based on arrows pressed
-    if (keyIsDown(LEFT_ARROW) && Math.abs(this.speedX) < MOVE_SPEED_WALK) {
+
+    // Right/left movement
+    if (controls.isControlPressed("MOVE_LEFT") && Math.abs(this.speedX) < MOVE_SPEED_WALK) {
       this.speedX -= MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
-    } else if (keyIsDown(RIGHT_ARROW) &&  Math.abs(this.speedX) < MOVE_SPEED_WALK) {
+    }
+
+    else if (controls.isControlPressed("MOVE_RIGHT") &&  Math.abs(this.speedX) < MOVE_SPEED_WALK) {
       this.speedX += MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
-    } else if (((!keyIsDown(RIGHT_ARROW) && !keyIsDown(LEFT_ARROW)) ||
-      (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW))) && this.speedX != 0) {
+    }
+
+    else if (((!controls.isControlPressed("MOVE_RIGHT") && !controls.isControlPressed("MOVE_LEFT")) ||
+      (controls.isControlPressed("MOVE_RIGHT") && controls.isControlPressed("MOVE_LEFT"))) && this.speedX != 0) {
+
         if (this.speedX < 0) {
           this.speedX += MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
         } else {
@@ -60,12 +66,19 @@ var player = {
           this.speedX = 0;
     }
 
-    if (keyIsDown(UP_ARROW) && Math.abs(this.speedY) < MOVE_SPEED_WALK) {
+
+    // Up/down movement
+    if (controls.isControlPressed("MOVE_UP") && Math.abs(this.speedY) < MOVE_SPEED_WALK) {
       this.speedY -= MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
-    } else if (keyIsDown(DOWN_ARROW) &&  Math.abs(this.speedY) < MOVE_SPEED_WALK) {
+    }
+
+    else if (controls.isControlPressed("MOVE_DOWN") &&  Math.abs(this.speedY) < MOVE_SPEED_WALK) {
       this.speedY += MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
-    } else if (((!keyIsDown(DOWN_ARROW) && !keyIsDown(UP_ARROW)) ||
-      (keyIsDown(DOWN_ARROW) && keyIsDown(UP_ARROW))) && this.speedY != 0) {
+    }
+
+    else if (((!controls.isControlPressed("MOVE_DOWN") && !controls.isControlPressed("MOVE_UP")) ||
+      (controls.isControlPressed("MOVE_DOWN") && controls.isControlPressed("MOVE_UP"))) && this.speedY != 0) {
+
         if (this.speedY < 0) {
           this.speedY += MOVE_SPEED_WALK / ACCEL_SPEED_WALK * deltaTime;
         } else {
