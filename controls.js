@@ -10,11 +10,11 @@ var controls = {
    * @type {Object}
    */
   bindings : {
-    "MOVE_UP" : [38, 87],  // up arrow and 'w' key
+    "MOVE_UP" : [38, 87],    // up arrow and 'w' key
     "MOVE_LEFT" : [37, 65],  // left arrow and 'a' key
     "MOVE_RIGHT" : [39, 68], // right arrow and 'd' key
-    "MOVE_DOWN" : [40, 83], // down arrow and 'd' key
-    "CROUCH" : [16] // shift
+    "MOVE_DOWN" : [40, 83],  // down arrow and 'd' key
+    "CROUCH" : [16]          // shift
   },
   /**
    * Checks if the given control is currently pressed.
