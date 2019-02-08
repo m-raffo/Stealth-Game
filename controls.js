@@ -41,5 +41,21 @@ var controls = {
     } else {  // if the control does not have a binding, return false
       return false;
     }
+  },
+
+  /**
+   * Logs all of the controls and if they are currently pressed or not
+   * (For debugging)
+   * @return {undefined} No return value
+   */
+  logControls : function() {
+
+    console.log("====CURRENT CONTROLS===========================");
+
+    Object.keys(this.bindings).forEach(key => {
+
+      console.log("    " + key.toString() + "  " + controls.isControlPressed(key).toString());
+    });
+    console.log("===============================================")
   }
 };

@@ -4,19 +4,19 @@
  * @constant
  * @type {Number}
  */
-const MOVE_SPEED_WALK = 0.5;
+const MOVE_SPEED_WALK = 0.7;
 
 /**
  * The movement speed of the player when crouched
  * @type {Number}
  */
-const MOVE_SPEED_CROUCH = 0.3;
+const MOVE_SPEED_CROUCH = 0.25;
 
 /**
  * The movement speed of the player when running
  * @type {Number}
  */
-const MOVE_SPEED_RUN = 5;
+const MOVE_SPEED_RUN = 1;
 
 /**
  * Number of milliseconds needed to get to full walking speed
@@ -44,6 +44,9 @@ var player = {
    * @return {undefined} No return value
    */
   move : function() {
+
+    controls.logControls();
+
     // Calculates player's movement based on inputted controls
 
     // Stores the number of milliseconds since the last frame
@@ -65,51 +68,64 @@ var player = {
     // TODO: Improve readability of this section/add comments (if you want to)
 
     // Right/left movement
-    if (controls.isControlPressed("MOVE_LEFT") && Math.abs(this.speedX) < playerMaxSpeed) {
-      this.speedX -= playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
+
+    // If neither control is pressed, or both controls are pressed, slow down
+    if ((!controls.isControlPressed("MOVE_RIGHT") && !controls.isControlPressed("MOVE_LEFT")) || ((controls.isControlPressed("MOVE_RIGHT") && controls.isControlPressed("MOVE_LEFT")))) {
+      // TODO: Replace 80% with math that reflects the ACCEL_SPEED_WALK value
+      this.speedX *= 0.8;
+
+      // If speed is almost zero, just stop
+      if (Math.abs(this.speedX) < 0.2){
+        this.speedX = 0;
+      }
+    } else {
+      // If pressing only left key and not going too fast
+      if (controls.isControlPressed("MOVE_LEFT") && this.speedX > playerMaxSpeed * -1) {
+        this.speedX -= playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
+      }
+
+      // If pressing only right key and not going too fast
+      else if (controls.isControlPressed("MOVE_RIGHT") &&  this.speedX < playerMaxSpeed) {
+        this.speedX += playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
+      }
     }
 
-    else if (controls.isControlPressed("MOVE_RIGHT") &&  Math.abs(this.speedX) < playerMaxSpeed) {
-      this.speedX += playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
+
+    // If neither control is pressed, or both controls are pressed, slow down
+    if ((!controls.isControlPressed("MOVE_DOWN") && !controls.isControlPressed("MOVE_UP")) || ((controls.isControlPressed("MOVE_DOWN") && controls.isControlPressed("MOVE_UP")))) {
+      // TODO: Replace 80% with math that reflects the ACCEL_SPEED_WALK value
+      this.speedY *= 0.8;
+
+      // If speed is almost zero, just stop
+      if (Math.abs(this.speedY) < 0.2){
+        this.speedY = 0;
+      }
+    } else {
+      // If pressing only left key and not going too fast
+      if (controls.isControlPressed("MOVE_UP") && this.speedY > playerMaxSpeed * -1) {
+        this.speedY -= playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
+      }
+
+      // If pressing only right key and not going too fast
+      else if (controls.isControlPressed("MOVE_DOWN") &&  this.speedY < playerMaxSpeed) {
+        this.speedY += playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
+      }
     }
 
-    else if (((!controls.isControlPressed("MOVE_RIGHT") && !controls.isControlPressed("MOVE_LEFT")) ||
-      (controls.isControlPressed("MOVE_RIGHT") && controls.isControlPressed("MOVE_LEFT"))) && this.speedX != 0) {
 
-        if (this.speedX < 0) {
-          this.speedX += playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
-        } else {
-          this.speedX -= playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
-        }
+    // Check if above the maximum speed
+    if (Math.abs(this.speedX) > playerMaxSpeed) {
+      this.speedX *= 0.8;
 
-        // If speed is close enough to zero, just stop
-        if (Math.abs(this.speedX) < 0.02)
-          this.speedX = 0;
+      // If the reduction in speed has brought the player to below the max speed
+      // raise them back up to it
+      if (this.speedX > playerMaxSpeed) {
+        this.speedX = playerMaxSpeed;
+      } else if (this.speedX < playerMaxSpeed * -1) {
+        this.speedX = playerMaxSpeed * -1;
+      }
     }
 
-
-    // Up/down movement
-    if (controls.isControlPressed("MOVE_UP") && Math.abs(this.speedY) < playerMaxSpeed) {
-      this.speedY -= playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
-    }
-
-    else if (controls.isControlPressed("MOVE_DOWN") &&  Math.abs(this.speedY) < playerMaxSpeed) {
-      this.speedY += playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
-    }
-
-    else if (((!controls.isControlPressed("MOVE_DOWN") && !controls.isControlPressed("MOVE_UP")) ||
-      (controls.isControlPressed("MOVE_DOWN") && controls.isControlPressed("MOVE_UP"))) && this.speedY != 0) {
-
-        if (this.speedY < 0) {
-          this.speedY += playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
-        } else {
-          this.speedY -= playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
-        }
-
-        // If speed is close enough to zero, just stop
-        if (Math.abs(this.speedY) < 0.02)
-          this.speedY = 0;
-    }
 
 
 
