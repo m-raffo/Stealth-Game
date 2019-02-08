@@ -14,7 +14,8 @@ var controls = {
     "MOVE_LEFT" : [37, 65],  // left arrow and 'a' key
     "MOVE_RIGHT" : [39, 68], // right arrow and 'd' key
     "MOVE_DOWN" : [40, 83],  // down arrow and 'd' key
-    "CROUCH" : [16]          // shift
+    "CROUCH" : [16],          // shift
+    "SPRINT" : [32],          // space
   },
   /**
    * Checks if the given control is currently pressed.
