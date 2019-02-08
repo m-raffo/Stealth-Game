@@ -58,5 +58,6 @@ function drawItem(item) {
 }
 
 window.onresize = function() {
-  resizeCanvas(windowWidth, windowHeight)
+  resizeCanvas(windowWidth, windowHeight);
+  cam.updateSize();
 };

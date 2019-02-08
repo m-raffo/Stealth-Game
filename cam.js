@@ -1,3 +1,18 @@
+/**
+ * The ideal height for the camera, it is adjusted to meet the player's screen
+ *   dimentions
+ * @type {Number}
+ * @constant
+ */
+const CAM_TARGET_HEIGHT = 3500;
+/**
+ * The ideal width for the camera, it is adjusted to meet the player's screen
+ *   dimentions
+ * @type {Number}
+ * @constant
+ */
+const CAM_TARGET_WIDTH  = 6200;
+
 var cam = {
   x : 0,
   y : 0,
@@ -82,6 +97,22 @@ var cam = {
       return undefined;
     }
   },
+
+  /**
+   * Updates the size of the camera to match the size of the window.
+   * Aims to keep the screen in a proportion of 1920*1080
+   * Keeps the ratio of the sides square, to prevent dilation in one axis
+   * @return {undefined} No return value
+   */
+  updateSize : function() {
+    if (windowWidth / windowHeight > 1.7) {
+      cam.width = CAM_TARGET_WIDTH;
+      cam.height = CAM_TARGET_WIDTH * windowHeight / windowWidth;
+    } else {
+      cam.width = CAM_TARGET_HEIGHT * windowWidth / windowHeight;
+      cam.height =  CAM_TARGET_HEIGHT;
+    }
+  }
 
 
 }
