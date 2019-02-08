@@ -3,7 +3,8 @@ var canvas;
 // 1 PIXEL/WORLD UNIT = 1 CM
 
 function setup() {
-  canvas = createCanvas(windowWidth,windowHeight);
+  createCanvas(windowWidth,windowHeight);
+  cam.updateSize();
 
   // hide scroll bars
   document.documentElement.style.overflow = 'hidden';  // firefox, chrome
@@ -58,5 +59,6 @@ function drawItem(item) {
 }
 
 window.onresize = function() {
-  resizeCanvas(windowWidth, windowHeight)
+  resizeCanvas(windowWidth, windowHeight);
+  cam.updateSize();
 };
