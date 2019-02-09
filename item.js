@@ -75,13 +75,35 @@ function Item(name, x, y, imagePath, width, height) {
 
   this.checkCollision = function(target) {
     // TODO: Implement this function
+
+    if (this.collisionShape === "box") {
+      if (target.collisionShape === "box") {
+
+        // If any of the corners of the target collide with this object, it is a
+        // collision
+
+        // Formula:
+        //    if (RectA.Left < RectB.Right && RectA.Right > RectB.Left &&
+        // RectA.Top > RectB.Bottom && RectA.Bottom < RectB.Top )
+        return (
+          this.x - (this.width / 2) <= target.x + (target.width / 2) &&
+          this.x + (this.width / 2) >= target.x - (target.width / 2) &&
+          this.y + (this.height / 2) >= target.y - (target.height / 2) &&
+          this.y - (this.height / 2) <= target.y + (target.height / 2)
+         )
+
+      } else if (target.collisionShape === "circle") {
+        // TODO: Implement box and circle collision
+        // see: https://www.geeksforgeeks.org/check-line-touches-intersects-circle/
+      }
+    }
   }
 
   /**
    * Determines if the given point is in collision with the item
    * @param  {Number} targetX    x position of the point to check
    * @param  {Number} targetY    y position of the point to check
-   * @return {undefined}         no return value
+     * @return {Boolean}         true if there is a collision, false if not
    */
   this.checkCollisionPoint = function(targetX, targetY) {
     if (this.collisionShape === "box") {
