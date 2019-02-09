@@ -93,5 +93,5 @@ function Item(name, x, y, imagePath, width, height) {
   }
 }
 
-
+if (typeof(modele) !== 'undefined')
 module.exports = Item;

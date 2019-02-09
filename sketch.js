@@ -23,12 +23,6 @@ function draw() {
   // TODO: update the width and height of the camera based on screen size
 
 
-  // Update sizes
-  resizeCanvas(windowWidth, windowHeight);
-  cam.updateSize();
-
-
-
   // Get player movements
   player.move();
 

@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var assert = require('chai').assert;
 
 
-var Item = require('../items');
+var Item = require('../item');
 
 describe('Item tests', function() {
   beforeEach(function() {
@@ -22,7 +22,7 @@ describe('Item tests', function() {
     done();
   })
 
-  it('should determine when .checkCollisionPoint is true', function(done) {
+  it('should determine when .checkCollisionPoint is true (box)', function(done) {
     assert.equal(testItem.checkCollisionPoint(10, 10), true);
     assert.equal(testItem.checkCollisionPoint(0, 10), true);
     assert.equal(testItem.checkCollisionPoint(10, 0), true);
@@ -34,7 +34,7 @@ describe('Item tests', function() {
     done();
   });
 
-  it('should determine when .checkCollisionPoint is false', function(done) {
+  it('should determine when .checkCollisionPoint is false (box)', function(done) {
     assert.equal(testItem.checkCollisionPoint(-10, 10), false);
     assert.equal(testItem.checkCollisionPoint(-1, 10), false);
     assert.equal(testItem.checkCollisionPoint(10, -1), false);
