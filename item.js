@@ -74,7 +74,7 @@ function Item(name, x, y, imagePath, width, height) {
   this.collisionShape = "box";
 
   this.checkCollision = function(target) {
-
+    // TODO: Implement this function
   }
 
   /**
@@ -86,12 +86,13 @@ function Item(name, x, y, imagePath, width, height) {
   this.checkCollisionPoint = function(targetX, targetY) {
     if (this.collisionShape === "box") {
       // check if the point is between x and x + width and also between y and y + height
-      return (this.x <= targetX && this.x + this.width >= targetX && this.y <= targetY && this.y + this.height >= targetY);
+      return (this.x - (this.width / 2) <= targetX && this.x + (this.width / 2) >= targetX && this.y - (this.height / 2) <= targetY && this.y + (this.height / 2) >= targetY);
     } else if (this.collisionShape === "circle") {
       return (Math.sqrt( ((this.x - targetX) ** 2) + ((this.y - targetY) ** 2)) <= this.width / 2);
     }
   }
 }
 
-if (typeof(modele) !== 'undefined')
-module.exports = Item;
+if (typeof(module) !== 'undefined') {
+  module.exports = Item;
+}
