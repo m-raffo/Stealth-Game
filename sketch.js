@@ -1,4 +1,4 @@
-var canvas;
+var crate;
 
 // 1 PIXEL/WORLD UNIT = 1 CM
 
@@ -11,6 +11,7 @@ function setup() {
   document.body.scroll = "no"; // ie only
 
   player.image = loadImage("guy.png");
+  crate = new Item("crate", 0, 0, "/assets/items/crate.png", player.width, player.height);
 
 }
 
@@ -22,6 +23,9 @@ function draw() {
   // TODO: update the width and height of the camera based on screen size
 
 
+  // Update sizes
+  resizeCanvas(windowWidth, windowHeight);
+  cam.updateSize();
 
 
 
@@ -31,6 +35,7 @@ function draw() {
 
 
   drawItem(player);
+  drawItem(crate);
 }
 
 

@@ -4,7 +4,7 @@
  * @constant
  * @type {Number}
  */
-const MOVE_SPEED_WALK = 0.7;
+const MOVE_SPEED_WALK = 0.5;
 
 /**
  * The movement speed of the player when crouched
@@ -90,6 +90,19 @@ var player = {
       }
     }
 
+    // Check if above the maximum speed
+    if (Math.abs(this.speedX) > playerMaxSpeed) {
+      this.speedX *= 0.8;
+
+      // If the reduction in speed has brought the player to below the max speed
+      // raise them back up to it
+      if (this.speedX > playerMaxSpeed) {
+        this.speedX = playerMaxSpeed;
+      } else if (this.speedX < playerMaxSpeed * -1) {
+        this.speedX = playerMaxSpeed * -1;
+      }
+    }
+
 
     // If neither control is pressed, or both controls are pressed, slow down
     if ((!controls.isControlPressed("MOVE_DOWN") && !controls.isControlPressed("MOVE_UP")) || ((controls.isControlPressed("MOVE_DOWN") && controls.isControlPressed("MOVE_UP")))) {
@@ -114,15 +127,15 @@ var player = {
 
 
     // Check if above the maximum speed
-    if (Math.abs(this.speedX) > playerMaxSpeed) {
-      this.speedX *= 0.8;
+    if (Math.abs(this.speedY) > playerMaxSpeed) {
+      this.speedY *= 0.8;
 
       // If the reduction in speed has brought the player to below the max speed
       // raise them back up to it
-      if (this.speedX > playerMaxSpeed) {
-        this.speedX = playerMaxSpeed;
-      } else if (this.speedX < playerMaxSpeed * -1) {
-        this.speedX = playerMaxSpeed * -1;
+      if (this.speedY > playerMaxSpeed) {
+        this.speedY = playerMaxSpeed;
+      } else if (this.speedY < playerMaxSpeed * -1) {
+        this.speedY = playerMaxSpeed * -1;
       }
     }
 
