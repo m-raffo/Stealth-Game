@@ -88,6 +88,7 @@ var player = {
       else if (controls.isControlPressed("MOVE_RIGHT") &&  this.speedX < playerMaxSpeed) {
         this.speedX += playerMaxSpeed / ACCEL_SPEED_WALK * deltaTime;
       }
+
     }
 
 
@@ -113,6 +114,7 @@ var player = {
     }
 
 
+
     // Check if above the maximum speed
     if (Math.abs(this.speedX) > playerMaxSpeed) {
       this.speedX *= 0.8;
@@ -125,7 +127,6 @@ var player = {
         this.speedX = playerMaxSpeed * -1;
       }
     }
-
 
 
 

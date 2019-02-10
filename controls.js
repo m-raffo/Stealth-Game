@@ -14,13 +14,14 @@ var controls = {
     "MOVE_LEFT" : [37, 65],  // left arrow and 'a' key
     "MOVE_RIGHT" : [39, 68], // right arrow and 'd' key
     "MOVE_DOWN" : [40, 83],  // down arrow and 'd' key
-    "CROUCH" : [16],          // shift
-    "SPRINT" : [32],          // space
+    "CROUCH" : [16],         // shift
+    "SPRINT" : [32],         // space
   },
   /**
    * Checks if the given control is currently pressed.
    * If a nonexistant control is passed, False is returned
-   * @param  {String} control the name of the control (as a string)
+   * @param  {String} control  the name of the control (as a string)
+
    * @return {Boolean}         True if the key is pressed, False if it is not
    */
   isControlPressed : function( control ) {
