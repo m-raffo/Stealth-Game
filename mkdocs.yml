@@ -1,0 +1,11 @@
+site_name: Stealth Game Docs
+nav:
+  - Main: sketch.js.md
+  - Item: item.js.md
+  - Camera: cam.js.md
+  - Controls: controls.js.md
+  - Player: player.js.md
+
+
+
+theme: 'material'

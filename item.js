@@ -49,18 +49,21 @@ function Item(name, x, y, imagePath, width, height) {
   /**
    * Determines if the object collides with the player
    * @type {Boolean}
+   * @default
    */
   this.collisionPlayer = true;
 
   /**
    * Determines if the item collides with bullets
    * @type {Boolean}
+   * @default
    */
   this.collisionBullet = false;
 
   /**
    * Determines if the item blocks line-of-sight
    * @type {Boolean}
+   * @default
    */
   this.collisionSight = true;
 
