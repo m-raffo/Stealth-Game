@@ -35,35 +35,10 @@ function draw() {
   player.move();
 
 
-
-  drawItem(player);
-  drawItem(crate);
+  cam.drawItem(player);
+  cam.drawItem(crate);
 }
 
-
-
-/**
- * Draws an item on the scree
- * @param  {object} item the item to be drawn
- * @return {undefined}      no return value
- */
-function drawItem(item) {
-
-  // if offscreen, return null
-  if (cam.objectOnScreen(item)) {
-
-
-      // these variables are not totally necessay, created to improve readability
-      var imageWidth = item.width / cam.width * width;
-      var imageHeight = item.height / cam.height * height;
-
-
-
-      image(item.image, ((item.x - cam.originX()) / cam.width * width) - (imageWidth / 2), ((item.y - cam.originY()) / cam.height * height) - (imageWidth / 2), imageWidth, imageHeight);
-
-  }
-
-}
 
 window.onresize = function() {
   resizeCanvas(windowWidth, windowHeight);

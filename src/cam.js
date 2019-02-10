@@ -138,6 +138,26 @@ var cam = {
       cam.height =  CAM_TARGET_HEIGHT;
     }
   }
+  },
+
+  /**
+   * Draws an item on the screen using the correct scaling and position
+   * @param  {Object}     item    item to be drawn
+   * @return {undefined}          No return value
+   */
+  drawItem: function(item) {
+    // only draw if the object is on the screen
+    if (this.objectOnScreen(item)) {
+      const imageWidth = item.width / cam.width * width;
+      const imageHeight = item.height / cam.height * height;
+
+      image(item.image,
+          ((item.x - cam.originX()) / cam.width * width) - (imageWidth / 2),
+          ((item.y - cam.originY()) / cam.height * height) - (imageWidth / 2),
+          imageWidth,
+          imageHeight);
+    }
+  },
 
 
 }
