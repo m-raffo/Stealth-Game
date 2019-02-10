@@ -1,4 +1,4 @@
-var crate;
+let crate;
 
 // 1 PIXEL/WORLD UNIT = 1 CM
 
@@ -8,25 +8,26 @@ var crate;
  * @return {undefined} No return value
  */
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(windowWidth, windowHeight);
   cam.updateSize();
 
   // hide scroll bars
-  document.documentElement.style.overflow = 'hidden';  // firefox, chrome
-  document.body.scroll = "no"; // ie only
+  document.documentElement.style.overflow = 'hidden'; // firefox, chrome
+  document.body.scroll = 'no'; // ie only
 
-  player.image = loadImage("guy.png");
-  crate = new Item("crate", 0, 0, "/assets/items/crate.png", player.width, player.height);
-
+  player.image = loadImage('guy.png');
+  crate = new Item('crate', 0, 0, '/assets/items/crate.png', player.width,
+      player.height);
 }
 
 
 /**
- * The main loop of the game. This function is called continually by the p5.js library.
+ * The main loop of the game. This function is called continually by the p5.js
+ * library.
  * @return {undefined} No return value
  */
 function draw() {
-  background("#363636");
+  background('#363636');
 
   // TODO: update the width and height of the camera based on screen size
 

@@ -11,38 +11,38 @@ const CAM_TARGET_HEIGHT = 3500;
  * @type {Number}
  * @constant
  */
-const CAM_TARGET_WIDTH  = 6200;
+const CAM_TARGET_WIDTH = 6200;
 
 /**
  * The camera object for the world.
  * @type {Object}
  */
-var cam = {
+const cam = {
   /**
    * x position of the camera in the world (from the center)
    * @type {Number}
    * @default
    */
-  x : 0,
+  x: 0,
 
   /**
    * y position of the camera in the world (from the center)
    * @type {Number}
    * @default
    */
-  y : 0,
+  y: 0,
 
   /**
    * width of the camera (in world units, not pixels)
    * @type {Number}
    */
-  width : 2000,
+  width: 2000,
 
   /**
    * height of the camera (in world units, not pixels)
    * @type {Number}
    */
-  height : 2000,
+  height: 2000,
 
   /**
    * Determines if a point is on screen
@@ -50,8 +50,10 @@ var cam = {
    * @param  {Number} pointY y coordinate of the point
    * @return {Boolean}        True if on the screen, False if not
    */
-  onScreen : function(pointX, pointY) {
-    if (pointX < this.originX() || pointY < this.originY() || pointX > this.originX() + this.width || pointY > this.originY() + this.height){
+  onScreen: function(pointX, pointY) {
+    if (pointX < this.originX() || pointY < this.originY() ||
+    pointX > this.originX() + this.width
+    || pointY > this.originY() + this.height) {
       return false;
     } else {
       return true;
@@ -63,16 +65,15 @@ var cam = {
    * @param  {Object} item  the item to be checked
    * @return {Boolean}      True if onscreen, False if not
    */
-  objectOnScreen : function(item) {
-
+  objectOnScreen: function(item) {
     if (this.onScreen(item.x - (item.width/2), item.y - (item.height/2)) ||
         this.onScreen(item.x + (item.width/2), item.y - (item.height/2)) ||
         this.onScreen(item.x - (item.width/2), item.y + (item.height/2)) ||
         this.onScreen(item.x + (item.width/2), item.y + (item.height/2)) ) {
-          return true;
-        } else {
-          return false;
-        }
+      return true;
+    } else {
+      return false;
+    }
   },
 
   /**
@@ -80,7 +81,7 @@ var cam = {
    *   camera
    * @return {Number} x coordinate
    */
-  originX : function() {
+  originX: function() {
     return this.x - (this.width/2);
   },
 
@@ -89,7 +90,7 @@ var cam = {
    *   camera
    * @return {Number} y coordinate
    */
-  originY : function() {
+  originY: function() {
     return this.y - (this.height/2);
   },
 
@@ -99,11 +100,11 @@ var cam = {
    * @param  {Number} pointX X coordinate to get
    * @return {Number}        The X coordinate of the pixel position on screen
    */
-  getOnscreenX : function(pointX) {
-    if (this.onScreen(pointX, this.y)) {  // use this.y as a point that is for-sure on screen
+  getOnscreenX: function(pointX) {
+    // use this.y as a point that is for-sure on screen
+    if (this.onScreen(pointX, this.y)) {
       return (pointX - this.originX()) * width / cam.width;
-    }
-    else { // if the point is not onscreen
+    } else { // if the point is not onscreen
       return undefined;
     }
   },
@@ -114,11 +115,11 @@ var cam = {
    * @param  {Number} pointY Y coordinate to get
    * @return {Number}        The Y coordinate of the pixel position on screen
    */
-  getOnscreenY : function(pointY) {
-    if (this.onScreen(this.x, pointY)) {  // use this.y as a point that is for-sure on screen
+  getOnscreenY: function(pointY) {
+    // use this.x as a point that is for-sure on screen
+    if (this.onScreen(this.x, pointY)) {
       return (pointY - this.originY()) * height / cam.height;
-    }
-    else { // if the point is not onscreen
+    } else { // if the point is not onscreen
       return undefined;
     }
   },
@@ -129,15 +130,14 @@ var cam = {
    * Keeps the ratio of the sides square, to prevent dilation in one axis.
    * @return {undefined} No return value
    */
-  updateSize : function() {
+  updateSize: function() {
     if (windowWidth / windowHeight > 1.7) {
       cam.width = CAM_TARGET_WIDTH;
       cam.height = CAM_TARGET_WIDTH * windowHeight / windowWidth;
     } else {
       cam.width = CAM_TARGET_HEIGHT * windowWidth / windowHeight;
-      cam.height =  CAM_TARGET_HEIGHT;
+      cam.height = CAM_TARGET_HEIGHT;
     }
-  }
   },
 
   /**
@@ -160,4 +160,4 @@ var cam = {
   },
 
 
-}
+};

@@ -2,8 +2,8 @@
  * The constructor for an item object. Items are things in the world that the
  *   player will interact with, but are smaller than rooms or sections.
  * @param       {String} name      the name of the object
- * @param       {Number} x         x position in the world of the object (center)
- * @param       {Number} y         y position in the world of the object (center)
+ * @param       {Number} x         x position in the world (from center)
+ * @param       {Number} y         y position in the world (from center)
  * @param       {String} imagePath path to the image of the file
  * @param       {Number} width     width of the object
  * @param       {Number} height    height of the object
@@ -74,13 +74,12 @@ function Item(name, x, y, imagePath, width, height) {
    * @type {String}
    */
   // TODO: Add elliptical collision option
-  this.collisionShape = "box";
+  this.collisionShape = 'box';
 
   this.checkCollision = function(target) {
     // TODO: Implement this function
-    if (this.collisionShape === "box") {
-      if (target.collisionShape === "box") {
-
+    if (this.collisionShape === 'box') {
+      if (target.collisionShape === 'box') {
         // If any of the corners of the target collide with this object, it is a
         // collision
 
@@ -92,14 +91,13 @@ function Item(name, x, y, imagePath, width, height) {
           this.x + (this.width / 2) >= target.x - (target.width / 2) &&
           this.y + (this.height / 2) >= target.y - (target.height / 2) &&
           this.y - (this.height / 2) <= target.y + (target.height / 2)
-         )
-
-      } else if (target.collisionShape === "circle") {
+        );
+      } else if (target.collisionShape === 'circle') {
         // TODO: Implement box and circle collision
-        // see: https://www.geeksforgeeks.org/check-line-touches-intersects-circle/
+        // https://www.geeksforgeeks.org/check-line-touches-intersects-circle/
       }
     }
-  }
+  };
 
   /**
    * Determines if the given point is in collision with the item
@@ -108,13 +106,18 @@ function Item(name, x, y, imagePath, width, height) {
    * @return {Boolean}           true if there is a collision, false if not
    */
   this.checkCollisionPoint = function(targetX, targetY) {
-    if (this.collisionShape === "box") {
-      // check if the point is between x and x + width and also between y and y + height
-      return (this.x - (this.width / 2) <= targetX && this.x + (this.width / 2) >= targetX && this.y - (this.height / 2) <= targetY && this.y + (this.height / 2) >= targetY);
-    } else if (this.collisionShape === "circle") {
-      return (Math.sqrt( ((this.x - targetX) ** 2) + ((this.y - targetY) ** 2)) <= this.width / 2);
+    if (this.collisionShape === 'box') {
+      // check if the point is between x and x + width and
+      // also between y and y + height
+      return (this.x - (this.width / 2) <= targetX &&
+      this.x + (this.width / 2) >= targetX &&
+      this.y - (this.height / 2) <= targetY &&
+      this.y + (this.height / 2) >= targetY);
+    } else if (this.collisionShape === 'circle') {
+      return (Math.sqrt(((this.x - targetX) ** 2) + ((this.y - targetY) ** 2))
+      <= this.width / 2);
     }
-  }
+  };
 }
 
 if (typeof(module) !== 'undefined') {

@@ -26,8 +26,8 @@ The constructor for an item object. Items are things in the world that the  pla
 | Param | Type | Description |
 | --- | --- | --- |
 | name | <code>String</code> | the name of the object |
-| x | <code>Number</code> | x position in the world of the object (center) |
-| y | <code>Number</code> | y position in the world of the object (center) |
+| x | <code>Number</code> | x position in the world (from center) |
+| y | <code>Number</code> | y position in the world (from center) |
 | imagePath | <code>String</code> | path to the image of the file |
 | width | <code>Number</code> | width of the object |
 | height | <code>Number</code> | height of the object |

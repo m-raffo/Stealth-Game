@@ -3,7 +3,7 @@
 ## controls : <code>Object</code>
 Provides control functionalityAllows for easy customization of the controls, and a centralized control  system
 
-**Kind**: global variable  
+**Kind**: global constant  
 
 * [controls](#controls) : <code>Object</code>
     * [.bindings](#controls.bindings) : <code>Object</code>
@@ -31,7 +31,7 @@ Checks if the given control is currently pressed.If a nonexistant control is pa
 <a name="controls.logControls"></a>
 
 ### controls.logControls() ⇒ <code>undefined</code>
-Logs all of the controls and if they are currently pressed or not (For debugging)
+Logs all of the controls and if they are currently pressed or not(For debugging)
 
 **Kind**: static method of [<code>controls</code>](#controls)  
 **Returns**: <code>undefined</code> - No return value  

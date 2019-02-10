@@ -6,7 +6,8 @@
   on the program start</p>
 </dd>
 <dt><a href="#draw">draw()</a> ⇒ <code>undefined</code></dt>
-<dd><p>The main loop of the game. This function is called continually by the p5.js library.</p>
+<dd><p>The main loop of the game. This function is called continually by the p5.js
+library.</p>
 </dd>
 <dt><a href="#drawItem">drawItem(item)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draws an item on the scree</p>
@@ -23,7 +24,7 @@ The setup function. Does initial setup for the program. Called once by p5.js  o
 <a name="draw"></a>
 
 ## draw() ⇒ <code>undefined</code>
-The main loop of the game. This function is called continually by the p5.js library.
+The main loop of the game. This function is called continually by the p5.jslibrary.
 
 **Kind**: global function  
 **Returns**: <code>undefined</code> - No return value  

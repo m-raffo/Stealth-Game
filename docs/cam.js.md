@@ -1,11 +1,3 @@
-## Members
-
-<dl>
-<dt><a href="#cam">cam</a> : <code>Object</code></dt>
-<dd><p>The camera object for the world.</p>
-</dd>
-</dl>
-
 ## Constants
 
 <dl>
@@ -17,14 +9,29 @@
 <dd><p>The ideal width for the camera, it is adjusted to meet the player&#39;s screen
   dimentions</p>
 </dd>
+<dt><a href="#cam">cam</a> : <code>Object</code></dt>
+<dd><p>The camera object for the world.</p>
+</dd>
 </dl>
 
+<a name="CAM_TARGET_HEIGHT"></a>
+
+## CAM\_TARGET\_HEIGHT : <code>Number</code>
+The ideal height for the camera, it is adjusted to meet the player's screen  dimentions
+
+**Kind**: global constant  
+<a name="CAM_TARGET_WIDTH"></a>
+
+## CAM\_TARGET\_WIDTH : <code>Number</code>
+The ideal width for the camera, it is adjusted to meet the player's screen  dimentions
+
+**Kind**: global constant  
 <a name="cam"></a>
 
 ## cam : <code>Object</code>
 The camera object for the world.
 
-**Kind**: global variable  
+**Kind**: global constant  
 
 * [cam](#cam) : <code>Object</code>
     * [.x](#cam.x) : <code>Number</code>
@@ -38,6 +45,7 @@ The camera object for the world.
     * [.getOnscreenX(pointX)](#cam.getOnscreenX) ⇒ <code>Number</code>
     * [.getOnscreenY(pointY)](#cam.getOnscreenY) ⇒ <code>Number</code>
     * [.updateSize()](#cam.updateSize) ⇒ <code>undefined</code>
+    * [.drawItem(item)](#cam.drawItem) ⇒ <code>undefined</code>
 
 <a name="cam.x"></a>
 
@@ -135,15 +143,15 @@ Updates the size of the camera to match the size of the window.Aims to keep the
 
 **Kind**: static method of [<code>cam</code>](#cam)  
 **Returns**: <code>undefined</code> - No return value  
-<a name="CAM_TARGET_HEIGHT"></a>
+<a name="cam.drawItem"></a>
 
-## CAM\_TARGET\_HEIGHT : <code>Number</code>
-The ideal height for the camera, it is adjusted to meet the player's screen  dimentions
+### cam.drawItem(item) ⇒ <code>undefined</code>
+Draws an item on the screen using the correct scaling and position
 
-**Kind**: global constant  
-<a name="CAM_TARGET_WIDTH"></a>
+**Kind**: static method of [<code>cam</code>](#cam)  
+**Returns**: <code>undefined</code> - No return value  
 
-## CAM\_TARGET\_WIDTH : <code>Number</code>
-The ideal width for the camera, it is adjusted to meet the player's screen  dimentions
+| Param | Type | Description |
+| --- | --- | --- |
+| item | <code>Object</code> | item to be drawn |
 
-**Kind**: global constant  
