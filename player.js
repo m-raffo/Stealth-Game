@@ -6,6 +6,7 @@
  */
 const MOVE_SPEED_WALK = 0.5;
 
+
 /**
  * The movement speed of the player when crouched
  * @type {Number}
@@ -138,7 +139,6 @@ var player = {
         this.speedY = playerMaxSpeed * -1;
       }
     }
-
 
 
 

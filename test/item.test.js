@@ -71,4 +71,15 @@ describe('Item tests', function() {
 
     done();
   });
+
+
+  it('should determine when .checkCollision is true (box and box)', function(done) {
+    testItem2 = new Item("Test item 2", 10, 10, "none", 100, 100);
+    assert.equal(testItem.checkCollision(testItem2), true);
+
+    testItem2 = new Item("Test item 2", -10, -10, "none", 500, 500);
+    assert.equal(testItem.checkCollision(testItem2), true);
+
+    done();
+  })
 });
