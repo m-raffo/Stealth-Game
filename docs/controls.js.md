@@ -31,7 +31,7 @@ Checks if the given control is currently pressed.If a nonexistant control is pa
 <a name="controls.logControls"></a>
 
 ### controls.logControls() ⇒ <code>undefined</code>
-Logs all of the controls and if they are currently pressed or not(For debugging)
+Logs all of the controls and if they are currently pressed or not (For debugging)
 
 **Kind**: static method of [<code>controls</code>](#controls)  
 **Returns**: <code>undefined</code> - No return value  

@@ -1,4 +1,4 @@
 /node_modules
 
 # the output folder for the doc_build script
-/site
+/docs-site
