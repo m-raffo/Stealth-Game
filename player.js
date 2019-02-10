@@ -131,23 +131,17 @@ var player = {
     }
 
 
-<<<<<<< HEAD
 
     // Check if above the maximum speed for x axis
     if (Math.abs(this.speedX) > playerMaxSpeed) {
       this.speedX *= 0.8;
-=======
-    // Check if above the maximum speed
-    if (Math.abs(this.speedY) > playerMaxSpeed) {
-      this.speedY *= 0.8;
->>>>>>> 36ec1468011945ffaca6bd33e481f78b6cae2b2f
 
       // If the reduction in speed has brought the player to below the max speed
       // raise them back up to it
-      if (this.speedY > playerMaxSpeed) {
-        this.speedY = playerMaxSpeed;
-      } else if (this.speedY < playerMaxSpeed * -1) {
-        this.speedY = playerMaxSpeed * -1;
+      if (this.speedX > playerMaxSpeed) {
+        this.speedX = playerMaxSpeed;
+      } else if (this.speedX < playerMaxSpeed * -1) {
+        this.speedX = playerMaxSpeed * -1;
       }
     }
 
