@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var assert = require('chai').assert;
 
 
-var Item = require('../item');
+var Item = require('../src/item');
 
 describe('Item tests', function() {
   beforeEach(function() {

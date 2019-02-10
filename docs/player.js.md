@@ -43,7 +43,7 @@ Calculates the player's movement based on the currently pressed controls
 The walking speed of the playerThe average human walking speed is 1.4 meters/second ~ 0.14 cm/millisecond
 
 **Kind**: global constant  
-**Default**: <code>0.7</code>  
+**Default**: <code>0.5</code>  
 <a name="MOVE_SPEED_CROUCH"></a>
 
 ## MOVE\_SPEED\_CROUCH : <code>Number</code>
