@@ -3,18 +3,21 @@
  * The average human walking speed is 1.4 meters/second ~ 0.14 cm/millisecond
  * @constant
  * @type {Number}
+ * @default
  */
 const MOVE_SPEED_WALK = 0.7;
 
 /**
  * The movement speed of the player when crouched
  * @type {Number}
+ * @default
  */
 const MOVE_SPEED_CROUCH = 0.25;
 
 /**
  * The movement speed of the player when running
  * @type {Number}
+ * @default
  */
 const MOVE_SPEED_RUN = 1;
 
@@ -22,6 +25,7 @@ const MOVE_SPEED_RUN = 1;
  * Number of milliseconds needed to get to full walking speed
  * @constant
  * @type {Number}
+ * @default
  */
 const ACCEL_SPEED_WALK = 100;
 

@@ -106,7 +106,7 @@ function Item(name, x, y, imagePath, width, height) {
    * Determines if the given point is in collision with the item
    * @param  {Number} targetX    x position of the point to check
    * @param  {Number} targetY    y position of the point to check
-     * @return {Boolean}         true if there is a collision, false if not
+   * @return {Boolean}         true if there is a collision, false if not
    */
   this.checkCollisionPoint = function(targetX, targetY) {
     if (this.collisionShape === "box") {

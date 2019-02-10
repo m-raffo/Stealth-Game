@@ -2,6 +2,11 @@ var crate;
 
 // 1 PIXEL/WORLD UNIT = 1 CM
 
+/**
+ * The setup function. Does initial setup for the program. Called once by p5.js
+ *   on the program start
+ * @return {undefined} No return value
+ */
 function setup() {
   createCanvas(windowWidth,windowHeight);
   cam.updateSize();
@@ -16,7 +21,10 @@ function setup() {
 }
 
 
-
+/**
+ * The main loop of the game. This function is called continually by the p5.js library.
+ * @return {undefined} No return value
+ */
 function draw() {
   background("#363636");
 

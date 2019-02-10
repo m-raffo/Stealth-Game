@@ -45,7 +45,7 @@ var controls = {
   },
 
   /**
-   * Logs all of the controls and if they are currently pressed or not
+   * Logs all of the controls and if they are currently pressed or not 
    * (For debugging)
    * @return {undefined} No return value
    */

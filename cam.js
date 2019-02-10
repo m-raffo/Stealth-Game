@@ -13,10 +13,35 @@ const CAM_TARGET_HEIGHT = 3500;
  */
 const CAM_TARGET_WIDTH  = 6200;
 
+/**
+ * The camera object for the world.
+ * @type {Object}
+ */
 var cam = {
+  /**
+   * x position of the camera in the world (from the center)
+   * @type {Number}
+   * @default
+   */
   x : 0,
+
+  /**
+   * y position of the camera in the world (from the center)
+   * @type {Number}
+   * @default
+   */
   y : 0,
+
+  /**
+   * width of the camera (in world units, not pixels)
+   * @type {Number}
+   */
   width : 2000,
+
+  /**
+   * height of the camera (in world units, not pixels)
+   * @type {Number}
+   */
   height : 2000,
 
   /**
@@ -100,8 +125,8 @@ var cam = {
 
   /**
    * Updates the size of the camera to match the size of the window.
-   * Aims to keep the screen in a proportion of 1920*1080
-   * Keeps the ratio of the sides square, to prevent dilation in one axis
+   * Aims to keep the screen in a proportion of 1920*1080.
+   * Keeps the ratio of the sides square, to prevent dilation in one axis.
    * @return {undefined} No return value
    */
   updateSize : function() {
