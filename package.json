@@ -16,7 +16,10 @@
     "url": "https://github.com/Mason739/p5-Game/issues"
   },
   "homepage": "https://github.com/Mason739/p5-Game#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-config-google": "^0.12.0"
+  },
   "dependencies": {
     "chai": "^4.2.0",
     "jsdoc": "^3.5.5",
