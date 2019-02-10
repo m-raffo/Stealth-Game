@@ -53,10 +53,10 @@ var player = {
     var deltaTime = 1000.0 / frameRate();
     var playerMaxSpeed = 0;
 
-    if (controls.isControlPressed("SPRINT")) {
-      playerMaxSpeed = MOVE_SPEED_RUN;
-    } else if (controls.isControlPressed("CROUCH")) {
+    if (controls.isControlPressed("CROUCH")) {
       playerMaxSpeed = MOVE_SPEED_CROUCH;
+    } else if (controls.isControlPressed("SPRINT")) {
+      playerMaxSpeed = MOVE_SPEED_RUN;
     } else {
       playerMaxSpeed = MOVE_SPEED_WALK;
     }
@@ -115,7 +115,7 @@ var player = {
 
 
 
-    // Check if above the maximum speed
+    // Check if above the maximum speed for x axis
     if (Math.abs(this.speedX) > playerMaxSpeed) {
       this.speedX *= 0.8;
 
@@ -125,6 +125,19 @@ var player = {
         this.speedX = playerMaxSpeed;
       } else if (this.speedX < playerMaxSpeed * -1) {
         this.speedX = playerMaxSpeed * -1;
+      }
+    }
+
+    // Check if above the maximun speed for y axis
+    if (Math.abs(this.speedY) > playerMaxSpeed) {
+      this.speedY *= 0.8;
+
+      // If the reduction in speed has brought the player to below the max speed
+      // raise them back up to it
+      if (this.speedY > playerMaxSpeed) {
+        this.speedY = playerMaxSpeed;
+      } else if (this.speedY < playerMaxSpeed * -1) {
+        this.speedY = playerMaxSpeed * -1;
       }
     }
 
