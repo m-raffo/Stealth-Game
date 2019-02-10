@@ -21,6 +21,7 @@ var controls = {
    * Checks if the given control is currently pressed.
    * If a nonexistant control is passed, False is returned
    * @param  {String} control  the name of the control (as a string)
+
    * @return {Boolean}         True if the key is pressed, False if it is not
    */
   isControlPressed : function( control ) {
