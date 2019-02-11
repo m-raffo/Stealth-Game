@@ -1,7 +1,9 @@
 <a name="controls"></a>
 
 ## controls : <code>Object</code>
-Provides control functionalityAllows for easy customization of the controls, and a centralized control  system
+Provides control functionality
+Allows for easy customization of the controls, and a centralized control
+  system
 
 **Kind**: global constant  
 
@@ -19,7 +21,8 @@ Contains the key bindings for all of the controls of the game
 <a name="controls.isControlPressed"></a>
 
 ### controls.isControlPressed(control) ⇒ <code>Boolean</code>
-Checks if the given control is currently pressed.If a nonexistant control is passed, False is returned
+Checks if the given control is currently pressed.
+If a nonexistant control is passed, False is returned
 
 **Kind**: static method of [<code>controls</code>](#controls)  
 **Returns**: <code>Boolean</code> - True if the key is pressed, False if it is not  
@@ -31,7 +34,8 @@ Checks if the given control is currently pressed.If a nonexistant control is pa
 <a name="controls.logControls"></a>
 
 ### controls.logControls() ⇒ <code>undefined</code>
-Logs all of the controls and if they are currently pressed or not(For debugging)
+Logs all of the controls and if they are currently pressed or not
+(For debugging)
 
 **Kind**: static method of [<code>controls</code>](#controls)  
 **Returns**: <code>undefined</code> - No return value  

@@ -20,7 +20,8 @@
 <a name="new_Item_new"></a>
 
 ### new Item(name, x, y, imagePath, width, height)
-The constructor for an item object. Items are things in the world that the  player will interact with, but are smaller than rooms or sections.
+The constructor for an item object. Items are things in the world that the
+  player will interact with, but are smaller than rooms or sections.
 
 
 | Param | Type | Description |
@@ -92,7 +93,9 @@ Determines if the item blocks line-of-sight
 <a name="Item+collisionShape"></a>
 
 ### item.collisionShape : <code>String</code>
-Determines the shape for the collision detection box."box" for a box hitbox matching the dimentions of the item"circle" for a circular hitbox with a radius of width / 2
+Determines the shape for the collision detection box.
+"box" for a box hitbox matching the dimentions of the item
+"circle" for a circular hitbox with a radius of width / 2
 
 **Kind**: instance property of [<code>Item</code>](#Item)  
 <a name="Item+checkCollisionPoint"></a>

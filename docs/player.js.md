@@ -22,7 +22,8 @@ The average human walking speed is 1.4 meters/second ~ 0.14 cm/millisecond</p>
 <a name="MOVE_SPEED_WALK"></a>
 
 ## MOVE\_SPEED\_WALK : <code>Number</code>
-The walking speed of the playerThe average human walking speed is 1.4 meters/second ~ 0.14 cm/millisecond
+The walking speed of the player
+The average human walking speed is 1.4 meters/second ~ 0.14 cm/millisecond
 
 **Kind**: global constant  
 **Default**: <code>0.5</code>  

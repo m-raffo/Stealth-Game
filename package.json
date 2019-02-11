@@ -24,7 +24,9 @@
     "chai": "^4.2.0",
     "jsdoc": "^3.5.5",
     "jsdoc-sphinx": "0.0.6",
+    "jsdoc-to-markdown": "^4.0.1",
     "markdown-pdf": "^9.0.0",
+    "mkdocs": "0.0.1",
     "mocha": "^5.2.0"
   }
 }
