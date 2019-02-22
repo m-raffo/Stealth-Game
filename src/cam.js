@@ -17,7 +17,7 @@ const CAM_TARGET_WIDTH = 6200;
  * The camera object for the world.
  * @type {Object}
  */
-const cam = {
+let cam = {
   /**
    * x position of the camera in the world (from the center)
    * @type {Number}
@@ -158,6 +158,20 @@ const cam = {
           imageHeight);
     }
   },
+
+  /**
+   * Draws the the level to the screen
+   * @param  {object}    level  the level to be drawn
+   * @return {undefined}        no return value
+   */
+  drawLevel: function(level) {
+    // TODO: Finish draw level function
+    var arrayLength = level.allItems.length;
+    for (var i; i < arrayLength; i++) {
+      this.drawItem(level.allItems[i]);
+    }
+
+  }
 
 
 };

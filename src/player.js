@@ -35,7 +35,7 @@ const ACCEL_SPEED_WALK = 100;
  *
  * @type {Object}
  */
-const player = {
+let player = {
   // Basic values
   x: 0,
   y: 0,
@@ -49,7 +49,7 @@ const player = {
    * @return {undefined} No return value
    */
   move: function() {
-    controls.logControls();
+    // controls.logControls();
 
     // Calculates player's movement based on inputted controls
 
@@ -168,5 +168,15 @@ const player = {
     this.x += this.speedX * deltaTime;
     this.y += this.speedY * deltaTime;
   },
+
+  /**
+   * Determines if the player is colliding with any objects that impeed their
+   * movement
+   * @return {Boolean} true if colliding, false if not
+   */
+  checkCollision: function() {
+    // TODO: Write the checkCollision function
+    return false;
+  }
 
 };

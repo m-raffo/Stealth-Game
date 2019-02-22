@@ -4,12 +4,12 @@
  * @param       {String} name      the name of the object
  * @param       {Number} x         x position in the world (from center)
  * @param       {Number} y         y position in the world (from center)
- * @param       {String} imagePath path to the image of the file
+ * @param       {String} image     the name of the image (to be loaded from allImages)
  * @param       {Number} width     width of the object
  * @param       {Number} height    height of the object
  * @constructor
  */
-function Item(name, x, y, imagePath, width, height) {
+function Item(name, x, y, image, width, height) {
   /**
    * Name of the object, mostly for identification purposes
    * @type {String}
@@ -32,7 +32,7 @@ function Item(name, x, y, imagePath, width, height) {
    * Image for the items
    * @type {Image}
    */
-  this.image = loadImage(imagePath);
+  this.image = image;
 
   /**
    * Width of the item
@@ -120,6 +120,7 @@ function Item(name, x, y, imagePath, width, height) {
   };
 }
 
+// For using npm testing only. No game functionality
 if (typeof(module) !== 'undefined') {
   module.exports = Item;
 }

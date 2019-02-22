@@ -4,7 +4,7 @@
  *   system
  * @type {Object}
  */
-const controls = {
+let controls = {
   /**
    * Contains the key bindings for all of the controls of the game
    * @type {Object}
