@@ -4,7 +4,7 @@
 **Kind**: global class  
 
 * [Item](#Item)
-    * [new Item(name, x, y, imagePath, width, height)](#new_Item_new)
+    * [new Item(name, x, y, image, width, height)](#new_Item_new)
     * [.name](#Item+name) : <code>String</code>
     * [.x](#Item+x) : <code>Number</code>
     * [.y](#Item+y) : <code>Number</code>
@@ -19,9 +19,8 @@
 
 <a name="new_Item_new"></a>
 
-### new Item(name, x, y, imagePath, width, height)
-The constructor for an item object. Items are things in the world that the
-  player will interact with, but are smaller than rooms or sections.
+### new Item(name, x, y, image, width, height)
+The constructor for an item object. Items are things in the world that the  player will interact with, but are smaller than rooms or sections.
 
 
 | Param | Type | Description |
@@ -29,7 +28,7 @@ The constructor for an item object. Items are things in the world that the
 | name | <code>String</code> | the name of the object |
 | x | <code>Number</code> | x position in the world (from center) |
 | y | <code>Number</code> | y position in the world (from center) |
-| imagePath | <code>String</code> | path to the image of the file |
+| image | <code>String</code> | the name of the image (to be loaded from allImages) |
 | width | <code>Number</code> | width of the object |
 | height | <code>Number</code> | height of the object |
 
@@ -93,9 +92,7 @@ Determines if the item blocks line-of-sight
 <a name="Item+collisionShape"></a>
 
 ### item.collisionShape : <code>String</code>
-Determines the shape for the collision detection box.
-"box" for a box hitbox matching the dimentions of the item
-"circle" for a circular hitbox with a radius of width / 2
+Determines the shape for the collision detection box."box" for a box hitbox matching the dimentions of the item"circle" for a circular hitbox with a radius of width / 2
 
 **Kind**: instance property of [<code>Item</code>](#Item)  
 <a name="Item+checkCollisionPoint"></a>

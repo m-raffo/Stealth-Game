@@ -22,7 +22,9 @@ function draw() {
 }
 
 
+
+
 window.onresize = function() {
-  resizeCanvas(windowWidth, windowHeight);
+  window.game.canvas.resizeCanvas(windowWidth, windowHeight);
   cam.updateSize();
 };
