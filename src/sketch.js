@@ -20,11 +20,3 @@ function draw() {
 
   // cam.drawItem(crate);
 }
-
-
-
-
-window.onresize = function() {
-  window.game.canvas.resizeCanvas(windowWidth, windowHeight);
-  cam.updateSize();
-};
