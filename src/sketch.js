@@ -20,3 +20,16 @@ function draw() {
 
   // cam.drawItem(crate);
 }
+
+// PUT ALL INITILIZATION FUNCTIONS HERE
+window.onload = function() {
+  canvasInitilization();
+  assetsInitilization();
+
+  while(!game.assets.allLoaded) {
+    console.log("Waiting to load");
+  }
+
+  game.canvas.ctx.drawImage(game.assets.guy, 10, 10);
+
+}

@@ -3,7 +3,12 @@
  * @namespace
  */
 let game = {};
-window.onload = function() {
+
+/**
+ * Sets up all of the canvas variables. Is called once after the page has loaded
+ * @return {undefined} no return value
+ */
+function canvasInitilization() {
 
 
 
@@ -36,6 +41,7 @@ window.onload = function() {
     game.canvas.ctx.fillRect(0, 0, this.element.width, this.element.height);
   }
 
+
   /**
    * Resizes the game canvas to the given size
    * @param  {number} newWidth  the new width of the canvas
@@ -53,16 +59,3 @@ window.onload = function() {
   game.canvas.fillBackground('#4ae4a1');
 
 }
-
-
-  //
-  // // TODO: Move all game variables over the the window.game namespace
-  //
-  // // Set the width and height of the canvas
-  // window.game.canvas.resizeCanvas(window.innerWidth, window.innerHeight);
-  //
-  // // Just a test fill color
-  // window.game.canvas.ctx.fillStyle = '#38b6bf';
-  // window.game.canvas.ctx.fillRect(0, 0, window.game.canvas.element.width,
-  //   window.game.canvas.element.height);
-  //
