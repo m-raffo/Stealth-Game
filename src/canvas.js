@@ -38,7 +38,7 @@ function canvasInitilization() {
    */
   game.canvas.fillBackground = function(color) {
     game.canvas.ctx.fillStyle = color;
-    game.canvas.ctx.fillRect(0, 0, this.element.width, this.element.height);
+    game.canvas.ctx.fillRect(0, 0, game.canvas.element.width, game.canvas.element.height);
   }
 
 

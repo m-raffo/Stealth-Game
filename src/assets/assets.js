@@ -30,6 +30,9 @@ async function assetsInitilization() {
   game.assets.guy = await game.assets.loadImage("assets/items/guy.png");
   game.assets.crate = await game.assets.loadImage("assets/items/crate.png");
 
+  console.log('All assets loaded!');
+
   game.assets.allLoaded = true;
+
 
 }
