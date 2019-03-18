@@ -1,3 +1,11 @@
+## Members
+
+<dl>
+<dt><a href="#player">player</a> : <code>Object</code></dt>
+<dd><p>The object for the main player of the game.</p>
+</dd>
+</dl>
+
 ## Constants
 
 <dl>
@@ -14,16 +22,37 @@ The average human walking speed is 1.4 meters/second ~ 0.14 cm/millisecond</p>
 <dt><a href="#ACCEL_SPEED_WALK">ACCEL_SPEED_WALK</a> : <code>Number</code></dt>
 <dd><p>Number of milliseconds needed to get to full walking speed</p>
 </dd>
-<dt><a href="#player">player</a> : <code>Object</code></dt>
-<dd><p>The object for the main player of the game.</p>
-</dd>
 </dl>
 
+<a name="player"></a>
+
+## player : <code>Object</code>
+The object for the main player of the game.
+
+**Kind**: global variable  
+
+* [player](#player) : <code>Object</code>
+    * [.move()](#player.move) ⇒ <code>undefined</code>
+    * [.checkCollision()](#player.checkCollision) ⇒ <code>Boolean</code>
+
+<a name="player.move"></a>
+
+### player.move() ⇒ <code>undefined</code>
+Calculates the player's movement based on the currently pressed controls
+
+**Kind**: static method of [<code>player</code>](#player)  
+**Returns**: <code>undefined</code> - No return value  
+<a name="player.checkCollision"></a>
+
+### player.checkCollision() ⇒ <code>Boolean</code>
+Determines if the player is colliding with any objects that impeed theirmovement
+
+**Kind**: static method of [<code>player</code>](#player)  
+**Returns**: <code>Boolean</code> - true if colliding, false if not  
 <a name="MOVE_SPEED_WALK"></a>
 
 ## MOVE\_SPEED\_WALK : <code>Number</code>
-The walking speed of the player
-The average human walking speed is 1.4 meters/second ~ 0.14 cm/millisecond
+The walking speed of the playerThe average human walking speed is 1.4 meters/second ~ 0.14 cm/millisecond
 
 **Kind**: global constant  
 **Default**: <code>0.5</code>  
@@ -48,16 +77,3 @@ Number of milliseconds needed to get to full walking speed
 
 **Kind**: global constant  
 **Default**: <code>100</code>  
-<a name="player"></a>
-
-## player : <code>Object</code>
-The object for the main player of the game.
-
-**Kind**: global constant  
-<a name="player.move"></a>
-
-### player.move() ⇒ <code>undefined</code>
-Calculates the player's movement based on the currently pressed controls
-
-**Kind**: static method of [<code>player</code>](#player)  
-**Returns**: <code>undefined</code> - No return value  

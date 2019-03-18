@@ -36,6 +36,12 @@ const ACCEL_SPEED_WALK = 100;
  * @type {Object}
  */
 let player = {
+  // TODO: Make this function calculate movement based on one "chunk of time"
+  /*
+  each chunk of time will be the same amount of in-game time, and the function
+  will be called as many times as necessary by the main game loop
+  First step: remove deltaTime from this function
+   */
   // Basic values
   x: 0,
   y: 0,

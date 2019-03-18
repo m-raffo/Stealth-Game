@@ -10,7 +10,7 @@ for file in os.listdir("./"):
 
 os.chdir('../')
 # TODO: make it use the correct install of python
-os.system("python3 -m mkdocs build")
+os.system("python -m mkdocs build")
 if os.path.isdir('docs-site'):
     shutil.rmtree('docs-site')
 shutil.move('site', 'docs-site')

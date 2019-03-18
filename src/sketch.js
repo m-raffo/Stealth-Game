@@ -6,7 +6,7 @@
  * library.
  * @return {undefined} No return value
  */
-function draw() {
+function gameLoop() {
   background('#363636');
 
   // TODO: update the width and height of the camera based on screen size
@@ -21,8 +21,22 @@ function draw() {
   // cam.drawItem(crate);
 }
 
+// PUT ALL INITILIZATION FUNCTIONS HERE
+window.onload = function() {
 
-window.onresize = function() {
-  resizeCanvas(windowWidth, windowHeight);
-  cam.updateSize();
-};
+  // hide scroll bars
+  document.documentElement.style.overflow = 'hidden'; // firefox, chrome
+  document.body.scroll = 'no'; // ie only
+
+
+  canvasInitilization();
+
+  game.canvas.element.width = window.innerWidth;
+  game.canvas.element.height = window.innerHeight;
+
+  game.canvas.fillBackground("#5e01bb");
+
+  assetsInitilization();
+
+
+}
