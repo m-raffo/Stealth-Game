@@ -4,30 +4,28 @@
  */
 let game = {
   lastFrameTimeMs: 0,
-  maxFPS: 60,
   delta: 0,
-  timestep: 1000 / 60,
 
   update: function(delta) {
-    boxPos += boxVelocity * delta;
+    box.pos += box.velocity * delta;
     // Switch directions if we go too far
-    if (boxPos >= limit || boxPos <= 0) boxVelocity = -boxVelocity;
+    if (box.pos >= box.limit || box.pos <= 0) box.velocity = -box.velocity;
   },
 
   mainLoop: function(timestamp) {
     // Throttle the frame rate.
-    if (timestamp < lastFrameTimeMs + (1000 / maxFPS)) {
+    if (timestamp < this.lastFrameTimeMs + (1000 / MAX_FPS)) {
         requestAnimationFrame(this.mainLoop);
         return;
     }
-    delta += timestamp - lastFrameTimeMs;
-    lastFrameTimeMs = timestamp;
+    this.delta += timestamp - lastFrameTimeMs;
+    this.lastFrameTimeMs = timestamp;
 
-    while (delta >= timestep) {
+    while (this.delta >= timestep) {
         update(timestep);
-        delta -= timestep;
+        this.delta -= timestep;
     }
-    draw();
+    camera.draw();
     requestAnimationFrame(this.mainLoop);
   }
 };
