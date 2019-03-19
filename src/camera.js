@@ -8,6 +8,6 @@ let camera = {
    * @return {undefined} no return value
    */
   draw: function() {
-    box.style.left = boxPos + 'px';
+    box.element.style.left = box.pos + 'px';
   }
  };

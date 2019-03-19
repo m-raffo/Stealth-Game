@@ -18,15 +18,15 @@ let game = {
         requestAnimationFrame(this.mainLoop);
         return;
     }
-    this.delta += timestamp - lastFrameTimeMs;
+    this.delta += timestamp - this.lastFrameTimeMs;
     this.lastFrameTimeMs = timestamp;
 
-    while (this.delta >= timestep) {
-        update(timestep);
-        this.delta -= timestep;
+    while (this.delta >= TIMESTEP) {
+        update(TIMESTEP);
+        this.delta -= TIMESTEP;
     }
     camera.draw();
-    requestAnimationFrame(this.mainLoop);
+    requestAnimationFrame(game.mainLoop);
   }
 };
 
