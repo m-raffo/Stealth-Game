@@ -15,7 +15,7 @@ let game = {
   mainLoop: function(timestamp) {
     // Throttle the frame rate.
     if (timestamp < this.lastFrameTimeMs + (1000 / MAX_FPS)) {
-        requestAnimationFrame(this.mainLoop);
+        requestAnimationFrame(game.mainLoop);
         return;
     }
     this.delta += timestamp - this.lastFrameTimeMs;
