@@ -58,19 +58,33 @@ let controls = {
   logControls: function() {
     console.log('====CURRENT CONTROLS===========================');
 
-    Object.keys(this.bindings).forEach((key) => {
-      console.log('    ' + key.toString() + '  ' +
-        controls.isControlPressed(key).toString());
+    Object.keys(controls.current).forEach((key) => {
+      console.log(key.toString() + controls.current[key]);
+      // console.log('    ' + key.toString() + '  ' +
+      //   controls.isControlPressed(key).toString());
     });
+
 
     console.log('===============================================');
   },
 };
 
 
-$(document).keypress(function(e){
+$(document).keydown(function(e){
     var checkWebkitandIE=(e.which==26 ? 1 : 0);
     var checkMoz=(e.which==122 && e.ctrlKey ? 1 : 0);
+    console.log("Press" + e.which);
 
-    if (checkWebkitandIE || checkMoz) $("body").append("<p>ctrl+z detected!</p>");
+    controls.current[e.which] = true;
+
+});
+
+$(document).keyup(function(e){
+    var checkWebkitandIE=(e.which==26 ? 1 : 0);
+    var checkMoz=(e.which==122 && e.ctrlKey ? 1 : 0);
+    console.log("Release" + e.which);
+
+    controls.current[e.which] = false;
+
+
 });

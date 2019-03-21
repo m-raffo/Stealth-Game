@@ -9,5 +9,7 @@ let camera = {
    */
   draw: function() {
     box.element.style.left = box.pos + 'px';
+
+    controls.logControls();
   }
  };
