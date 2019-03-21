@@ -14,16 +14,16 @@ let game = {
 
   mainLoop: function(timestamp) {
     // Throttle the frame rate.
-    if (timestamp < this.lastFrameTimeMs + (1000 / MAX_FPS)) {
+    if (timestamp < game.lastFrameTimeMs + (1000 / MAX_FPS)) {
         requestAnimationFrame(game.mainLoop);
         return;
     }
-    this.delta += timestamp - this.lastFrameTimeMs;
-    this.lastFrameTimeMs = timestamp;
+    game.delta += timestamp - game.lastFrameTimeMs;
+    game.lastFrameTimeMs = timestamp;
 
-    while (this.delta >= TIMESTEP) {
-        update(TIMESTEP);
-        this.delta -= TIMESTEP;
+    while (game.delta >= TIMESTEP) {
+        game.update(TIMESTEP);
+        game.delta -= TIMESTEP;
     }
     camera.draw();
     requestAnimationFrame(game.mainLoop);
