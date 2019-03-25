@@ -37,7 +37,7 @@ let controls = {
       const options = this.bindings[control];
 
       for (let i = 0; i < options.length; i++) {
-        if (keyIsDown(options[i])) {
+        if (controls.current[options[i]]) {
           return true;
         }
       }

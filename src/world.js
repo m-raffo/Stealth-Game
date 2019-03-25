@@ -10,6 +10,8 @@ let game = {
     box.pos += box.velocity * delta;
     // Switch directions if we go too far
     if (box.pos >= box.limit || box.pos <= 0) box.velocity = -box.velocity;
+
+    player.move();
   },
 
   mainLoop: function(timestamp) {
