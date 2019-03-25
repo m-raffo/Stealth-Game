@@ -8,6 +8,10 @@ let camera = {
    * @return {undefined} no return value
    */
   draw: function() {
+    // Clear canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+
     box.element.style.left = box.pos + 'px';
 
 
