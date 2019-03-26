@@ -25,6 +25,20 @@ let controls = {
   current: {
 
   },
+
+  /**
+   * Stores the current state of the right mouse button.
+   * @type {Boolean}
+   */
+  rightMouseDown: false,
+
+  /**
+   * Stores the current state of the left mouse button.
+   * @type {Boolean}
+   */
+  leftMouseDown: false,
+
+
   /**
    * Checks if the given control is currently pressed.
    * If a nonexistant control is passed, False is returned
@@ -58,6 +72,10 @@ let controls = {
   logControls: function() {
     console.log('====CURRENT CONTROLS===========================');
 
+    console.log("Mouse:");
+    console.log("\tR: " + this.rightMouseDown);
+    console.log("\tL: " + this.leftMouseDown);
+
     Object.keys(controls.current).forEach((key) => {
       console.log(key.toString() + controls.current[key]);
       // console.log('    ' + key.toString() + '  ' +
@@ -76,7 +94,6 @@ $(document).keydown(function(e){
     console.log("Press" + e.which);
 
     controls.current[e.which] = true;
-
 });
 
 $(document).keyup(function(e){
@@ -85,6 +102,41 @@ $(document).keyup(function(e){
     console.log("Release" + e.which);
 
     controls.current[e.which] = false;
+});
 
+$(document).mousedown(function(event) {
+  console.log("MOUSED OWN");
+  switch (event.which) {
+    // left mouse
+    case 1:
+      controls.leftMouseDown = true;
+      break;
+    // middle mouse
+    case 2:
+      break;
+    // right mouse
+    case 3:
+      controls.rightMouseDown = true;
+      break;
+    default:
+      break;
+    }
+});
 
+$(document).mouseup(function(event) {
+  switch (event.which) {
+    // left mouse
+    case 1:
+      controls.leftMouseDown = false;
+      break;
+    // middle mouse
+    case 2:
+      break;
+    // right mouse
+    case 3:
+      controls.rightMouseDown = false;
+      break;
+    default:
+      break;
+    }
 });

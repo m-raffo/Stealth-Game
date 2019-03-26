@@ -102,8 +102,13 @@ let camera = {
    */
   drawEllipse: function(x, y, radiusX, radiusY) {
     // FIXME: this does not work
-    // TODO: Fix this
-    game.canvas.ctx.ellipse(x, y, radiusX, radiusY);
+    // TODO: Fix thiscd
+
+
+    game.canvas.ctx.beginPath();
+    game.canvas.ctx.ellipse(x, y, radiusX, radiusY, 0, 0, 2 * Math.PI);
+    game.canvas.ctx.fill();
+    game.canvas.ctx.closePath();
   },
 
   /**

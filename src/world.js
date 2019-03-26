@@ -14,6 +14,8 @@ let game = {
     camera.updateSize();
 
     player.move();
+
+    controls.logControls();
   },
 
   mainLoop: function(timestamp) {
