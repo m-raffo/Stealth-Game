@@ -11,6 +11,8 @@ let game = {
     // Switch directions if we go too far
     if (box.pos >= box.limit || box.pos <= 0) box.velocity = -box.velocity;
 
+    camera.updateSize();
+
     player.move();
   },
 

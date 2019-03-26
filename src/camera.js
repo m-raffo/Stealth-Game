@@ -1,4 +1,19 @@
 /**
+ * The ideal height for the camera, it is adjusted to meet the player's screen
+ *   dimentions
+ * @type {Number}
+ * @constant
+ */
+const CAM_TARGET_HEIGHT = 3500;
+/**
+ * The ideal width for the camera, it is adjusted to meet the player's screen
+ *   dimentions
+ * @type {Number}
+ * @constant
+ */
+const CAM_TARGET_WIDTH = 6200;
+
+/**
  * Define the camera namespace for rendering the world
  * @namespace
  */
@@ -8,13 +23,13 @@ let camera = {
    * The x coordinate of the camera in the world FROM THE TOP LEFT!!!
    * @type {Number}
    */
-  x: 0,
+  x: 10,
 
   /**
    * The y coordinate of the camera in the world FROM THE TOP LEFT!!!
    * @type {Number}
    */
-  y: 0,
+  y: -10,
 
   /**
    * The width of the camera (in world units)
@@ -42,19 +57,19 @@ let camera = {
 
     // draw 2 boxes for testing
     camera.setFill('#cd0477');
-    camera.drawBox(10, 10, 100, 100);
+    camera.renderRect(10, 10, 100, 100);
 
     camera.setFill('#1f2a08');
-    camera.drawBox(5, 10, 10, 10);
+    camera.renderRect(5, 10, 10, 10);
 
     // Draw the player
     // TODO: Draw the player sprite (instead of box)
-    camera.setFill('#b5a60f');
-    camera.drawBox(player.x, player.y, 10, 10);
+    // camera.setFill('#b5a60f');
+    // camera.drawBox(player.x, player.y, 10, 10);
 
     // Draw the player (rendering properly)
     camera.setFill('#2eaff4');
-    camera.renderRect(player.x, player.y, 10, 10);
+    camera.renderRect(player.x, player.y, 100, 100);
 
 
   },
@@ -132,10 +147,36 @@ let camera = {
    */
   isOnScreen: function(x, y) {
     // NOTE: The function could be condensed, it is written this way to improve readability
-    if (x >= camera.x && x < camera.x + camera.width) {
-      if (y >= camera.y && y < camera.y + camera.height) {
+    if (x >= this.x && x < this.x + this.width) {
+      if (y >= this.y && y < this.y + this.height) {
         return true;
-      };
+      }
+
     }
     return false;
+  },
+
+  /**
+   * Updates the size of the camera to match the size of the window.
+   * Aims to keep the screen in a proportion of 1920*1080.
+   * Keeps the ratio of the sides square, to prevent dilation in one axis.
+   * @return {undefined} No return value
+   */
+
+  updateSize: function() {
+
+    game.canvas.element.width = window.innerWidth;
+    game.canvas.element.height = window.innerHeight;
+
+    var windowWidth = game.canvas.element.width;
+    var windowHeight = game.canvas.element.height;
+
+    if (windowWidth / windowHeight > 1.7) {
+      this.width = CAM_TARGET_WIDTH;
+      this.height = CAM_TARGET_WIDTH * windowHeight / windowWidth;
+    } else {
+      this.width = CAM_TARGET_HEIGHT * windowWidth / windowHeight;
+      this.height = CAM_TARGET_HEIGHT;
+    }
+  },
  };
