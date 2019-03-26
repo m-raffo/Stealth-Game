@@ -122,6 +122,20 @@ let camera = {
 
 
     camera.drawBox(pixelX, pixelY, pixelWidth, pixelHeight);
-  }
+  },
 
+  /**
+   * Determines if the given point is on the screen
+   * @param  {Number} x the x coordinate
+   * @param  {Number} y y coordinate
+   * @return {Boolean}  true if onscreen, false if not
+   */
+  isOnScreen: function(x, y) {
+    // NOTE: The function could be condensed, it is written this way to improve readability
+    if (x >= camera.x && x < camera.x + camera.width) {
+      if (y >= camera.y && y < camera.y + camera.height) {
+        return true;
+      };
+    }
+    return false;
  };
