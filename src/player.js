@@ -61,7 +61,7 @@ let player = {
 
     // Stores the number of milliseconds since the last frame
     // TODO: This is a constant value as a temp fix to keep the movement speed constant when this function is called.
-    const deltaTime = 1000.0 / 60;
+    const deltaTime = 1000.0 / 120;
     let playerMaxSpeed = 0;
 
     if (controls.isControlPressed('CROUCH')) {
