@@ -174,6 +174,9 @@ let player = {
     // Move character given current speeds
     this.x += this.speedX * deltaTime;
     this.y += this.speedY * deltaTime;
+
+    game.bullets.push(new Bullet(player.x, player.y, Math.floor((Math.random() * 10) + 1), Math.floor((Math.random() * 10) + 1)));
+
   },
 
   /**

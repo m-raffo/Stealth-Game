@@ -75,6 +75,12 @@ let camera = {
     camera.renderEllipse(player.x, player.y, 100, 100);
 
 
+    // Draw all bullets
+    for (var i = 0; i < game.bullets.length; i++) {
+      var bullet = game.bullets[i];
+      camera.renderEllipse(bullet.x, bullet.y, 10, 10);
+    }
+
   },
 
   /**

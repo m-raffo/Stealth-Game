@@ -11,4 +11,9 @@ function Bullet(x, y, dirX, dirY) {
   this.y = y;
   this.dirX = dirX;
   this.dirY = dirY;
+
+  this.move = function() {
+    this.x += this.dirX;
+    this.y += this.dirY;
+  }
 }

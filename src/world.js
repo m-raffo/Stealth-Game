@@ -15,7 +15,10 @@ let game = {
 
     player.move();
 
-    controls.logControls();
+    for (var i = 0; i < game.bullets.length; i++) {
+      game.bullets[i].move();
+    }
+
   },
 
   mainLoop: function(timestamp) {
