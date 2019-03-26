@@ -31,7 +31,13 @@ let game = {
     }
     camera.draw();
     requestAnimationFrame(game.mainLoop);
-  }
+  },
+
+  /**
+   * Holds all of the bullet objects in the world
+   * @type {Array}
+   */
+  bullets: []
 };
 
 /**

@@ -3,6 +3,7 @@
  *   dimentions
  * @type {Number}
  * @constant
+ * @default
  */
 const CAM_TARGET_HEIGHT = 3500;
 /**
@@ -10,6 +11,7 @@ const CAM_TARGET_HEIGHT = 3500;
  *   dimentions
  * @type {Number}
  * @constant
+ * @default
  */
 const CAM_TARGET_WIDTH = 6200;
 
@@ -69,7 +71,8 @@ let camera = {
 
     // Draw the player (rendering properly)
     camera.setFill('#2eaff4');
-    camera.renderRect(player.x, player.y, 100, 100);
+    // camera.renderRect(player.x, player.y, 100, 100);
+    camera.renderEllipse(player.x, player.y, 100, 100);
 
 
   },
@@ -87,6 +90,20 @@ let camera = {
     game.canvas.ctx.rect(x, y, width, height);
     game.canvas.ctx.fill();
     game.canvas.ctx.closePath();
+  },
+
+  /**
+   * Draws an ellipse to the screen
+   * @param  {Number} x       x position of the center of the ellipse
+   * @param  {number} y       y position of the center of the ellipse
+   * @param  {Number} radiusX x radius of the ellipse
+   * @param  {Number} radiusY y radius of the ellipse
+   * @return {undefined}         no return value
+   */
+  drawEllipse: function(x, y, radiusX, radiusY) {
+    // FIXME: this does not work
+    // TODO: Fix this
+    game.canvas.ctx.ellipse(x, y, radiusX, radiusY);
   },
 
   /**
@@ -137,6 +154,27 @@ let camera = {
 
 
     camera.drawBox(pixelX, pixelY, pixelWidth, pixelHeight);
+  },
+
+  /**
+   * Same as renderRect(), but for ellipse instead
+   * @param  {Number} x       x position (in wu)
+   * @param  {Number} y       y position (in wu)
+   * @param  {Number} radiusX x radius (in wu)
+   * @param  {Number} radiusY y radius (in wu)
+   * @return {undefined}         no return value
+   */
+  renderEllipse: function(x, y, radiusX, radiusY) {
+    // See renderRect() for math
+
+    var pixelX = ((x - camera.x) * game.canvas.element.width) / camera.width;
+    var pixelY = ((y - camera.y) * game.canvas.element.height) / camera.height;
+
+    var pixelWidth = (radiusX / camera.width) * game.canvas.element.width;
+    var pixelHeight = (radiusY / camera.height) * game.canvas.element.height;
+
+
+    camera.drawEllipse(pixelX, pixelY, pixelWidth, pixelHeight);
   },
 
   /**
