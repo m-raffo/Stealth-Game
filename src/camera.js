@@ -229,7 +229,6 @@ let camera = {
    * Converts a point on the screen to a position in the world.
    * @return {Array.Number} A two number list of the coordinates (x,y)
    */
-  //// TODO: finish this function
   screenToWorldPoint: function(x, y) {
     var x1 = this.map(x, 0, game.canvas.element.width, this.x, this.x + this.width);
     var y1 = this.map(y, 0, game.canvas.element.height, this.y, this.y + this.height);

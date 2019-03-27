@@ -59,6 +59,12 @@ let player = {
   speedY: 0,
 
   /**
+   * The time in milliseconds that the player's weapon will be ready to fire again.
+   * @type {Number}
+   */
+  weaponReset: Date.now();
+
+  /**
    * Calculates the player's movement based on the currently pressed controls
    * @return {undefined} No return value
    */
@@ -184,12 +190,10 @@ let player = {
     this.y += this.speedY * deltaTime;
 
 
-    // Calculate bullet path
-    // See: https://www.geeksforgeeks.org/find-points-at-a-given-distance-on-a-line-of-given-slope/
+    // Calculate bullet path toward mouse
 
     // Better see: https://math.stackexchange.com/questions/656500/given-a-point-slope-and-a-distance-along-that-slope-easily-find-a-second-p
 
-    // TODO: finish these calculations
 
     var worldMouseX = camera.screenToWorldPoint(controls.mouseX, controls.mouseY);
 
@@ -201,34 +205,20 @@ let player = {
     // slope from player to mouse
     var m = (this.y - worldMouseY) / (this.x - worldMouseX);
 
-    // console.log(worldMouseX);
-
     // distance for the bullet to move
     var d = BULLET_SPEED;
 
     // something
     var r = Math.sqrt(1 + (m * m));
 
-    // var speedX = this.x + (d / r);
-    // var speedY = this.y + (d * m / r);
-
     var speedX = 0 + (d / r);
     var speedY = 0 + (d * m / r);
-
-////// SOLUTION HERER!!!!!!!!
-// TODO: map onscreen pixels units to world units
-
-
-
-    // Create bullets going in random direction
-    // game.bullets.push(new Bullet(player.x, player.y, Math.floor((Math.random() * 10) + 1), Math.floor((Math.random() * 10) + 1)));
 
     if (worldMouseX < player.x) {
       speedX *= -1;
       speedY *= -1;
     }
 
-    console.log(speedX);
     game.bullets.push(new Bullet(player.x, player.y, speedX, speedY));
 
   },
