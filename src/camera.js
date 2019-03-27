@@ -224,4 +224,26 @@ let camera = {
       this.height = CAM_TARGET_HEIGHT;
     }
   },
+
+  /**
+   * Converts a point on the screen to a position in the world.
+   * @return {Array.Number} A two number list of the coordinates (x,y)
+   */
+  //// TODO: finish this function
+  screenToWorldPoint: function() {
+
+  },
+
+  /**
+   * Maps the input in the range to the output
+   * @param  {Number} x       [description]
+   * @param  {Number} in_min  [description]
+   * @param  {Number} in_max  [description]
+   * @param  {Number} out_min [description]
+   * @param  {Number} out_max [description]
+   * @return {Number}         [description]
+   */
+  map: function(x, in_min, in_max, out_min, out_max) {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  }
  };

@@ -36,7 +36,7 @@ const ACCEL_SPEED_WALK = 100;
  * @constant
  * @default
  */
-const BULLET_SPEED = 10;
+const BULLET_SPEED = 0.000000001;
 
 /**
  * The object for the main player of the game.
@@ -187,13 +187,35 @@ let player = {
     // Calculate bullet path
     // See: https://www.geeksforgeeks.org/find-points-at-a-given-distance-on-a-line-of-given-slope/
 
+    // Better see: https://math.stackexchange.com/questions/656500/given-a-point-slope-and-a-distance-along-that-slope-easily-find-a-second-p
+
     // TODO: finish these calculations
 
-    // var slope = ????
-    // var speedX = controls.mouseX + (BULLET_SPEED * Math.sqrt(1 / (1 + )))
+    // slope from player to mouse
+    var m = (this.y - controls.mouseY) / (this.x - controls.mouseX);
+
+    // distance for the bullet to move
+    var d = 10;
+
+    // something
+    var r = Math.sqrt(1 + (m * m));
+
+    // var speedX = this.x + (d / r);
+    // var speedY = this.y + (d * m / r);
+
+    var speedX = 0 + (d / r);
+    var speedY = 0 + (d * m / r);
+
+////// SOLUTION HERER!!!!!!!!
+// TODO: map onscreen pixels units to world units
 
 
-    game.bullets.push(new Bullet(player.x, player.y, Math.floor((Math.random() * 10) + 1), Math.floor((Math.random() * 10) + 1)));
+    // Create bullets going in random direction
+    // game.bullets.push(new Bullet(player.x, player.y, Math.floor((Math.random() * 10) + 1), Math.floor((Math.random() * 10) + 1)));
+
+    console.log(controls.mouseY);
+
+    game.bullets.push(new Bullet(player.x, player.y, speedX, speedY));
 
   },
 
