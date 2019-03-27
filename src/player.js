@@ -31,6 +31,14 @@ const MOVE_SPEED_RUN = 1;
 const ACCEL_SPEED_WALK = 100;
 
 /**
+ * The default bullet speed
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const BULLET_SPEED = 10;
+
+/**
  * The object for the main player of the game.
  *
  * @type {Object}
@@ -174,6 +182,16 @@ let player = {
     // Move character given current speeds
     this.x += this.speedX * deltaTime;
     this.y += this.speedY * deltaTime;
+
+
+    // Calculate bullet path
+    // See: https://www.geeksforgeeks.org/find-points-at-a-given-distance-on-a-line-of-given-slope/
+
+    // TODO: finish these calculations
+
+    // var slope = ????
+    // var speedX = controls.mouseX + (BULLET_SPEED * Math.sqrt(1 / (1 + )))
+
 
     game.bullets.push(new Bullet(player.x, player.y, Math.floor((Math.random() * 10) + 1), Math.floor((Math.random() * 10) + 1)));
 
