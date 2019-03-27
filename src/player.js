@@ -36,7 +36,7 @@ const ACCEL_SPEED_WALK = 100;
  * @constant
  * @default
  */
-const BULLET_SPEED = 0.000000001;
+const BULLET_SPEED = 10;
 
 /**
  * The object for the main player of the game.
@@ -191,11 +191,20 @@ let player = {
 
     // TODO: finish these calculations
 
+    var worldMouseX = camera.screenToWorldPoint(controls.mouseX, controls.mouseY);
+
+    var worldMouseY = worldMouseX[1];
+    var worldMouseX = worldMouseX[0];
+
+
+
     // slope from player to mouse
-    var m = (this.y - controls.mouseY) / (this.x - controls.mouseX);
+    var m = (this.y - worldMouseY) / (this.x - worldMouseX);
+
+    // console.log(worldMouseX);
 
     // distance for the bullet to move
-    var d = 10;
+    var d = BULLET_SPEED;
 
     // something
     var r = Math.sqrt(1 + (m * m));
@@ -210,11 +219,16 @@ let player = {
 // TODO: map onscreen pixels units to world units
 
 
+
     // Create bullets going in random direction
     // game.bullets.push(new Bullet(player.x, player.y, Math.floor((Math.random() * 10) + 1), Math.floor((Math.random() * 10) + 1)));
 
-    console.log(controls.mouseY);
+    if (worldMouseX < player.x) {
+      speedX *= -1;
+      speedY *= -1;
+    }
 
+    console.log(speedX);
     game.bullets.push(new Bullet(player.x, player.y, speedX, speedY));
 
   },

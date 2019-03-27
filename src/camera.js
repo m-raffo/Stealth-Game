@@ -230,18 +230,21 @@ let camera = {
    * @return {Array.Number} A two number list of the coordinates (x,y)
    */
   //// TODO: finish this function
-  screenToWorldPoint: function() {
+  screenToWorldPoint: function(x, y) {
+    var x1 = this.map(x, 0, game.canvas.element.width, this.x, this.x + this.width);
+    var y1 = this.map(y, 0, game.canvas.element.height, this.y, this.y + this.height);
 
+    return [x1, y1];
   },
 
   /**
    * Maps the input in the range to the output
-   * @param  {Number} x       [description]
-   * @param  {Number} in_min  [description]
-   * @param  {Number} in_max  [description]
-   * @param  {Number} out_min [description]
-   * @param  {Number} out_max [description]
-   * @return {Number}         [description]
+   * @param  {Number} x       the inputted value
+   * @param  {Number} in_min  the minimun possible for the inputted value
+   * @param  {Number} in_max  the maximun possible for the inputted value
+   * @param  {Number} out_min the minimun output value
+   * @param  {Number} out_max the maximum output value
+   * @return {Number}         The outputed value
    */
   map: function(x, in_min, in_max, out_min, out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
