@@ -85,9 +85,21 @@ let controls = {
 
     console.log('===============================================');
   },
+
+  /**
+   * The current x coordinate of the mouse
+   * @type {Number}
+   */
+  mouseX: 0,
+
+  /**
+   * The current y coordinate of the mouse
+   * @type {Number}
+   */
+  mouseY: 0,
 };
 
-
+// Key presses
 $(document).keydown(function(e){
     var checkWebkitandIE=(e.which==26 ? 1 : 0);
     var checkMoz=(e.which==122 && e.ctrlKey ? 1 : 0);
@@ -104,6 +116,8 @@ $(document).keyup(function(e){
     controls.current[e.which] = false;
 });
 
+
+// Mouse clicks
 $(document).mousedown(function(event) {
   console.log("MOUSED OWN");
   switch (event.which) {
@@ -140,3 +154,9 @@ $(document).mouseup(function(event) {
       break;
     }
 });
+
+// Get mouse movements
+document.addEventListener("mousemove", function(e) {
+  controls.mouseX = e.clientX;
+  controls.mouseY = e.clientY;
+}, false);
