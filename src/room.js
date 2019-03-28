@@ -6,11 +6,13 @@
  * @param       {Number} height height of the room in wu
  * @constructor
  */
-function Room(x, y, width, height) {
+function Room(x, y, width, height, walls = []) {
   this.x = x;
   this.y = y;
   this.width = width;
   this.height = height;
+
+  this.walls = walls;
 
   /**
    * The amount that the room is visible.
@@ -19,4 +21,11 @@ function Room(x, y, width, height) {
    * @type {Number}
    */
   this.visibility = 0;
+}
+
+function Wall(x, y, width, height) {
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.height = height;
 }

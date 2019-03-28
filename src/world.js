@@ -16,7 +16,7 @@ let game = {
      * @type {Array}
      */
     rooms:[
-      new Room(10, 10, 1000, 1000),
+      new Room(10, 10, 1000, 1000, [new Wall(10, 10, 25, 1000)]),
     ]
   },
 

@@ -249,13 +249,23 @@ let camera = {
    * @return {undefined}      no return value
    */
   renderRoom: function(room) {
+    // Draw floor
     this.setFill('#ff0000');
     this.renderRect(room.x, room.y, room.width, room.height);
 
+    // Draw hidden
     this.setFill('rgba(71, 71, 71, ' + room.visibility + ')');
     this.renderRect(room.x, room.y, room.width, room.height);
 
-    console.log(room.visibility);
+    this.setFill('#358c67');
+    // Draw walls
+    for (var i = 0; i < room.walls.length; i++) {
+      var wall = room.walls[i];
+      console.log(wall);
+
+      this.renderRect(wall.x, wall.y, wall.width, wall.height);
+    }
+
   },
 
   /**

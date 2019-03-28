@@ -331,12 +331,28 @@ let player = {
   },
 
   /**
-   * Determines if the player is colliding with any objects that impeed their
-   * movement
+   * Determines if the player is in collision with the given wall
+   * @param  {Object.Wall} wall  the wall to check for collision with
    * @return {Boolean} true if colliding, false if not
    */
-  checkCollision: function() {
-    // TODO: Write the checkCollision function
+  checkCollision: function(wall) {
+
+    /*
+    If in collision, one of these must be true:
+    1. Player's center is inside the rectangle
+    2. One rectangle edge is on the circle
+     */
+
+    // Case 1:
+    if (camera.pointInRect(this.x, this.y, wall.x, wall.y, wall.width, wall.height)) {
+      return true;
+    }
+
+    // TODO: Finish the checkCollision function
+    // Case 2:
+    // See: https://www.geeksforgeeks.org/check-line-touches-intersects-circle/
+    // Find perpendiclar from player center and each rectangle side. Then get distance. If the distance is <= circle radius, they are in collision
+
     return false;
   }
 
