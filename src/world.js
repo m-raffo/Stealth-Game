@@ -12,6 +12,7 @@ let game = {
     if (box.pos >= box.limit || box.pos <= 0) box.velocity = -box.velocity;
 
     camera.updateSize();
+    camera.updatePosition();
 
     player.move();
 

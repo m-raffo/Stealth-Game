@@ -16,6 +16,14 @@ const CAM_TARGET_HEIGHT = 3500;
 const CAM_TARGET_WIDTH = 6200;
 
 /**
+ * The speed at which the camera tracks the player's movements
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const CAM_TRACK_SPEED = 0.125;
+
+/**
  * Define the camera namespace for rendering the world
  * @namespace
  */
@@ -32,6 +40,35 @@ let camera = {
    * @type {Number}
    */
   y: -10,
+
+  /**
+   * Sets the camera x position so that the given coordinate is in the center
+   * @param  {Number} x x coordinate to set
+   * @return {undefined}   no return value
+   */
+  setCenterX: function(x) {
+    this.x = x - (this.width / 2);
+  },
+
+  /**
+   * Sets the camera y position so that the given coordinate is in the center
+   * @param  {Number} y y coordinate to set
+   * @return {undefined}   no return value
+   */
+  setCenterY: function(y) {
+    this.y = y - (this.height / 2);
+  },
+
+  /**
+   * Sets the camera position to center around the given coordinates
+   * @param  {Number} x x coordinate
+   * @param  {Number} y y coordinate
+   * @return {undefined}   no return value
+   */
+  setCenter: function(x, y) {
+    this.setCenterX(x);
+    this.setCenterY(y);
+  },
 
   /**
    * The width of the camera (in world units)
@@ -231,6 +268,27 @@ let camera = {
     var y1 = this.map(y, 0, game.canvas.element.height, this.y, this.y + this.height);
 
     return [x1, y1];
+  },
+
+  /**
+   * Calculates the linear interlopation between the two given points and the percentage given
+   * @param  {Number} x1         x coordinate of point 1
+   * @param  {numebr} y1         y coordinate of point 1
+   * @param  {Number} x2         x coordinate of point 2
+   * @param  {Number} y2         y coordinate of point 2
+   * @param  {Number} percentage percent (range from 0 - 1)
+   * @return {Array.Number}      A two element array of the result. [x, y]
+   */
+  lerp: function(x1, y1, x2, y2, percentage) {
+    var x = x1 + ((x2 - x1) * percentage);
+    var y = y1 + ((y2 - y1) * percentage);
+
+    return [x, y];
+  },
+
+  updatePosition: function() {
+    var position = this.lerp(this.x + (this.width / 2), this.y + (this.height / 2), player.x, player.y, CAM_TRACK_SPEED);
+    this.setCenter(position[0], position[1]);
   },
 
   /**
