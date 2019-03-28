@@ -16,6 +16,7 @@ let controls = {
     'MOVE_DOWN': [40, 83], // down arrow and 'd' key
     'CROUCH': [16], // shift
     'SPRINT': [32], // space
+    'RELOAD' : [82]  // 'r'
   },
 
   /**
@@ -103,7 +104,6 @@ let controls = {
 $(document).keydown(function(e){
     var checkWebkitandIE=(e.which==26 ? 1 : 0);
     var checkMoz=(e.which==122 && e.ctrlKey ? 1 : 0);
-    console.log("Press" + e.which);
 
     controls.current[e.which] = true;
 });
@@ -111,7 +111,6 @@ $(document).keydown(function(e){
 $(document).keyup(function(e){
     var checkWebkitandIE=(e.which==26 ? 1 : 0);
     var checkMoz=(e.which==122 && e.ctrlKey ? 1 : 0);
-    console.log("Release" + e.which);
 
     controls.current[e.which] = false;
 });
@@ -119,7 +118,6 @@ $(document).keyup(function(e){
 
 // Mouse clicks
 $(document).mousedown(function(event) {
-  console.log("MOUSED OWN");
   switch (event.which) {
     // left mouse
     case 1:
