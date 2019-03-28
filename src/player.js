@@ -98,6 +98,10 @@ let player = {
      * @type {Number}
      */
     timeToReload: 1000,
+
+    updateAmmoDisplay: function() {
+      $('#ammoDisplay').text(this.ammo + ' / ' + this.ammoTotal);
+    }
   },
 
 
@@ -291,6 +295,8 @@ let player = {
 
 
     }
+
+    this.weapon.updateAmmoDisplay();
 
 
 

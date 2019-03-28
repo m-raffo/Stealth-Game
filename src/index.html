@@ -9,15 +9,19 @@
         	canvas { background: #eee; display: block; margin: 0 auto; }
         </style>
 
+        <link rel="stylesheet" href="/style.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
   </head>
   <body>
+    <div id="container">
+      <canvas id="myCanvas" width="480" height="480"></canvas>
 
-    <div id="box" style="position: absolute; top: 10px; left: 10px; height: 50px; width: 50px; background-color: red; display: none;"></div>
+      <!-- TODO: Make this look nicer, it is looks TERRIBLE -->
+      <h1 id="ammoDisplay" class="unselectable">This is the display</h1>
+    </div>
 
-    <canvas id="myCanvas" width="480" height="480"></canvas>
 
 
   </body>

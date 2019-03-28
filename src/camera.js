@@ -54,9 +54,6 @@ let camera = {
     camera.clear();
 
 
-    box.element.style.left = box.pos + 'px';
-
-
     // draw 2 boxes for testing
     camera.setFill('#cd0477');
     camera.renderRect(10, 10, 100, 100);
