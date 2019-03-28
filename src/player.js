@@ -111,6 +111,10 @@ let player = {
      */
     timeToReload: 1000,
 
+    /**
+     * Updates the on-screen display to reflect the current ammo state
+     * @return {undefined} no return value
+     */
     updateAmmoDisplay: function() {
       $('#ammoDisplay').text(this.ammo + ' / ' + this.ammoTotal);
     }
@@ -120,6 +124,7 @@ let player = {
 
   /**
    * Calculates the player's movement based on the currently pressed controls
+   * Also calculates other actions about the player (ie shooting)
    * @return {undefined} No return value
    */
   move: function() {
