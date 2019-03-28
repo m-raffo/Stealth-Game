@@ -140,6 +140,8 @@ $(document).mouseup(function(event) {
     // left mouse
     case 1:
       controls.leftMouseDown = false;
+      // the mouse has been released
+      player.weapon.mouseRelease = true;
       break;
     // middle mouse
     case 2:

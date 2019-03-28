@@ -70,6 +70,18 @@ let player = {
     resetTimestamp: Date.now(),
 
     /**
+     * True if the mouse has been released since the last shot, false if not
+     * @type {Boolean}
+     */
+    mouseReleased: true,
+
+    /**
+     * True if the weapon requires the mosue to be released in between shoots
+     * @type {Boolean}
+     */
+    requireMouseRelease: true,
+
+    /**
      * The time in milliseconds that the weapon needs until it is ready to be fired
      * @type {Number}
      */
@@ -234,13 +246,21 @@ let player = {
 
     // Shooting
 
-    // TODO: Add parameter to make the mouse have to be pressed again to fire again
-    if (controls.leftMouseDown && Date.now() > this.weapon.resetTimestamp) {
+    /*
+    This statement checks that:
+    1. The left mouse is down
+    2. The the mouse has been released since the last shot OR that it is not required to have been released
+    3. Enough time has passed to allow for another shot
+     */
+    if (controls.leftMouseDown && (this.weapon.mouseRelease || !this.weapon.requireMouseRelease) && Date.now() > this.weapon.resetTimestamp) {
       if (this.weapon.ammo > 0) {
         // Set wait until the weapon can be fired again and remove one bullet
         this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReset;
         this.weapon.ammo -= 1;
         this.weapon.ammoTotal -= 1;
+
+        // need to wait again until the mouse is released
+        this.weapon.mouseRelease = false;
 
         // Calculate bullet path toward mouse
 
@@ -284,6 +304,7 @@ let player = {
     // Reloading
     if (controls.isControlPressed('RELOAD') && this.weapon.ammo < this.weapon.ammoPerClip && this.weapon.ammo < this.weapon.ammoTotal) {
       // TODO: Replace this with a reloading sound effect
+      // TODO: Add a progress bar for reloading
       console.log("RELOADING...");
       this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReload;
 
