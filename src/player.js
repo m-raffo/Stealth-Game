@@ -36,7 +36,7 @@ const ACCEL_SPEED_WALK = 100;
  * @constant
  * @default
  */
-const BULLET_SPEED = 10;
+const BULLET_SPEED = 40;
 
 /**
  * The object for the main player of the game.
@@ -59,10 +59,48 @@ let player = {
   speedY: 0,
 
   /**
-   * The time in milliseconds that the player's weapon will be ready to fire again.
-   * @type {Number}
+   * Stores all of the information about the player's current weapon
+   * @type {Object}
    */
-  weaponReset: Date.now();
+  weapon: {
+    /**
+     * The time in milliseconds that the player's weapon will be ready to fire again.
+     * @type {Number}
+     */
+    resetTimestamp: Date.now(),
+
+    /**
+     * The time in milliseconds that the weapon needs until it is ready to be fired
+     * @type {Number}
+     */
+    timeToReset: 100,
+
+    /**
+     * The number of bullets in the current clip of the weapon
+     * @type {Number}
+     */
+    ammo: 10,
+
+    /**
+     * The number of bullets in a full clip of the weapon
+     * @type {Number}
+     */
+    ammoPerClip: 10,
+
+    /**
+     * The number of remaining bullets (total).
+     * @type {Number}
+     */
+    ammoTotal: 25,
+
+    /**
+     * The time in milliseconds to reload the weapon with another clip
+     * @type {Number}
+     */
+    timeToReload: 1000,
+  },
+
+
 
   /**
    * Calculates the player's movement based on the currently pressed controls
@@ -190,36 +228,71 @@ let player = {
     this.y += this.speedY * deltaTime;
 
 
-    // Calculate bullet path toward mouse
+    // Shooting
 
-    // Better see: https://math.stackexchange.com/questions/656500/given-a-point-slope-and-a-distance-along-that-slope-easily-find-a-second-p
+    // TODO: Add parameter to make the mouse have to be pressed again to fire again
+    if (controls.leftMouseDown && Date.now() > this.weapon.resetTimestamp) {
+      if (this.weapon.ammo > 0) {
+        // Set wait until the weapon can be fired again and remove one bullet
+        this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReset;
+        this.weapon.ammo -= 1;
+        this.weapon.ammoTotal -= 1;
+
+        // Calculate bullet path toward mouse
+
+        // Better see: https://math.stackexchange.com/questions/656500/given-a-point-slope-and-a-distance-along-that-slope-easily-find-a-second-p
 
 
-    var worldMouseX = camera.screenToWorldPoint(controls.mouseX, controls.mouseY);
+        var worldMouseX = camera.screenToWorldPoint(controls.mouseX, controls.mouseY);
 
-    var worldMouseY = worldMouseX[1];
-    var worldMouseX = worldMouseX[0];
+        var worldMouseY = worldMouseX[1];
+        var worldMouseX = worldMouseX[0];
 
 
 
-    // slope from player to mouse
-    var m = (this.y - worldMouseY) / (this.x - worldMouseX);
+        // slope from player to mouse
+        var m = (this.y - worldMouseY) / (this.x - worldMouseX);
 
-    // distance for the bullet to move
-    var d = BULLET_SPEED;
+        // distance for the bullet to move
+        var d = BULLET_SPEED;
 
-    // something
-    var r = Math.sqrt(1 + (m * m));
+        // something
+        var r = Math.sqrt(1 + (m * m));
 
-    var speedX = 0 + (d / r);
-    var speedY = 0 + (d * m / r);
+        var speedX = 0 + (d / r);
+        var speedY = 0 + (d * m / r);
 
-    if (worldMouseX < player.x) {
-      speedX *= -1;
-      speedY *= -1;
+        if (worldMouseX < player.x) {
+          speedX *= -1;
+          speedY *= -1;
+        }
+
+        game.bullets.push(new Bullet(player.x, player.y, speedX, speedY));
+      } else {
+        // TODO: Replace this with a click sound effect
+        console.log("CLICK"); // The gun is empty
+      }
+
     }
 
-    game.bullets.push(new Bullet(player.x, player.y, speedX, speedY));
+
+
+    // Reloading
+    if (controls.isControlPressed('RELOAD') && this.weapon.ammo < this.weapon.ammoPerClip && this.weapon.ammo < this.weapon.ammoTotal) {
+      // TODO: Replace this with a reloading sound effect
+      console.log("RELOADING...");
+      this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReload;
+
+      if (this.weapon.ammoTotal < this.weapon.ammoPerClip) {
+        this.weapon.ammo = this.weapon.ammoTotal;
+      } else {
+        this.weapon.ammo = this.weapon.ammoPerClip;
+      }
+
+
+    }
+
+
 
   },
 
