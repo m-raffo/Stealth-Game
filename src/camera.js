@@ -24,6 +24,14 @@ const CAM_TARGET_WIDTH = 6200;
 const CAM_TRACK_SPEED = 0.125;
 
 /**
+ * The speed for a room to become dark/light after you enter/ leave
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const ROOM_HIDE_SPEED = 0.1;
+
+/**
  * Define the camera namespace for rendering the world
  * @namespace
  */
@@ -90,6 +98,26 @@ let camera = {
     // Clear canvas
     camera.clear();
 
+    // Draw all rooms
+    for (var i = 0; i < game.world.rooms.length; i++) {
+      var currentRoom = game.world.rooms[i];
+      this.renderRoom(currentRoom);
+
+      // If inside room, make brighter
+      if (this.pointInRect(player.x, player.y, currentRoom.x, currentRoom.y, currentRoom.width, currentRoom.height)) {
+        currentRoom.visibility -= ROOM_HIDE_SPEED;
+      } else {
+        currentRoom.visibility += ROOM_HIDE_SPEED;
+      }
+
+      if (currentRoom.visibility < 0) {
+        currentRoom.visibility = 0;
+      } else if (currentRoom.visibility > 1) {
+        currentRoom.visibility = 1;
+      }
+
+    }
+
 
     // draw 2 boxes for testing
     camera.setFill('#cd0477');
@@ -98,16 +126,13 @@ let camera = {
     camera.setFill('#1f2a08');
     camera.renderRect(5, 10, 10, 10);
 
-    // Draw the player
+
     // TODO: Draw the player sprite (instead of box)
-    // camera.setFill('#b5a60f');
-    // camera.drawBox(player.x, player.y, 10, 10);
 
     // Draw the player (rendering properly)
     camera.setFill('#2eaff4');
     // camera.renderRect(player.x, player.y, 100, 100);
     camera.renderEllipse(player.x, player.y, 100, 100);
-
 
     // Draw all bullets
     for (var i = 0; i < game.bullets.length; i++) {
@@ -219,6 +244,21 @@ let camera = {
   },
 
   /**
+   * Renders the inputted room to the screen
+   * @param  {Object.Room} room The room to be drawn
+   * @return {undefined}      no return value
+   */
+  renderRoom: function(room) {
+    this.setFill('#ff0000');
+    this.renderRect(room.x, room.y, room.width, room.height);
+
+    this.setFill('rgba(71, 71, 71, ' + room.visibility + ')');
+    this.renderRect(room.x, room.y, room.width, room.height);
+
+    console.log(room.visibility);
+  },
+
+  /**
    * Determines if the given point is on the screen
    * @param  {Number} x the x coordinate
    * @param  {Number} y y coordinate
@@ -284,6 +324,26 @@ let camera = {
     var y = y1 + ((y2 - y1) * percentage);
 
     return [x, y];
+  },
+
+  /**
+   * Determines if the world is inside
+   * @param  {Number} x1     the x position of the point
+   * @param  {Number} y1     the y position of the point
+   * @param  {Number} x      the x of the upper left of the rectangle
+   * @param  {Number} y      the y of the upper left of the rectangle
+   * @param  {Number} width  width of rectagle
+   * @param  {Number} height height of rectangle
+   * @return {Boolean}        True if inside, false if outside
+   */
+  pointInRect: function(x1, y1, x, y, width, height) {
+    if (x1 >= x && x1 <= x + width) {
+      if (y1 >= y && y1 <= y + height) {
+        return true;
+      }
+    }
+
+    return false;
   },
 
   updatePosition: function() {

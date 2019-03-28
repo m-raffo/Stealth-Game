@@ -6,6 +6,20 @@ let game = {
   lastFrameTimeMs: 0,
   delta: 0,
 
+  /**
+   * The object that contains all of the data about the current level.
+   * @type {Object}
+   */
+  world: {
+    /**
+     * A list of room objects that contains all of the rooms in the level.
+     * @type {Array}
+     */
+    rooms:[
+      new Room(10, 10, 1000, 1000),
+    ]
+  },
+
   update: function(delta) {
     box.pos += box.velocity * delta;
     // Switch directions if we go too far

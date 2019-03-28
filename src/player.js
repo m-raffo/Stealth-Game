@@ -116,7 +116,7 @@ let player = {
      * @return {undefined} no return value
      */
     updateAmmoDisplay: function() {
-      $('#ammoDisplay').text(this.ammo + ' / ' + this.ammoTotal);
+      $('#ammoDisplay').text(this.ammo + ' / ' + (this.ammoTotal - this.ammo));
     }
   },
 
@@ -250,6 +250,8 @@ let player = {
 
 
     // Shooting
+
+    // BUG: Can't shoot on first mouse click (inital value of mouse click release variablce)
 
     /*
     This statement checks that:
