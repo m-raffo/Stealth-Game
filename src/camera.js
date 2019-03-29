@@ -356,6 +356,44 @@ let camera = {
     return false;
   },
 
+  /**
+   * Checks if the given line passes through the circle
+   * @param  {Number} x  x coordinate of the center of the circle
+   * @param  {Number} y  y coordinate of the center of the circle
+   * @param  {Number} r  radius of the circle
+   * @param  {Number} x1 one point of the line coordinate
+   * @param  {Number} y1 one point of the line coordinate
+   * @param  {Number} x2 one point of the line coordinate
+   * @param  {Number} y2 one point of the line coordinate
+   * @return {Boolean}    true if passes through, false if not.
+   */
+  circleLineCollision: function(x, y, r, x1, y1, x2, y2) {
+
+    // First, convert (x1, y1) and (x2, y2) into ax + by + c = 0;
+    var m = (y2 - y1) / (x2 - x1);  // slope
+
+    // OLD!!! Don't use these
+    // ax + by + c = 0;
+    // var a = (y2 - y1) * -1;
+    // var b = (x2 - x1);
+    // var c = (m * (0 - x1) + y1) * -1 / b;  // calculate y intercept
+
+    // ax + by + c = 0;
+    // TODO:  Check these equations for accuracy
+    var a = -1 * m;
+    var b = 1;
+    var c = -1 * (m * (0 - x1) + y1);  // calculate y intercept
+
+    // NOTE: See: https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
+
+
+    // y = m(x - x1) + y1
+
+
+
+    return true;
+  }
+
   updatePosition: function() {
     var position = this.lerp(this.x + (this.width / 2), this.y + (this.height / 2), player.x, player.y, CAM_TRACK_SPEED);
     this.setCenter(position[0], position[1]);
