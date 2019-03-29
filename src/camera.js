@@ -261,7 +261,6 @@ let camera = {
     // Draw walls
     for (var i = 0; i < room.walls.length; i++) {
       var wall = room.walls[i];
-      console.log(wall);
 
       this.renderRect(wall.x, wall.y, wall.width, wall.height);
     }
@@ -356,6 +355,8 @@ let camera = {
     return false;
   },
 
+
+
   /**
    * Checks if the given line passes through the circle
    * @param  {Number} x  x coordinate of the center of the circle
@@ -369,8 +370,19 @@ let camera = {
    */
   circleLineCollision: function(x, y, r, x1, y1, x2, y2) {
 
+    // TODO: further test this function
+    var distance = this.distancePointToLine(x, y, x1, y1, x2, y2);
+
+    if (distance <= r){
+      return true;
+    } else {
+      return false;
+    }
+
+    // =======NONE OF THIS IS NECESSARY!!!!========
+
     // First, convert (x1, y1) and (x2, y2) into ax + by + c = 0;
-    var m = (y2 - y1) / (x2 - x1);  // slope
+    // var m = (y2 - y1) / (x2 - x1);  // slope
 
     // OLD!!! Don't use these
     // ax + by + c = 0;
@@ -379,20 +391,44 @@ let camera = {
     // var c = (m * (0 - x1) + y1) * -1 / b;  // calculate y intercept
 
     // ax + by + c = 0;
-    // TODO:  Check these equations for accuracy
-    var a = -1 * m;
-    var b = 1;
-    var c = -1 * (m * (0 - x1) + y1);  // calculate y intercept
+    // var a = -1 * m;
+    // var b = 1;
+    // var c = -1 * (m * (0 - x1) + y1);  // calculate y intercept
 
     // NOTE: See: https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
 
 
     // y = m(x - x1) + y1
 
+    // ===========================================
+
 
 
     return true;
-  }
+  },
+
+  /**
+   * Calculates the distance from the given point to a line defined by two points
+   * @param  {Number} x  x coordinate of the point
+   * @param  {Number} y  y coordinate of the point
+   * @param  {Number} x1 x coordinate of the first point of the line
+   * @param  {Number} y1 y coordinate of the first point of the line
+   * @param  {Number} x2 x coordinate of the second point of the line
+   * @param  {Number} y2 y coordinate of the second point of the line
+   * @return {Number}    the result
+   */
+  distancePointToLine: function(x0, y0, x1, y1, x2, y2) {
+    // See: https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
+
+    // BUG: This won't work for vertical or horizontal lines (maybe)
+    // TODO: Further testing of this function
+
+    var a = Math.abs( ((y2 - y1)*x0) - ((x2 - x1) * y0) + (x2 * y1) - (y2 * x1) );
+
+    var b = Math.sqrt(  ((y2 - y1) * (y2 - y1)) + ((x2 - x1) * (x2 - x1) )    );
+
+    return a / b;
+  },
 
   updatePosition: function() {
     var position = this.lerp(this.x + (this.width / 2), this.y + (this.height / 2), player.x, player.y, CAM_TRACK_SPEED);

@@ -53,8 +53,8 @@ let player = {
   // Basic values
   x: 0,
   y: 0,
-  width: 450,
-  height: 450,
+  width: 100,
+  height: 100,
   speedX: 0,
   speedY: 0,
 
@@ -327,6 +327,10 @@ let player = {
     this.weapon.updateAmmoDisplay();
 
 
+    // Check collisions
+    console.log(this.checkCollision(game.world.rooms[0].walls[0]));
+
+
 
   },
 
@@ -337,6 +341,7 @@ let player = {
    */
   checkCollision: function(wall) {
 
+    // BUG: CHECKS LEFt and right, but not up and down properly
     /*
     If in collision, one of these must be true:
     1. Player's center is inside the rectangle
@@ -352,6 +357,32 @@ let player = {
     // Case 2:
     // See: https://www.geeksforgeeks.org/check-line-touches-intersects-circle/
     // Find perpendiclar from player center and each rectangle side. Then get distance. If the distance is <= circle radius, they are in collision
+
+    // NOTE: assumes that the player is perfectly round, and uses the width value
+
+    // Top edge
+    if (camera.circleLineCollision(player.x, player.y, player.width, wall.x, wall.y, wall.x + wall.width, wall.y)) {
+      return true;
+    }
+
+    // Left edge
+    if (camera.circleLineCollision(player.x, player.y, player.width, wall.x, wall.y, wall.x, wall.y + wall.height)) {
+      return true;
+    }
+
+
+    // Right edge
+    if (camera.circleLineCollision(player.x, player.y, player.width, wall.x + wall.width, wall.y, wall.x + wall.width, wall.y + wall.height)) {
+      return true;
+    }
+
+
+
+    // Bottom edge
+    if (camera.circleLineCollision(player.x, player.y, player.width, wall.x, wall.y + wall.height, wall.x + wall.width, wall.y + wall.height)) {
+      return true;
+    }
+
 
     return false;
   }
