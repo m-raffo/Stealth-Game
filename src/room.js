@@ -21,6 +21,13 @@ function Room(x, y, width, height, walls = []) {
    * @type {Number}
    */
   this.visibility = 0;
+
+  /**
+   * A color for the floor if there is no texture/image
+   * @type {String}
+   * @default
+   */
+  this.floorColor = '#ccae44';
 }
 
 function Wall(x, y, width, height) {

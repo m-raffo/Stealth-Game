@@ -136,6 +136,7 @@ let camera = {
 
     // Draw all bullets
     for (var i = 0; i < game.bullets.length; i++) {
+      // TODO: Bullets should not be visible in hidden rooms
       var bullet = game.bullets[i];
       camera.renderEllipse(bullet.x, bullet.y, 10, 10);
     }
@@ -250,11 +251,11 @@ let camera = {
    */
   renderRoom: function(room) {
     // Draw floor
-    this.setFill('#ff0000');
+    this.setFill(room.floorColor);
     this.renderRect(room.x, room.y, room.width, room.height);
 
     // Draw hidden
-    this.setFill('rgba(71, 71, 71, ' + room.visibility + ')');
+    this.setFill('rgba(0, 0, 0, ' + room.visibility + ')');
     this.renderRect(room.x, room.y, room.width, room.height);
 
     this.setFill('#358c67');
@@ -391,7 +392,6 @@ let camera = {
 
     if (distance <= r) {
 
-      console.log([distance, intersection, x1, y1, x2, y2 ]);
       // Check that the intersection is between the x values of the two corners of the rectanlge
       if ((x1 <= intersection[0] && intersection[0] <= x2) || (x1 >= intersection[0] && intersection[0] >= x2)) {
         // Also check the y values

@@ -30,8 +30,13 @@ let game = {
 
     player.move();
 
-    for (var i = 0; i < game.bullets.length; i++) {
+    // Loop backwards to not mess up i if a bullet is removed
+    for (var i = game.bullets.length -1; i >= 0; i--) {
       game.bullets[i].move();
+
+      if (!game.bullets[i].active) {
+        game.bullets.splice(i, 1);
+      }
     }
 
   },

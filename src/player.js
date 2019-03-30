@@ -51,8 +51,8 @@ let player = {
   First step: remove deltaTime from this function
    */
   // Basic values
-  x: 0,
-  y: 0,
+  x: -100,
+  y: -100,
   width: 100,
   height: 100,
   speedX: 0,
@@ -246,7 +246,18 @@ let player = {
 
     // Move character given current speeds
     this.x += this.speedX * deltaTime;
+
+    // Move back if causing collision
+    if (this.checkAllCollisions()) {
+      this.x -= this.speedX * deltaTime;
+    }
+
     this.y += this.speedY * deltaTime;
+    if (this.checkAllCollisions()) {
+      this.y -= this.speedY * deltaTime;
+    }
+
+    // If the player is in collision with any walls, move them back
 
 
     // Shooting
@@ -327,11 +338,25 @@ let player = {
     this.weapon.updateAmmoDisplay();
 
 
-    // Check collisions
-    console.log(this.checkCollision(game.world.rooms[0].walls[0]));
+  },
+
+  /**
+   * Checks all collisions to determine if the player is touching anything
+   * @return {Boolean} true if in collision, false if not
+   */
+  checkAllCollisions: function() {
+    // Check all rooms
+    for (var i = 0; i < game.world.rooms.length; i++) {
+      // Loop through all walls in the room
+      for (var j = 0; j < game.world.rooms[i].walls.length; j++) {
+        if (this.checkCollision(game.world.rooms[i].walls[j])) {
+          return true;
+        }
+      }
+    }
 
 
-
+    return false;
   },
 
   /**

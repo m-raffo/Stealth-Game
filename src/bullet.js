@@ -1,4 +1,12 @@
 /**
+ * The number of steps to take when calculating the bullets movement to avoid skipping over a wall
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const BULLET_MOVE_STEPS = 10;
+
+/**
  * Creates a bullet object
  * @param       {Number} x    the x position to start the bullet
  * @param       {Number} y    the y position to start the bullets
@@ -11,9 +19,34 @@ function Bullet(x, y, dirX, dirY) {
   this.y = y;
   this.dirX = dirX;
   this.dirY = dirY;
+  this.active = true;
 
+  // TODO: make bullet movement seem "smoother"
   this.move = function() {
-    this.x += this.dirX;
-    this.y += this.dirY;
+    for (var i = 0; i < BULLET_MOVE_STEPS; i++) {
+      this.x += this.dirX / BULLET_MOVE_STEPS;
+      this.y += this.dirY / BULLET_MOVE_STEPS;
+
+      if(this.checkAllCollisions()) {
+        this.active = false;
+      }
+    }
+
+
+  }
+
+  this.checkAllCollisions = function() {
+    // Check all rooms
+    for (var i = 0; i < game.world.rooms.length; i++) {
+      // Loop through all walls in the room
+      for (var j = 0; j < game.world.rooms[i].walls.length; j++) {
+        var wall = game.world.rooms[i].walls[j];
+        if (camera.pointInRect(this.x, this.y, wall.x, wall.y, wall.width, wall.height)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }
