@@ -254,6 +254,12 @@ let camera = {
     this.setFill(room.floorColor);
     this.renderRect(room.x, room.y, room.width, room.height);
 
+    // Draw items
+    for (var i = 0; i < room.items.length; i++) {
+      this.setFill(room.items[i].color);
+      this.renderRect(room.items[i].x, room.items[i].y, room.items[i].width, room.items[i].height);
+    }
+
     // Draw hidden
     this.setFill('rgba(0, 0, 0, ' + room.visibility + ')');
     this.renderRect(room.x, room.y, room.width, room.height);

@@ -6,7 +6,7 @@
  * @param       {Number} height height of the room in wu
  * @constructor
  */
-function Room(x, y, width, height, walls = []) {
+function Room(x, y, width, height, walls = [], items = []) {
   this.x = x;
   this.y = y;
   this.width = width;
@@ -28,6 +28,8 @@ function Room(x, y, width, height, walls = []) {
    * @default
    */
   this.floorColor = '#ccae44';
+
+  this.items = items;
 }
 
 function Wall(x, y, width, height) {
