@@ -355,6 +355,20 @@ let camera = {
     return false;
   },
 
+  /**
+   * Finds the distance between 2 given points
+   * @param  {Number} x1 x coordinate of one of the points
+   * @param  {Number} y1 y coordinate of one of the points
+   * @param  {Number} x2 x coordinate of one of the points
+   * @param  {Number} y2 y coordinate of one of the points
+   * @return {Number}    the distance between the points
+   */
+  distance: function(x1, y1, x2, y2) {
+    // TODO: Test this function
+    return Math.hypot(y2 - y1, x2 - x1);
+  },
+
+  // TODO: Move some math functions to their own file?
 
 
   /**
@@ -370,14 +384,32 @@ let camera = {
    */
   circleLineCollision: function(x, y, r, x1, y1, x2, y2) {
 
-    // TODO: further test this function
+    // TODO: test this function
     var distance = this.distancePointToLine(x, y, x1, y1, x2, y2);
 
-    if (distance <= r){
-      return true;
-    } else {
-      return false;
+    var intersection = this.findIntersectionBetweenPointAndLine(x, y, x1, y1, x2, y2);
+
+    if (distance <= r) {
+
+      console.log([distance, intersection, x1, y1, x2, y2 ]);
+      // Check that the intersection is between the x values of the two corners of the rectanlge
+      if ((x1 <= intersection[0] && intersection[0] <= x2) || (x1 >= intersection[0] && intersection[0] >= x2)) {
+        // Also check the y values
+        if ((y1 <= intersection[1] && intersection[1] <= y2) || (y1 >= intersection[1] && intersection[1] >= y2)) {
+          return true;
+        }
+      }
     }
+
+    // if any of the edges are inside the circle, return true
+    if (this.distance(x, y, x1, y1) <= r || this.distance(x, y, x2, y2) <= r) {
+      return true;
+    }
+
+
+
+
+    return false;
 
     // =======NONE OF THIS IS NECESSARY!!!!========
 
@@ -401,10 +433,6 @@ let camera = {
     // y = m(x - x1) + y1
 
     // ===========================================
-
-
-
-    return true;
   },
 
   /**
@@ -428,6 +456,69 @@ let camera = {
     var b = Math.sqrt(  ((y2 - y1) * (y2 - y1)) + ((x2 - x1) * (x2 - x1) )    );
 
     return a / b;
+  },
+
+  /**
+   * Finds the intersection point between:
+   * 1. Line through (x1, y1) and (x2, y2)
+   * 2. Line thorugh (x3, y3) and (x4, y4)
+   * @param  {Number} x1 one of the points of the lines
+   * @param  {Number} y1 one of the points of the lines
+   * @param  {Number} x2 one of the points of the lines
+   * @param  {Number} y2 one of the points of the lines
+   * @param  {Number} x3 one of the points of the lines
+   * @param  {Number} y3 one of the points of the lines
+   * @param  {Number} x4 one of the points of the lines
+   * @param  {Number} y4 one of the points of the lines
+   * @return {Array.Number}  Coordinates of the intersection
+   */
+  findIntersection: function(x1, y1, x2, y2, x3, y3, x4, y4) {
+    var m1 = (y2 - y1) / (x2 - x1);  // slope for line 1
+    var m2 = (y4 - y3) / (x4 - x3);  // slope for line 2
+
+    // TODO: Test this function further
+
+    // Found by solving two linear equations in point-slope form
+    // var x = (x2 + (m * y2) + (m * m *x1) - (m * x1)) / (m * m + 1);
+    // var x = ((m2 * m1 * x1) + (m2 * y2) - (m2*y1) + x2) / (m1 * m2 + 1);
+    var x = ((-1 * x3 * m2) + (m1 * x1) + y3 - y1) / ((-1 * m2) + m1);
+
+    // find the y coordinate by soling a linear equation with the value for x
+    var y = m1 * (x - x1) + y1;
+
+    return [x, y];
+  },
+
+  /**
+   * Finds the point of intersection between a line and a perpendiclar lines thourgh a point
+   * @param  {Number} x1 coordinate of the point
+   * @param  {Number} y1 coordinate of the point
+   * @param  {Number} x2 coordinate of one point on the line
+   * @param  {Number} y2 coordinate of one point on the line
+   * @param  {Number} x3 coordinate of one point on the line
+   * @param  {Number} y3 coordinate of one point on the line
+   * @return {Array.number}    the point of intersection (x, y)
+   */
+  findIntersectionBetweenPointAndLine: function(x1, y1, x2, y2, x3, y3) {
+
+    // if the line is horizontal
+    if (x2 == x3) {
+      // the intersection is the x of the line and the y value of the given point
+      return [x2, y1];
+    } else if (y2 == y3) { // just the opposite if the line is vertical
+      return [x1, y2];
+    }
+
+    var m1 = (y3 - y2) / (x3 - x2);
+    var m2 = -1 / m1;
+
+    // TODO: Test this function more
+
+    // Find another point on the perpendiclar line
+    var x4 = x1 + 1;
+    var y4 = y1 * m2;
+
+    return this.findIntersection(x1, y1, x4, y4, x2, y2, x3, y3);
   },
 
   updatePosition: function() {

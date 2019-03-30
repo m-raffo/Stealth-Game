@@ -341,7 +341,6 @@ let player = {
    */
   checkCollision: function(wall) {
 
-    // BUG: CHECKS LEFt and right, but not up and down properly
     /*
     If in collision, one of these must be true:
     1. Player's center is inside the rectangle
