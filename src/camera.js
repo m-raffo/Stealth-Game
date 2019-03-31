@@ -118,15 +118,6 @@ let camera = {
 
     }
 
-
-    // draw 2 boxes for testing
-    camera.setFill('#cd0477');
-    camera.renderRect(10, 10, 100, 100);
-
-    camera.setFill('#1f2a08');
-    camera.renderRect(5, 10, 10, 10);
-
-
     // TODO: Draw the player sprite (instead of box)
 
     // Draw the player (rendering properly)
