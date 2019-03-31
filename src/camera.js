@@ -263,6 +263,14 @@ let camera = {
       this.renderRect(wall.x, wall.y, wall.width, wall.height);
     }
 
+    // Draw doors
+    for (var i = 0; i < room.doors.length; i++) {
+      var door = room.doors[i];
+      door.update();
+      this.setFill(door.color);
+      this.renderRect(door.currentX, door.currentY, door.width, door.height);
+    }
+
   },
 
   /**
@@ -407,29 +415,6 @@ let camera = {
 
 
     return false;
-
-    // =======NONE OF THIS IS NECESSARY!!!!========
-
-    // First, convert (x1, y1) and (x2, y2) into ax + by + c = 0;
-    // var m = (y2 - y1) / (x2 - x1);  // slope
-
-    // OLD!!! Don't use these
-    // ax + by + c = 0;
-    // var a = (y2 - y1) * -1;
-    // var b = (x2 - x1);
-    // var c = (m * (0 - x1) + y1) * -1 / b;  // calculate y intercept
-
-    // ax + by + c = 0;
-    // var a = -1 * m;
-    // var b = 1;
-    // var c = -1 * (m * (0 - x1) + y1);  // calculate y intercept
-
-    // NOTE: See: https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
-
-
-    // y = m(x - x1) + y1
-
-    // ===========================================
   },
 
   /**

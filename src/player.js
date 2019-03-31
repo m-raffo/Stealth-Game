@@ -372,6 +372,8 @@ let player = {
     2. One rectangle edge is on the circle
      */
 
+    // TODO: Allow the player to "roll" off hard edges (easier to move around)
+
     // Case 1:
     if (camera.pointInRect(this.x, this.y, wall.x, wall.y, wall.width, wall.height)) {
       return true;

@@ -16,7 +16,8 @@ let controls = {
     'MOVE_DOWN': [40, 83], // down arrow and 'd' key
     'CROUCH': [16], // shift
     'SPRINT': [32], // space
-    'RELOAD' : [82]  // 'r'
+    'RELOAD' : [82],  // 'r'
+    'ACTION': [70], // 'f'
   },
 
   /**
