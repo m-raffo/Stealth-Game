@@ -1,6 +1,7 @@
 function Guard(startX, startY, direction){
   this.x = startX;
   this.y = startY;
+  this.direction = direction;
 
   this.width = 100;
   this.height = 100;
