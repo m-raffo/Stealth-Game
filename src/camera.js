@@ -98,11 +98,14 @@ let camera = {
     // Clear canvas
     camera.clear();
 
+    // TODO: Draw the dark boxes covering hidden rooms last (to cover anything visible: bullets, guards, etc.)
+
     // Draw all rooms
     for (var i = 0; i < game.world.rooms.length; i++) {
       var currentRoom = game.world.rooms[i];
-      this.renderRoom(currentRoom);
+      this.renderRoomFloor(currentRoom);
 
+      // TODO: This code should not be in the draw function: move to update function
       // If inside room, make brighter
       if (this.pointInRect(player.x, player.y, currentRoom.x, currentRoom.y, currentRoom.width, currentRoom.height)) {
         currentRoom.visibility -= ROOM_HIDE_SPEED;
@@ -118,12 +121,13 @@ let camera = {
 
     }
 
-    // TODO: Draw the player sprite (instead of box)
 
-    // Draw the player (rendering properly)
-    camera.setFill('#2eaff4');
-    // camera.renderRect(player.x, player.y, 100, 100);
-    camera.renderEllipse(player.x, player.y, 100, 100);
+
+    // Draw the guards
+    for (var i = 0; i < game.world.guards.length; i++) {
+      var guard = game.world.guards[i];
+      this.renderGuard(guard);
+    }
 
     // Draw all bullets
     for (var i = 0; i < game.bullets.length; i++) {
@@ -131,6 +135,20 @@ let camera = {
       var bullet = game.bullets[i];
       camera.renderEllipse(bullet.x, bullet.y, 10, 10);
     }
+
+    // render room coverings
+    for (var i = 0; i < game.world.rooms.length; i++) {
+      var currentRoom = game.world.rooms[i];
+      this.renderRoomCovering(currentRoom);
+    }
+
+
+    // TODO: Draw the player sprite (instead of box)
+
+    // Draw the player (rendering properly)
+    camera.setFill('#2eaff4');
+    // camera.renderRect(player.x, player.y, 100, 100);
+    camera.renderEllipse(player.x, player.y, 100, 100);
 
   },
 
@@ -236,11 +254,11 @@ let camera = {
   },
 
   /**
-   * Renders the inputted room to the screen
+   * Renders the inputted room to the screen (except for the covering)
    * @param  {Object.Room} room The room to be drawn
    * @return {undefined}      no return value
    */
-  renderRoom: function(room) {
+  renderRoomFloor: function(room) {
     // Draw floor
     this.setFill(room.floorColor);
     this.renderRect(room.x, room.y, room.width, room.height);
@@ -251,9 +269,19 @@ let camera = {
       this.renderRect(room.items[i].x, room.items[i].y, room.items[i].width, room.items[i].height);
     }
 
-    // Draw hidden
-    this.setFill('rgba(0, 0, 0, ' + room.visibility + ')');
-    this.renderRect(room.x, room.y, room.width, room.height);
+  },
+
+  /**
+   * Renders the inputted room's covering to the screen
+   * @param  {Object.Room} room The room to be drawn
+   * @return {undefined}      no return value
+   */
+  renderRoomCovering: function(room) {
+    if (room.visibility > 0) {
+      // Draw covering
+      this.setFill('rgba(0, 0, 0, ' + room.visibility + ')');
+      this.renderRect(room.x, room.y, room.width, room.height);
+    }
 
     this.setFill('#358c67');
     // Draw walls
@@ -270,7 +298,17 @@ let camera = {
       this.setFill(door.color);
       this.renderRect(door.x, door.y, door.width, door.height);
     }
+  },
 
+  /**
+   * Renders the given to the guard to the screen
+   * @param  {Object.Guard} guard the guard to be drawn
+   * @return {undefined}        no return value
+   */
+  renderGuard: function(guard) {
+    this.setFill(guard.color);
+
+    this.renderEllipse(guard.x, guard.y, guard.width, guard.height);
   },
 
   /**
@@ -519,5 +557,16 @@ let camera = {
    */
   map: function(x, in_min, in_max, out_min, out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-  }
+  },
+
+  /**
+   * Converts and angle (in degrees) to a slope
+   * @param  {Number} angle the angle in degrees
+   * @return {Number}       the slope
+   */
+  angleToSlope: function(angle) {
+    var rad = angle * Math.PI/180;
+    return Math.tan(rad);
+  },
+
  };

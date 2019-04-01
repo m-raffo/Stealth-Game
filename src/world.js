@@ -90,7 +90,15 @@ let game = {
       [
         new Door(-890, 1990, -490, 1990, 400, 50)
       ]),
-    ]
+    ],
+
+    /**
+     * An array containing all of the guards
+     * @type {Array.Guard}
+     */
+    guards: [
+      new Guard(1500, 500, 10),
+    ],
   },
 
   update: function(delta) {
