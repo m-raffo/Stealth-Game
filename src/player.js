@@ -353,6 +353,13 @@ let player = {
           return true;
         }
       }
+
+      // Loop through all doors in the room
+      for (var j = 0; j < game.world.rooms[i].doors.length; j++) {
+        if (this.checkCollision(game.world.rooms[i].doors[j])) {
+          return true;
+        }
+      }
     }
 
 

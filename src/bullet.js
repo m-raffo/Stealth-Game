@@ -45,6 +45,14 @@ function Bullet(x, y, dirX, dirY) {
           return true;
         }
       }
+
+      // Loop through all doors in the room
+      for (var j = 0; j < game.world.rooms[i].doors.length; j++) {
+        var door = game.world.rooms[i].doors[j];
+        if (camera.pointInRect(this.x, this.y, door.x, door.y, door.width, door.height)) {
+          return true;
+        }
+      }
     }
 
     return false;

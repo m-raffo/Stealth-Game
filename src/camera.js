@@ -268,7 +268,7 @@ let camera = {
       var door = room.doors[i];
       door.update();
       this.setFill(door.color);
-      this.renderRect(door.currentX, door.currentY, door.width, door.height);
+      this.renderRect(door.x, door.y, door.width, door.height);
     }
 
   },
