@@ -309,6 +309,18 @@ let camera = {
     this.setFill(guard.color);
 
     this.renderEllipse(guard.x, guard.y, guard.width, guard.height);
+    var r = 75;
+    var x = r * Math.cos(this.degToRad(guard.direction));
+    var y = r * Math.sin(this.degToRad(guard.direction));
+
+
+
+
+
+    this.setFill("#000000");
+    this.renderRect(guard.x + x, guard.y + y, 25, 25);
+
+    guard.direction += 1;
   },
 
   /**
@@ -568,5 +580,9 @@ let camera = {
     var rad = angle * Math.PI/180;
     return Math.tan(rad);
   },
+
+  degToRad: function(degree) {
+    return degree * (Math.PI/180);
+  }
 
  };
