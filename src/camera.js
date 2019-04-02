@@ -155,24 +155,27 @@ let camera = {
     // draw the navigation nodes
     // TODO: remove this, it's for testing only
     this.setFill('#9430e3');
-    for (var i = 0; i < game.world.nodes.length; i++) {
-      for (var j = 0; j < game.world.nodes[i].length; j++) {
+    if(true) {
+      for (var i = 0; i < game.world.nodes.length; i++) {
+        for (var j = 0; j < game.world.nodes[i].length; j++) {
 
-        var node = game.world.nodes[i][j];
-        if(node) {
-          this.renderEllipse(game.world.nodes[i][j].x, game.world.nodes[i][j].y, game.world.nodes[i][j].radius, game.world.nodes[i][j].radius);
+          var node = game.world.nodes[i][j];
+          if(node) {
+            this.renderEllipse(game.world.nodes[i][j].x, game.world.nodes[i][j].y, game.world.nodes[i][j].radius, game.world.nodes[i][j].radius);
 
-          for (var k = 0; k < game.world.nodes[i][j].adjacent.length; k++) {
-            if(node.adjacent[k]) {
-              this.renderLine(node.x, node.y, node.adjacent[k].x, node.adjacent[k].y);
+            for (var k = 0; k < game.world.nodes[i][j].adjacent.length; k++) {
+              if(node.adjacent[k]) {
+                this.renderLine(node.x, node.y, node.adjacent[k].x, node.adjacent[k].y);
 
+              }
             }
           }
+
         }
 
       }
-
     }
+
 
   },
 

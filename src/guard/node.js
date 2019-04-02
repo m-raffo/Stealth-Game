@@ -14,6 +14,8 @@ function Node(x, y, gridX, gridY){
     f:0   // total cost
   }
 
+  this.parent = undefined; // parent node for path finding.
+
   /**
    * Determines if this node is touching a wall
    * @return {[type]} [description]
