@@ -150,17 +150,26 @@ let camera = {
     // camera.renderRect(player.x, player.y, 100, 100);
     camera.renderEllipse(player.x, player.y, 100, 100);
 
+    this.setStroke('#e408fb');
 
     // draw the navigation nodes
     // TODO: remove this, it's for testing only
+    this.setFill('#9430e3');
     for (var i = 0; i < game.world.nodes.length; i++) {
       for (var j = 0; j < game.world.nodes[i].length; j++) {
-        var node = game.world.nodes[i][j];
-        this.renderEllipse(game.world.nodes[i][j].x, game.world.nodes[i][j].y, 25, 25);
 
-        for (var k = 0; k < game.world.nodes[i][j].adjacent.length; k++) {
-          this.renderLine(node.x, node.y, node.adjacent[k].x, node.adjacent[k].y);
+        var node = game.world.nodes[i][j];
+        if(node) {
+          this.renderEllipse(game.world.nodes[i][j].x, game.world.nodes[i][j].y, game.world.nodes[i][j].radius, game.world.nodes[i][j].radius);
+
+          for (var k = 0; k < game.world.nodes[i][j].adjacent.length; k++) {
+            if(node.adjacent[k]) {
+              this.renderLine(node.x, node.y, node.adjacent[k].x, node.adjacent[k].y);
+
+            }
+          }
         }
+
       }
 
     }
@@ -220,6 +229,15 @@ let camera = {
    */
   setFill: function(color) {
     game.canvas.ctx.fillStyle = color;
+  },
+
+  /**
+   * Sets the stroke color for drawings
+   * @param  {String} color The color to change to
+   * @return {undefined}       no return value
+   */
+  setStroke: function(color) {
+    game.canvas.ctx.strokeStyle = color;
   },
 
   /**
