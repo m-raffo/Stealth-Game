@@ -150,6 +150,21 @@ let camera = {
     // camera.renderRect(player.x, player.y, 100, 100);
     camera.renderEllipse(player.x, player.y, 100, 100);
 
+
+    // draw the navigation nodes
+    // TODO: remove this, it's for testing only
+    for (var i = 0; i < game.world.nodes.length; i++) {
+      for (var j = 0; j < game.world.nodes[i].length; j++) {
+        var node = game.world.nodes[i][j];
+        this.renderEllipse(game.world.nodes[i][j].x, game.world.nodes[i][j].y, 25, 25);
+
+        for (var k = 0; k < game.world.nodes[i][j].adjacent.length; k++) {
+          this.renderLine(node.x, node.y, node.adjacent[k].x, node.adjacent[k].y);
+        }
+      }
+
+    }
+
   },
 
   /**
@@ -179,6 +194,22 @@ let camera = {
     game.canvas.ctx.beginPath();
     game.canvas.ctx.ellipse(x, y, radiusX, radiusY, 0, 0, 2 * Math.PI);
     game.canvas.ctx.fill();
+    game.canvas.ctx.closePath();
+  },
+
+  /**
+   * Draws a line to the screen (in pixels)
+   * @param  {Number} x1 one of the points to draw the line to
+   * @param  {Number} y1 one of the points to draw the line to
+   * @param  {Number} x2 one of the points to draw the line to
+   * @param  {Number} y2 one of the points to draw the line to
+   * @return {undefined}    no return value
+   */
+  drawLine: function(x1, y1, x2, y2) {
+    game.canvas.ctx.beginPath();
+    game.canvas.ctx.moveTo(x1, y1);
+    game.canvas.ctx.lineTo(x2, y2);
+    game.canvas.ctx.stroke();
     game.canvas.ctx.closePath();
   },
 
@@ -251,6 +282,24 @@ let camera = {
 
 
     camera.drawEllipse(pixelX, pixelY, pixelWidth, pixelHeight);
+  },
+
+  /**
+   * Renders a line onscreen from the points given in world units
+   * @param  {Number} x1 coordinate of the points
+   * @param  {Number} y1 coordinate of the points
+   * @param  {Number} x2 coordinate of the points
+   * @param  {Number} y2 coordinate of the points
+   * @return {undefined}    no return value
+   */
+  renderLine: function(x1, y1, x2, y2) {
+    var pixelX1 = ((x1 - camera.x) * game.canvas.element.width) / camera.width;
+    var pixelY1 = ((y1 - camera.y) * game.canvas.element.height) / camera.height;
+
+    var pixelX2 = ((x2 - camera.x) * game.canvas.element.width) / camera.width;
+    var pixelY2 = ((y2 - camera.y) * game.canvas.element.height) / camera.height;
+
+    this.drawLine(pixelX1, pixelY1, pixelX2, pixelY2);
   },
 
   /**
