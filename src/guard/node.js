@@ -1,4 +1,4 @@
-function Node(x, y){
+function Node(x, y, gridX, gridY){
   this.x = x;
   this.y = y;
   this.adjacent = [];
@@ -7,6 +7,12 @@ function Node(x, y){
   this.gridY = gridY;
 
   this.radius = 25;
+
+  this.score = {
+    g:0,  // current cost
+    h:0,  // estimated cost
+    f:0   // total cost
+  }
 
   /**
    * Determines if this node is touching a wall

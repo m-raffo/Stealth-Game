@@ -23,19 +23,12 @@ game.world.astar = {
     var openList = [startNode];
     var closedList = [];
 
-    // create empty array to store scores in
-    var scores = [];
-    for (var i = 0; i < nodes.length; i++) {
-      scores.push([]);
-      for (var j = 0; j < nodes[i].length; j++) {
-        scores[i].push([]);
-      }
-    }
-
     // calculate all h scores for the tiles
     for (var i = 0; i < nodes.length; i++) {
       for (var j = 0; j < nodes[i].length; j++) {
-        scores[i][j] = new Score(undefined, Math.abs(targetY - i) + Math.abs(targetX - j), Math.abs(targetY - i) + Math.abs(targetX - j));
+        nodes[i][j].score.h = Math.abs(j - targetX) + Math.abs(i - targetY);
+        nodes[i][j].score.f = Math.abs(j - targetX) + Math.abs(i - targetY);
+        nodes[i][j].score.g = undefined;
       }
     }
 
@@ -45,6 +38,19 @@ game.world.astar = {
      */
     var getLowestFScore = function() {
       // TODO: Write this function
+      var best = {
+        index: undefined,
+        score: 1000000000000 // a really big number so that the first compared to is smaller // TODO: <----- maybe change this
+      }
+
+      for (var i = 0; i < openList.length; i++) {
+        if(openList[i].score.f <= best.score) {
+          best.score = openList[i].score.f;
+          best.index = i;
+        }
+      }
+
+      return openList[best.index];
     }
 
     openList.push(startNode);
@@ -52,6 +58,7 @@ game.world.astar = {
 
 
     do {
+      var currentTile = getLowerFScore();
 
     } while (true);
 
