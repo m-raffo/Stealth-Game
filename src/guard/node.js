@@ -3,6 +3,9 @@ function Node(x, y){
   this.y = y;
   this.adjacent = [];
 
+  this.gridX = gridX;
+  this.gridY = gridY;
+
   this.radius = 25;
 
   /**
@@ -22,6 +25,7 @@ function Node(x, y){
       // don't check doors, because guards can walk through doors
     }
   }
+
 
   this.checkCollision = function(wall) {
 
@@ -87,7 +91,7 @@ game.world.nodes = [];
     index.x = 0;
     for (var j = 0; j < 3000; j += 125) {
 
-      var node = new Node(i, j);
+      var node = new Node(i, j, index.x, index.y);
       if (!node.isTouchingWall()) {
         game.world.nodes[index.y][index.x] = node;
       } else {
