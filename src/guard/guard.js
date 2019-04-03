@@ -1,3 +1,32 @@
+/*
+Guard behaviour modes:
+1. Stationary
+  Guard remains around the same location. Some looking around, mostly same place
+
+  Deault
+
+2. Patrol
+  Guard walks around a set path, looking where he is going
+
+  Default
+
+3. Investigation
+  Guard is walking toward a point to investigate
+
+  After the guard arrives at the point, if they find no player, they will look around, then return to staion/patrol
+
+  Triggered by hearing a noise, maybe seeing the player from a distance
+
+4. Fighting
+  Guard is aware of the player, and fighting against them.
+
+  Triggered only by seeing the player
+
+  If the guard loses sight of the player, activate alarm -or- try to find them
+
+
+ */
+
 function Guard(startX, startY, direction){
   this.x = startX;
   this.y = startY;
@@ -42,7 +71,7 @@ function Guard(startX, startY, direction){
       }
 
       if (this.path.length > 0) {
-        var newCoords = camera.moveToward(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y, 10);
+        var newCoords = camera.moveToward(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y, 5);
         this.x = newCoords[0];
         this.y = newCoords[1];
       }
