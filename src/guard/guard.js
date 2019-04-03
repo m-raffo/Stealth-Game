@@ -80,12 +80,19 @@ function Guard(startX, startY, direction){
         this.setPath(this.target.x, this.target.y);
       }
 
+      // Check for noise
+      for (var i = 0; i < game.world.noise.length; i++) {
+        if(camera.distance(game.world.noise[i].x, game.world.noise[i].y, this.x, this.y) <= game.world.noise[i].amount) {
+          console.log("I can hear you!");
+        }
+      }
+
     }
 
     // Move toward target defined by this.target.x and this.target.y
 
     if (this.path.length > 0) {
-      var newCoords = camera.moveToward(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y, 10);
+      var newCoords = camera.moveToward(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y, 5);
 
       var changeX = this.x - newCoords[0];
       var changeY = this.y - newCoords[1];

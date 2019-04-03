@@ -112,6 +112,12 @@ let player = {
     timeToReload: 1000,
 
     /**
+     * The amount of noise produced by the weapon when fired.
+     * @type {Number}
+     */
+    noise: 500,
+
+    /**
      * Updates the on-screen display to reflect the current ammo state
      * @return {undefined} no return value
      */
@@ -310,6 +316,7 @@ let player = {
         }
 
         game.bullets.push(new Bullet(player.x, player.y, speedX, speedY));
+        game.world.noise.push(new Noise(player.x, player.y, this.weapon.noise));
       } else {
         // TODO: Replace this with a click sound effect
         console.log("CLICK"); // The gun is empty

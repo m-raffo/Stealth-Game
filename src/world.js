@@ -11,6 +11,13 @@ let game = {
    * @type {Object}
    */
   world: {
+
+    /**
+     * An array of all the noise in the world
+     * @type {Array}
+     */
+    noise: [],
+    
     /**
      * A list of room objects that contains all of the rooms in the level.
      * @type {Array}
