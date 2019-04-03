@@ -2,11 +2,12 @@ function Node(x, y, gridX, gridY){
   this.x = x;
   this.y = y;
   this.adjacent = [];
+  this.adjacentDistances = [];
 
   this.gridX = gridX;
   this.gridY = gridY;
 
-  this.radius = 25;
+  this.radius = 75;
 
   this.score = {
     g:0,  // current cost
@@ -94,10 +95,10 @@ game.world.nodes = [];
   };
 
   // create all nodes
-  for (var i = -1000; i < 2500; i += 125) {
+  for (var i = -1000; i < 2200; i += 122) {
     game.world.nodes.push([]);
     index.x = 0;
-    for (var j = 0; j < 3000; j += 125) {
+    for (var j = 0; j < 3000; j += 122) {
 
       var node = new Node(i, j, index.x, index.y);
       if (!node.isTouchingWall()) {
@@ -116,7 +117,6 @@ game.world.nodes = [];
     index.y += 1;
   }
 
-  // TODO: delete any nodes that are touching the a wall
 
   // connect all nodes
   for (var i = 0; i < game.world.nodes.length; i++) {
@@ -125,21 +125,54 @@ game.world.nodes = [];
       if (node) {
         if (i > 0) {
           node.adjacent.push(game.world.nodes[i-1][j]);
+          node.adjacentDistances.push(1);
         }
 
         if(i < game.world.nodes.length-1) {
           node.adjacent.push(game.world.nodes[i+1][j]);
+          node.adjacentDistances.push(1);
 
         }
 
         if(j > 0) {
           node.adjacent.push(game.world.nodes[i][j-1]);
+          node.adjacentDistances.push(1);
 
         }
 
         if(j < game.world.nodes[i].length-1) {
           node.adjacent.push(game.world.nodes[i][j+1]);
+          node.adjacentDistances.push(1);
+
         }
+
+        // diagonal connections
+        if (i > 0 && j > 0) {
+          node.adjacent.push(game.world.nodes[i-1][j-1]);
+          node.adjacentDistances.push(2);
+
+        }
+
+        if(i < game.world.nodes.length-1 && j > 0) {
+          node.adjacent.push(game.world.nodes[i+1][j-1]);
+
+          node.adjacentDistances.push(2);
+
+        }
+
+        if(j < game.world.nodes.length-1 && i > 0) {
+          node.adjacent.push(game.world.nodes[i-1][j+1]);
+          node.adjacentDistances.push(2);
+
+        }
+
+        if(j < game.world.nodes.length-1 && i < game.world.nodes.length-1) {
+          node.adjacent.push(game.world.nodes[i+1][j+1]);
+          node.adjacentDistances.push(2);
+
+        }
+
+
       }
 
 

@@ -6,6 +6,8 @@ function Guard(startX, startY, direction){
   this.width = 100;
   this.height = 100;
 
+  // TODO: Make the guard's movement seem more natural by adding a speedX and speedY, and changing them similar to the way the player does
+
   /**
    * Color for the guard (if no texture)
    * @type {String}

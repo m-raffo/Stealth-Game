@@ -104,7 +104,7 @@ game.world.astar = {
         }
 
         if(!checkIfContains(openList, aSquare)) { // if not in open list, add to open list and update score
-          aSquare.score.g = currentTile.score.g + 1;
+          aSquare.score.g = currentTile.score.g + currentTile.adjacentDistances[i];
           aSquare.score.f = aSquare.score.g + aSquare.score.h;
           aSquare.parent = currentTile;
           openList.push(aSquare);
