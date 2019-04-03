@@ -1,23 +1,23 @@
 /*
 Guard behaviour modes:
-1. Stationary
+1. STATION
   Guard remains around the same location. Some looking around, mostly same place
 
   Deault
 
-2. Patrol
+2. PATROL
   Guard walks around a set path, looking where he is going
 
   Default
 
-3. Investigation
+3. INVEST
   Guard is walking toward a point to investigate
 
   After the guard arrives at the point, if they find no player, they will look around, then return to staion/patrol
 
   Triggered by hearing a noise, maybe seeing the player from a distance
 
-4. Fighting
+4. FIGHT
   Guard is aware of the player, and fighting against them.
 
   Triggered only by seeing the player
@@ -27,6 +27,14 @@ Guard behaviour modes:
 
  */
 
+/**
+ * The speed the guard changes angles
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_PIVOT_SPEED = 5;
+
 function Guard(startX, startY, direction){
   this.x = startX;
   this.y = startY;
@@ -34,6 +42,10 @@ function Guard(startX, startY, direction){
 
   this.width = 100;
   this.height = 100;
+
+  this.mode = 'STATION';
+
+  this.path = [];
 
   // TODO: Make the guard's movement seem more natural by adding a speedX and speedY, and changing them similar to the way the player does
 
@@ -50,32 +62,57 @@ function Guard(startX, startY, direction){
     direction: direction
   };
 
-  this.path = undefined;
+  this.target = {
+    x: startX,
+    y: startY,
+    direction: 0
+  };
+
 
   this.update = function() {
 
-    if(controls.rightMouseDown) {
-      var worldMouseX = camera.screenToWorldPoint(controls.mouseX, controls.mouseY);
 
-      var worldMouseY = worldMouseX[1];
-      worldMouseX = worldMouseX[0];
-      this.setPath(worldMouseX, worldMouseY);
-    }
 
-    if(this.path === undefined) {
-      this.path = game.world.astar.findPath(3, 6, 23, 23);
-    } else {
-
-      if(this.path.length > 0 && camera.distance(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y) < 10) {
-        this.path.pop();
+    if (this.mode === 'STATION') {
+      if (this.target.x !== this.station.x || this.target.y !== this.station.y) {
+        this.target.x = this.station.x;
+        this.target.y = this.station.y;
+        this.setPath(this.target.x, this.target.y);
       }
 
-      if (this.path.length > 0) {
-        var newCoords = camera.moveToward(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y, 5);
-        this.x = newCoords[0];
-        this.y = newCoords[1];
-      }
     }
+
+    // Move toward target defined by this.target.x and this.target.y
+
+    if (this.path.length > 0) {
+      var newCoords = camera.moveToward(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y, 10);
+
+      var changeX = this.x - newCoords[0];
+      var changeY = this.y - newCoords[1];
+      var m = changeY / changeX;
+
+      this.target.direction = camera.slopeToAngle(m);
+
+
+
+      this.x = newCoords[0];
+      this.y = newCoords[1];
+
+
+    }
+
+    // Change direction
+    if (this.direction !== this.target.direction) {
+      // only use the x value of this function
+      this.direction = camera.moveToward(this.direction, 0, this.target.direction, 0, GUARD_PIVOT_SPEED)[0];
+    }
+
+    if(this.path.length > 0 && camera.distance(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y) < 100) {
+      this.path.pop();
+    }
+
+
+
   };
 
   this.findClosestNode = function() {

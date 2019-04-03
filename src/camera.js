@@ -155,7 +155,7 @@ let camera = {
     // draw the navigation nodes
     // TEMP: remove this, it's for testing only
     this.setFill('#9430e3');
-    if(false) {
+    if (false) {
       for (var i = 0; i < game.world.nodes.length; i++) {
         for (var j = 0; j < game.world.nodes[i].length; j++) {
 
@@ -391,8 +391,8 @@ let camera = {
 
     this.renderEllipse(guard.x, guard.y, guard.width, guard.height);
     var r = 75;
-    var x = r * Math.cos(this.degToRad(guard.direction));
-    var y = r * Math.sin(this.degToRad(guard.direction));
+    var x = r * Math.cos(this.degToRad(guard.direction + 180));
+    var y = r * Math.sin(this.degToRad(guard.direction + 180));
 
 
 
@@ -400,8 +400,6 @@ let camera = {
 
     this.setFill("#000000");
     this.renderRect(guard.x + x, guard.y + y, 25, 25);
-
-    guard.direction += 1;
   },
 
   /**
@@ -720,13 +718,16 @@ let camera = {
    * @param  {Number} angle the angle in degrees
    * @return {Number}       the slope
    */
-  angleToSlope: function(angle) {
-    var rad = angle * Math.PI/180;
-    return Math.tan(rad);
+  slopeToAngle: function(slope) {
+    return this.radToDeg(Math.atan(slope));
   },
 
-  degToRad: function(degree) {
+  degToRad: function (degree) {
     return degree * (Math.PI/180);
-  }
+  },
+
+  radToDeg: function (angle) {
+  return angle * (180 / Math.PI);
+}
 
  };
