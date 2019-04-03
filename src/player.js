@@ -288,7 +288,7 @@ let player = {
         var worldMouseX = camera.screenToWorldPoint(controls.mouseX, controls.mouseY);
 
         var worldMouseY = worldMouseX[1];
-        var worldMouseX = worldMouseX[0];
+        worldMouseX = worldMouseX[0];
 
 
 

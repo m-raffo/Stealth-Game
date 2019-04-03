@@ -26,10 +26,11 @@ game.world.astar = {
     // calculate all h scores for the tiles
     for (var i = 0; i < nodes.length; i++) {
       for (var j = 0; j < nodes[i].length; j++) {
-        if(nodes[i][j]) {
+        if(nodes[i][j] !== undefined) {
           nodes[i][j].score.h = Math.abs(j - targetX) + Math.abs(i - targetY);
           nodes[i][j].score.f = Math.abs(j - targetX) + Math.abs(i - targetY);
-          nodes[i][j].score.g = undefined;
+          nodes[i][j].score.g = 0;
+          nodes[i][j].parent = undefined;
         }
 
       }
@@ -40,22 +41,17 @@ game.world.astar = {
      * @return {Object.Node} the node with the lowest f score
      */
     var getLowestFScore = function() {
-      console.log(openList);
-      // TODO: Write this function
       var best = {
         index: undefined,
         score: 1000000000000 // a really big number so that the first compared to is smaller // TODO: <----- maybe change this
       }
 
-      // BUG: this function is still returning undefined
       for (var i = 0; i < openList.length; i++) {
-        if(openList[i].score.f <= best.score) {
-          console.log('Found a tile');
+        if(openList[i] && openList[i].score.f <= best.score) {
           best.score = openList[i].score.f;
           best.index = i;
         }
       }
-      console.log(best.index);
       return openList[best.index];
     }
 
@@ -85,14 +81,13 @@ game.world.astar = {
     }
 
 
-
+    var currentTile;
     do {
-      var currentTile = getLowestFScore();
+      currentTile = getLowestFScore();
       closedList.push(currentTile);
       removeFromOpenList(currentTile);
 
       if(checkIfContains(closedList, targetNode)){
-        console.log('PATH FOUND!!!!!');
         break;
       }
 
@@ -120,7 +115,14 @@ game.world.astar = {
 
     } while (openList.length > 0);
 
-    debugger;
+    // console.log("Moving past first loop");
+
+    var finishedPath = [];
+    while(currentTile) {
+      finishedPath.push(currentTile);
+      currentTile = currentTile.parent;
+    }
+    return finishedPath;
   },
 
   // TODO: Reset node scores in between findPath runs

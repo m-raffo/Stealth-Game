@@ -153,14 +153,24 @@ let camera = {
     this.setStroke('#e408fb');
 
     // draw the navigation nodes
-    // TODO: remove this, it's for testing only
+    // TEMP: remove this, it's for testing only
     this.setFill('#9430e3');
-    if(true) {
+    if(false) {
       for (var i = 0; i < game.world.nodes.length; i++) {
         for (var j = 0; j < game.world.nodes[i].length; j++) {
 
           var node = game.world.nodes[i][j];
           if(node) {
+
+            var worldMouseX = camera.screenToWorldPoint(controls.mouseX, controls.mouseY);
+
+            var worldMouseY = worldMouseX[1];
+            worldMouseX = worldMouseX[0];
+
+            if (this.distance(node.x, node.y, worldMouseX, worldMouseY) <= node.radius) {
+              console.log([node.gridX, node.gridY]);
+            }
+
             this.renderEllipse(game.world.nodes[i][j].x, game.world.nodes[i][j].y, game.world.nodes[i][j].radius, game.world.nodes[i][j].radius);
 
             for (var k = 0; k < game.world.nodes[i][j].adjacent.length; k++) {
@@ -349,7 +359,8 @@ let camera = {
   renderRoomCovering: function(room) {
     if (room.visibility > 0) {
       // Draw covering
-      this.setFill('rgba(0, 0, 0, ' + room.visibility + ')');
+      // TEMP: divided by two to allow me to see what's going on. This must be changed for the final build
+      this.setFill('rgba(0, 0, 0, ' + room.visibility / 2 + ')');
       this.renderRect(room.x, room.y, room.width, room.height);
     }
 
@@ -459,6 +470,40 @@ let camera = {
     var y = y1 + ((y2 - y1) * percentage);
 
     return [x, y];
+  },
+
+  /**
+   * Calculate a movement from x1, y1 to x2, y2. Moves in EACH AXIS by the amount given
+   * @param  {Number} x1     one of the coordinates
+   * @param  {Number} y1     one of the coordinates
+   * @param  {Number} x2     one of the coordinates
+   * @param  {Number} y2     one of the coordinates
+   * @param  {Number} amount the amount to move
+   * @return {Array.Number}        coordinates of the result [x, y]
+   */
+  moveToward: function(x1, y1, x2, y2, amount) {
+    var finalX, finalY;
+    if (Math.abs(x1 - x2) <= amount) {
+      finalX = x2;
+    } else if (x1 < x2) {
+      finalX = x1 + amount;
+    } else if (x1 > x2) {
+      finalX = x1 - amount;
+    } else {
+      finalX = x1;
+    }
+
+    if (Math.abs(y1 - y2) <= amount) {
+      finalY = y2;
+    } else if (y1 < y2) {
+      finalY = y1 + amount;
+    } else if (y1 > y2) {
+      finalY = y1 - amount;
+    } else {
+      finalY = y1;
+    }
+
+    return [finalX, finalY];
   },
 
   /**
@@ -589,6 +634,35 @@ let camera = {
     var y = m1 * (x - x1) + y1;
 
     return [x, y];
+  },
+
+  /**
+   * Finds the node closest to the point given
+   * @param  {Number} x coordinate to search for node near
+   * @param  {Number} y coordinate to search for node near
+   * @return {Object.Node}   the node closest to the point
+   */
+  findNodeAtPoint: function(x, y) {
+    var nodes = game.world.nodes;
+    var best = {
+      node: undefined,
+      distance: 1000000000000
+    };
+
+    for (var i = 0; i < nodes.length; i++) {
+      for (var j = 0; j < nodes[i].length; j++) {
+        var node = nodes[i][j];
+        if(node === undefined) {
+          continue;  // only look at not undefined nodes
+        }
+        if (camera.distance(x, y, node.x, node.y) <= best.distance) {
+          best.node = node;
+          best.distance = camera.distance(x, y, node.x, node.y);
+        }
+      }
+    }
+
+    return best.node;
   },
 
   /**

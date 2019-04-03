@@ -111,6 +111,10 @@ let game = {
 
     player.move();
 
+    for (var i = 0; i < game.world.guards.length; i++) {
+      game.world.guards[i].update();
+    }
+
     // Loop backwards to not mess up i if a bullet is removed
     for (var i = game.bullets.length -1; i >= 0; i--) {
       game.bullets[i].move();

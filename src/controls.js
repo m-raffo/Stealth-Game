@@ -99,6 +99,8 @@ let controls = {
    * @type {Number}
    */
   mouseY: 0,
+
+  // TODO: Automatically convert these values to world units
 };
 
 // Key presses
