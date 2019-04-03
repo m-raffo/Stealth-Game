@@ -10,7 +10,7 @@ Guard behaviour modes:
 
   Default
 
-3. INVEST
+3. INVESTIGATE
   Guard is walking toward a point to investigate
 
   After the guard arrives at the point, if they find no player, they will look around, then return to staion/patrol
@@ -65,7 +65,8 @@ function Guard(startX, startY, direction){
   this.target = {
     x: startX,
     y: startY,
-    direction: 0
+    direction: 0,
+    investigate_done: undefined,
   };
 
 
@@ -84,8 +85,26 @@ function Guard(startX, startY, direction){
       for (var i = 0; i < game.world.noise.length; i++) {
         if(camera.distance(game.world.noise[i].x, game.world.noise[i].y, this.x, this.y) <= game.world.noise[i].amount) {
           console.log("I can hear you!");
+
+          // Begin an investigation
+          this.mode = 'INVESTIGATE';
+          this.target.x = game.world.noise[i].x;
+          this.target.y = game.world.noise[i].y;
+          this.setPath(this.target.x, this.target.y);
         }
       }
+
+    }
+
+    if (this.mode === 'INVESTIGATE') {
+
+      if(Date.now() >= this.target.investigate_done) {
+        this.target.x = this.station.x;
+        this.target.y = this.station.y;
+        this.setPath(this.target.x, this.target.y);
+        this.mode = 'STATION';
+      }
+
 
     }
 
@@ -98,7 +117,12 @@ function Guard(startX, startY, direction){
       var changeY = this.y - newCoords[1];
       var m = changeY / changeX;
 
-      this.target.direction = camera.slopeToAngle(m);
+      if(changeX >= 0) {
+        this.target.direction = camera.slopeToAngle(m);
+      } else {
+        this.target.direction = camera.slopeToAngle(m) + 180;
+      }
+
 
 
 
@@ -116,7 +140,21 @@ function Guard(startX, startY, direction){
 
     if(this.path.length > 0 && camera.distance(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y) < 100) {
       this.path.pop();
+      if(this.path.length <= 0 && this.mode === 'INVESTIGATE') {
+        this.target.investigate_done = Date.now() + 1000;
+      }
     }
+
+    // If touching a door, open it.
+    for (var i = 0; i < game.world.rooms.length; i++) {
+      for (var j = 0; j < game.world.rooms[i].doors.length; j++) {
+        var door = game.world.rooms[i].doors[j];
+        if (camera.distance(this.x, this.y, door.x + (door.width / 2), door.y + (door.height / 2)) < 200) {
+          door.open();
+        }
+      }
+    }
+
 
 
 

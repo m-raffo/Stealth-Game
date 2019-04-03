@@ -17,7 +17,7 @@ let game = {
      * @type {Array}
      */
     noise: [],
-    
+
     /**
      * A list of room objects that contains all of the rooms in the level.
      * @type {Array}
@@ -128,6 +128,13 @@ let game = {
 
       if (!game.bullets[i].active) {
         game.bullets.splice(i, 1);
+      }
+    }
+
+    // Remove expired noises
+    for (var i = game.world.noise.length -1; i >= 0; i--) {
+      if(game.world.noise[i].timeEnd > Date.now()) {
+        game.world.noise.splice(i, 1);
       }
     }
 

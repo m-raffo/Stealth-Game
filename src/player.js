@@ -115,7 +115,7 @@ let player = {
      * The amount of noise produced by the weapon when fired.
      * @type {Number}
      */
-    noise: 500,
+    noise: 1500,
 
     /**
      * Updates the on-screen display to reflect the current ammo state
@@ -360,6 +360,8 @@ let player = {
           return true;
         }
       }
+
+      // BUG: If a player opens a door and it touches them, they and the door will become stuck`
 
       // Loop through all doors in the room
       for (var j = 0; j < game.world.rooms[i].doors.length; j++) {
