@@ -621,6 +621,25 @@ let camera = {
     var m1 = (y2 - y1) / (x2 - x1);  // slope for line 1
     var m2 = (y4 - y3) / (x4 - x3);  // slope for line 2
 
+    // Check if the lines are vertical
+    if(x2 === x1 && x3 === x4) {
+      if (x1 === x3) {  // if this is true, they are the same line
+        return [x1, y1]; // BUG: Calculate intersection between vertical lines properly
+      } else {
+        return false;
+      }
+    }
+
+    if (x2 === x1) {
+      // if the first line is vertical, just calculate the second one with the first's x value
+      return [x1, m2 * (x1 - x3) + y3]
+    }
+
+    if (x3 === x4) {
+      // reverse of math above
+      return [x3, m1 * (x3 - x1) + y1]
+    }
+
     // TODO: Test this function further
 
     // Found by solving two linear equations in point-slope form
@@ -632,6 +651,78 @@ let camera = {
     var y = m1 * (x - x1) + y1;
 
     return [x, y];
+  },
+
+  /**
+   * Checks if line segments defined by 2 points intersect
+   * @param  {Number} x1 one of the points of the first line segment
+   * @param  {Number} y1 one of the points of the first line segment
+   * @param  {Number} x2 one of the points of the first line segment
+   * @param  {Number} y2 one of the points of the first line segment
+   * @param  {Number} x3 one of the points of the second line segment
+   * @param  {Number} y3 one of the points of the second line segment
+   * @param  {Number} x4 one of the points of the second line segment
+   * @param  {Number} y4 one of the points of the second line segment
+   * @return {Boolean}    true if they touch, false if not
+   */
+  checkSegmentIntersection: function(x1, y1, x2, y2, x3, y3, x4, y4) {
+    var intersection = this.findIntersection(x1, y1, x2, y2, x3, y3, x4, y4);
+    var intersectX = intersection[0];
+
+    // check the point is inside line segment 1
+    if((intersectX >= x1 && intersectX <= x2) || (intersectX <= x1 && intersectX >= x2)) {
+
+      // check the point is inside line segment 2
+      if((intersectX >= x3 && intersectX <= x4) || (intersectX <= x3 && intersectX >= x4)) {
+        return true;
+      }
+    }
+
+    return false;
+  },
+
+  /**
+   * Checks if a line segment defined by two points intersects a rectangle defined by the top left edge and a width/height/
+   * @param  {Number} x1     The coordinates of the line segment
+   * @param  {Number} y1     The coordinates of the line segment
+   * @param  {Number} x2     The coordinates of the line segment
+   * @param  {Number} y2     The coordinates of the line segment
+   * @param  {Number} x      The coordinates of the top left corner of the rect.
+   * @param  {Number} y      The coordinates of the top left corner of the rect.
+   * @param  {Number} width  Width of the rectangle
+   * @param  {Number} height Height of the rectangle
+   * @return {Boolean}       true if they collide, false if not
+   */
+  checkSegmentRectangleIntersection: function(x1, y1, x2, y2, x, y, width, height) {
+    // Must check each edge of the rectangle
+
+    // Top edge
+    if (this.checkSegmentIntersection(x1, y1, x2, y2, x, y, x + width, y)) {
+      return true;
+    }
+
+    // Left edge
+    if (this.checkSegmentIntersection(x1, y1, x2, y2, x, y, x, y + height)) {
+      return true;
+    }
+
+    // Right edge
+    if (this.checkSegmentIntersection(x1, y1, x2, y2, x + width, y, x + width, y + height)) {
+      return true;
+    }
+
+    // Bottom edge
+    if (this.checkSegmentIntersection(x1, y1, x2, y2, x, y + height, x + width, y + height)) {
+      return true;
+    }
+
+    // If either point is inside the rectangle
+    if(this.pointInRect(x1, y1, x, y, width, height) || this.pointInRect(x2, y2, x, y, width, height)) {
+      return true;
+    }
+
+    // if none of the above are true, return false
+    return false;
   },
 
   /**
