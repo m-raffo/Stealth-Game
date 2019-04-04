@@ -395,9 +395,6 @@ let camera = {
     var x = r * Math.cos(this.degToRad(guard.direction + 180));
     var y = r * Math.sin(this.degToRad(guard.direction + 180));
 
-    console.log([guard.direction, x, y]);
-
-
     this.setFill("#000000");
     this.renderRect(guard.x + x, guard.y + y, 25, 25);
   },

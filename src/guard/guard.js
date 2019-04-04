@@ -103,6 +103,21 @@ function Guard(startX, startY, direction){
         this.target.y = this.station.y;
         this.setPath(this.target.x, this.target.y);
         this.mode = 'STATION';
+        this.target.investigate_done = undefined;
+      }
+
+      // TODO: Should the guard continually check for noise while investigating?
+      // Check for noise
+      for (var i = 0; i < game.world.noise.length; i++) {
+        if(camera.distance(game.world.noise[i].x, game.world.noise[i].y, this.x, this.y) <= game.world.noise[i].amount) {
+          console.log("I can hear you!");
+
+          // Begin an investigation
+          this.mode = 'INVESTIGATE';
+          this.target.x = game.world.noise[i].x;
+          this.target.y = game.world.noise[i].y;
+          this.setPath(this.target.x, this.target.y);
+        }
       }
 
       // if investigating, continue to check for noises
@@ -137,14 +152,10 @@ function Guard(startX, startY, direction){
         this.target.direction = camera.slopeToAngle(m) + 180;
       }
 
-
-
-
       this.x = newCoords[0];
       this.y = newCoords[1];
 
-
-    } else {
+    } else if(this.x !== this.target.x || this.y !== this.target.y) {
       var newCoords = camera.moveToward(this.x, this.y, this.target.x, this.target.y, 5);
 
       this.x = newCoords[0];

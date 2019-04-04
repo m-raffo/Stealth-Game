@@ -120,7 +120,10 @@ let game = {
 
     for (var i = 0; i < game.world.guards.length; i++) {
       game.world.guards[i].update();
-      console.log(game.world.guards[i].canSeePlayer());
+      if(Date.now() % 1000 > 800) {
+        console.log(game.world.guards[i].canSeePlayer());
+
+      }
     }
 
     // Loop backwards to not mess up i if a bullet is removed
