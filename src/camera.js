@@ -188,20 +188,24 @@ let camera = {
       }
     }
 
-    for(var x = 0; x < 3000; x += 25) {
-      for (var y = 1250; y < 10000; y+= 25) {
-        if(game.world.guards[0].canSee(x, y)) {
-          this.setFill('#009521');
-          this.renderRect(x, y, 10, 10);
+    // Creates a grid of which points you can see
+    if (false) {
+      for(var x = 0; x < 3000; x += 25) {
+        for (var y = 1250; y < 10000; y+= 25) {
+          if(game.world.guards[0].canSee(x, y)) {
+            this.setFill('#009521');
+            this.renderRect(x, y, 10, 10);
 
 
-        } else {
-          // this.setFill('#7d1313');
-          // this.renderRect(x, y, 10, 10);
+          } else {
+            // this.setFill('#7d1313');
+            // this.renderRect(x, y, 10, 10);
 
+          }
         }
       }
     }
+
 
 
   },

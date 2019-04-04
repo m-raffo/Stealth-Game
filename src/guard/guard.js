@@ -35,6 +35,14 @@ Guard behaviour modes:
  */
 const GUARD_PIVOT_SPEED = 5;
 
+/**
+ * The entire field of view of the guard (in degrees)
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_FOV = 30;
+
 function Guard(startX, startY, direction){
   this.x = startX;
   this.y = startY;
