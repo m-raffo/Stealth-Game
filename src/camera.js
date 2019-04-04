@@ -652,6 +652,30 @@ let camera = {
     }
 
 
+    // this means that line 1 is horizontal
+    if(y1 === y2) {
+      /*
+      Math:
+      y = m2(x - x3) + y3
+      y - y3 = m2(x - x3)
+      (y - y3) / m2 = (x - x3)
+      ((y - y3) / m2) + x3 = x
+       */
+      var y = y1;
+      var x = ((y - y3) / m2) + x3;
+      return [x, y];
+    }
+
+    // this means that line 1 is horizontal
+    if(y3 === y4) {
+      var y = y3
+      var x = ((y - y1) / m1) + x1;
+      return [x, y];
+
+    }
+
+
+    // TODO: What to do if both lines are horizontal/vertical?
     // TODO: Test this function further
 
     // Found by solving two linear equations in point-slope form
