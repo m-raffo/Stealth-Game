@@ -100,6 +100,8 @@ let camera = {
 
     // TODO: Draw the dark boxes covering hidden rooms last (to cover anything visible: bullets, guards, etc.)
 
+
+
     // Draw all rooms
     for (var i = 0; i < game.world.rooms.length; i++) {
       var currentRoom = game.world.rooms[i];
@@ -183,6 +185,21 @@ let camera = {
 
         }
 
+      }
+    }
+
+    for(var x = 0; x < 3000; x += 25) {
+      for (var y = 1250; y < 10000; y+= 25) {
+        if(game.world.guards[0].canSee(x, y)) {
+          this.setFill('#009521');
+          this.renderRect(x, y, 10, 10);
+
+
+        } else {
+          // this.setFill('#7d1313');
+          // this.renderRect(x, y, 10, 10);
+
+        }
       }
     }
 
@@ -618,24 +635,22 @@ let camera = {
     var m1 = (y2 - y1) / (x2 - x1);  // slope for line 1
     var m2 = (y4 - y3) / (x4 - x3);  // slope for line 2
 
-    // Check if the lines are vertical
-    if(x2 === x1 && x3 === x4) {
-      if (x1 === x3) {  // if this is true, they are the same line
-        return [x1, y1]; // BUG: Calculate intersection between vertical lines properly
-      } else {
-        return false;
-      }
+    // This means that line 1 is vertical and m1 = Infinity
+    if(x1 === x2) {
+      // Just use x1 and solve for the y of the second line
+      var x = x1;
+      var y = m2 * (x - x3) + y3;
+      return [x, y];
     }
 
-    if (x2 === x1) {
-      // if the first line is vertical, just calculate the second one with the first's x value
-      return [x1, m2 * (x1 - x3) + y3]
+    // Same as above for line 2
+    if(x3 === x4) {
+      // Just use x1 and solve for the y of the second line
+      var x = x3;
+      var y = m1 * (x - x1) + y1;
+      return [x, y];
     }
 
-    if (x3 === x4) {
-      // reverse of math above
-      return [x3, m1 * (x3 - x1) + y1]
-    }
 
     // TODO: Test this function further
 
@@ -665,12 +680,17 @@ let camera = {
   checkSegmentIntersection: function(x1, y1, x2, y2, x3, y3, x4, y4) {
     var intersection = this.findIntersection(x1, y1, x2, y2, x3, y3, x4, y4);
     var intersectX = intersection[0];
+    var intersectY = intersection[1];
 
     // check the point is inside line segment 1
-    if((intersectX >= x1 && intersectX <= x2) || (intersectX <= x1 && intersectX >= x2)) {
+    if(((intersectX >= x1 && intersectX <= x2) || (intersectX <= x1 && intersectX >= x2)) &&
+
+    ((intersectY >= y1 && intersectY <= y2) || (intersectY <= y1 && intersectY >= y2))) {
 
       // check the point is inside line segment 2
-      if((intersectX >= x3 && intersectX <= x4) || (intersectX <= x3 && intersectX >= x4)) {
+      if(((intersectX >= x3 && intersectX <= x4) || (intersectX <= x3 && intersectX >= x4)) &&
+
+    ((intersectY >= y3 && intersectY <= y4) || (intersectY <= y3 && intersectY >= y4))) {
         return true;
       }
     }

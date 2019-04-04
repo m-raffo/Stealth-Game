@@ -234,6 +234,7 @@ function Guard(startX, startY, direction){
         var wall = game.world.rooms[i].walls[j];
 
         if(camera.checkSegmentRectangleIntersection(this.x, this.y, player.x, player.y, wall.x, wall.y, wall.width, wall.height)) {
+
           return false;
         }
       }
@@ -243,6 +244,32 @@ function Guard(startX, startY, direction){
         var door = game.world.rooms[i].doors[j];
 
         if(camera.checkSegmentRectangleIntersection(this.x, this.y, player.x, player.y, door.x, door.y, door.width, door.height)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  };
+
+  this.canSee = function(x, y) {
+    for (var i = 0; i < game.world.rooms.length; i++) {
+
+      // Check all walls
+      for (var j = 0; j < game.world.rooms[i].walls.length; j++) {
+        var wall = game.world.rooms[i].walls[j];
+
+        if(camera.checkSegmentRectangleIntersection(this.x, this.y, x, y, wall.x, wall.y, wall.width, wall.height)) {
+
+          return false;
+        }
+      }
+
+      // Also check doors
+      for(var j = 0; j < game.world.rooms[i].doors.length; j++) {
+        var door = game.world.rooms[i].doors[j];
+
+        if(camera.checkSegmentRectangleIntersection(this.x, this.y, x, y, door.x, door.y, door.width, door.height)) {
           return false;
         }
       }

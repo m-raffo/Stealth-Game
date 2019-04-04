@@ -120,7 +120,8 @@ let game = {
 
     for (var i = 0; i < game.world.guards.length; i++) {
       game.world.guards[i].update();
-      if(Date.now() % 1000 > 800) {
+      // if(Date.now() % 1000 > 800) {
+      if(false) {
         console.log(game.world.guards[i].canSeePlayer());
 
       }
