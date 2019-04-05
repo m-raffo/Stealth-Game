@@ -290,6 +290,7 @@ let player = {
 
         // Better see: https://math.stackexchange.com/questions/656500/given-a-point-slope-and-a-distance-along-that-slope-easily-find-a-second-p
 
+        // TODO: Add recoil
 
         var worldMouseX = camera.screenToWorldPoint(controls.mouseX, controls.mouseY);
 
@@ -361,7 +362,7 @@ let player = {
         }
       }
 
-      // BUG: If a player opens a door and it touches them, they and the door will become stuck`
+      // BUG: If a player opens a door and it touches them, they and the door will become stuck
 
       // Loop through all doors in the room
       for (var j = 0; j < game.world.rooms[i].doors.length; j++) {

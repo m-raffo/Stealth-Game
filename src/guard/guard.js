@@ -77,6 +77,96 @@ function Guard(startX, startY, direction){
     investigate_done: undefined,
   };
 
+  this.weapon = {
+    /**
+     * The time in milliseconds that the player's weapon will be ready to fire again.
+     * @type {Number}
+     */
+    resetTimestamp: Date.now(),
+
+    /**
+     * True if the mouse has been released since the last shot, false if not
+     * @type {Boolean}
+     */
+    mouseReleased: true,
+
+    /**
+     * True if the weapon requires the mosue to be released in between shoots
+     * @type {Boolean}
+     */
+    requireMouseRelease: true,
+
+    /**
+     * The time in milliseconds that the weapon needs until it is ready to be fired
+     * @type {Number}
+     */
+    timeToReset: 100,
+
+    /**
+     * The number of bullets in the current clip of the weapon
+     * @type {Number}
+     */
+    ammo: 10,
+
+    /**
+     * The number of bullets in a full clip of the weapon
+     * @type {Number}
+     */
+    ammoPerClip: 10,
+
+    /**
+     * The number of remaining bullets (total).
+     * @type {Number}
+     */
+    ammoTotal: 25,
+
+    /**
+     * The time in milliseconds to reload the weapon with another clip
+     * @type {Number}
+     */
+    timeToReload: 1000,
+
+    /**
+     * The amount of noise produced by the weapon when fired.
+     * @type {Number}
+     */
+    noise: 1500,
+
+  };
+
+  /**
+   * Shoots the guards weapon at the player. Performs necessary checks and noise additions, etc.
+   * @return {undefined} no return value
+   */
+  this.shoot = function() {
+    if(this.weapon.resetTimestamp > Date.now() && this.weapon.ammo > 0) {
+      this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReset;
+      this.weapon.ammo -= 1;
+      this.weapon.ammoTotal -= 1;
+
+      // Slope from guard to player
+      var m = (this.y - player.y) / (this.x - this.y);
+      var d = BULLET_SPEED;
+
+      var r = Math.sqrt(1 + (m * m));
+
+      var speedX = 0 + (d / r);
+      var speedY = 0 + (d * m / r);
+
+      if(player.x < this.x) {
+        speedX *= -1;
+        speedY *= -1;
+      }
+
+      // TODO: Prevent bullets from hurting the person that shot them. Probably add atrb. 'shooter' or something and only damage if target != shooter
+
+      game.bullets.push(new Bullet(this.x, this.y, speedX, speedY));
+      game.world.noise.push(new Noise(this.x, this.y, this.weapon.noise));
+
+
+    }
+  }
+
 
   this.update = function() {
 
@@ -91,7 +181,7 @@ function Guard(startX, startY, direction){
 
       // Check for can see player
       if(this.canSeePlayer()) {
-        console.log("OWOWOWOWOOWOWOWOWO I CAN SEE YOU!!!!!");
+        this.mode = 'FIGHT';
       }
 
       // Check for noise
@@ -319,8 +409,5 @@ function Guard(startX, startY, direction){
 
     return false;
   }
-
-
-
 
 }
