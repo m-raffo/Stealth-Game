@@ -188,6 +188,7 @@ let camera = {
       }
     }
 
+    // TEMP: Only for testing guard.canSee();
     // Creates a grid of which points you can see
     if (false) {
       for(var x = 0; x < 3000; x += 25) {
@@ -205,9 +206,6 @@ let camera = {
         }
       }
     }
-
-
-
   },
 
   /**
@@ -223,6 +221,50 @@ let camera = {
     game.canvas.ctx.rect(x, y, width, height);
     game.canvas.ctx.fill();
     game.canvas.ctx.closePath();
+  },
+
+  /**
+   * Draws a triangle to the screen using the current fill color
+   * @param  {Number} x1 the coordinates of one of the points of the triangle
+   * @param  {Number} y1 the coordinates of one of the points of the triangle
+   * @param  {Number} x2 the coordinates of one of the points of the triangle
+   * @param  {Number} y2 the coordinates of one of the points of the triangle
+   * @param  {Number} x3 the coordinates of one of the points of the triangle
+   * @param  {Number} y3 the coordinates of one of the points of the triangle
+   * @return {undefined}    no return value
+   */
+  drawTriangle: function(x1, y1, x2, y2, x3, y3) {
+    game.canvas.ctx.beginPath();
+    game.canvas.ctx.moveTo(x1, y1);
+    game.canvas.ctx.lineTo(x2, y2);
+    game.canvas.ctx.lineTo(x3, y3);
+    game.canvas.ctx.fill();
+    game.canvas.ctx.closePath();
+  },
+
+  /**
+   * Render a triangle to the screen using the current fill color
+   * @param  {Number} x1 the coordinates of one of the points of the triangle (in world units)
+   * @param  {Number} y1 the coordinates of one of the points of the triangle (in world units)
+   * @param  {Number} x2 the coordinates of one of the points of the triangle (in world units)
+   * @param  {Number} y2 the coordinates of one of the points of the triangle (in world units)
+   * @param  {Number} x3 the coordinates of one of the points of the triangle (in world units)
+   * @param  {Number} y3 the coordinates of one of the points of the triangle (in world units)
+   * @return {undefined}    no return value
+   */
+  renderTriangle: function(x1, y1, x2, y2, x3, y3) {
+
+    // see renderRect() function for math
+    var pixelX1 = ((x1 - camera.x) * game.canvas.element.width) / camera.width;
+    var pixelY1 = ((y1 - camera.y) * game.canvas.element.height) / camera.height;
+
+    var pixelX2 = ((x2 - camera.x) * game.canvas.element.width) / camera.width;
+    var pixelY2 = ((y2 - camera.y) * game.canvas.element.height) / camera.height;
+
+    var pixelX3 = ((x3 - camera.x) * game.canvas.element.width) / camera.width;
+    var pixelY3 = ((y3 - camera.y) * game.canvas.element.height) / camera.height;
+
+    this.drawTriangle(pixelX1, pixelY1, pixelX2, pixelY2, pixelX3, pixelY3);
   },
 
   /**
@@ -864,6 +906,20 @@ let camera = {
 
   radToDeg: function (angle) {
   return angle * (180 / Math.PI);
-}
+  },
+
+  /**
+   * Determines the difference from angle1 to angle2
+   * Works even if the angles cross the 360 degree mark
+   * @param  {Number} angle1 One of the angles
+   * @param  {Number} angle2 One of the angles
+   * @return {Number}        The difference
+   */
+  angleDistance: function(angle1, angle2) {
+    return (angle1 - angle2 + 180 + 360) % 360 - 180;
+
+  },
+
+
 
  };

@@ -41,7 +41,7 @@ const GUARD_PIVOT_SPEED = 5;
  * @constant
  * @default
  */
-const GUARD_FOV = 30;
+const GUARD_FOV = 50;
 
 function Guard(startX, startY, direction){
   this.x = startX;
@@ -87,6 +87,11 @@ function Guard(startX, startY, direction){
         this.target.x = this.station.x;
         this.target.y = this.station.y;
         this.setPath(this.target.x, this.target.y);
+      }
+
+      // Check for can see player
+      if(this.canSeePlayer()) {
+        console.log("OWOWOWOWOOWOWOWOWO I CAN SEE YOU!!!!!");
       }
 
       // Check for noise
@@ -257,7 +262,23 @@ function Guard(startX, startY, direction){
       }
     }
 
-    return true;
+
+    // TODO: Reverse the order of these checks to improve performance
+    // Has straight line of sight to player, check if angles are correct
+    var m = (this.y - player.y) / (this.x - player.x);
+    var angle = camera.slopeToAngle(m);
+
+    // If the player is behind the guard, reverse the angle
+    if(this.x < player.x) {
+      angle += 180;
+    }
+    if(Math.abs(camera.angleDistance(angle, this.direction)) < GUARD_FOV / 2) {
+      return true;
+    }
+
+    return false;
+
+
   };
 
   this.canSee = function(x, y) {
@@ -283,7 +304,20 @@ function Guard(startX, startY, direction){
       }
     }
 
-    return true;
+    // TODO: Reverse the order of these checks to improve performance
+    // Has straight line of sight to player, check if angles are correct
+    var m = (this.y - y) / (this.x - x);
+    var angle = camera.slopeToAngle(m);
+
+    // If the player is behind the guard, reverse the angle
+    if(this.x < x) {
+      angle += 180;
+    }
+    if(Math.abs(camera.angleDistance(angle, this.direction)) < GUARD_FOV / 2) {
+      return true;
+    }
+
+    return false;
   }
 
 
