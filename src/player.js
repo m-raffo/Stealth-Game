@@ -57,7 +57,7 @@ let player = {
   height: 100,
   speedX: 0,
   speedY: 0,
-  health: 50,
+  health: 100,
 
   /**
    * Stores all of the information about the player's current weapon
@@ -118,7 +118,7 @@ let player = {
      */
     noise: 1500,
 
-    damage: 10,
+    damage: 25,
 
     /**
      * Updates the on-screen display to reflect the current ammo state
@@ -139,8 +139,8 @@ let player = {
   move: function() {
     // controls.logControls();
     if(this.health <= 0) {
-      console.log(this.health);
-      
+      console.log("YOU DEAD!!!");
+
     }
 
     // Calculates player's movement based on inputted controls

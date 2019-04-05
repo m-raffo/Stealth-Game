@@ -91,6 +91,22 @@ const GUARD_WALK_SPEED = 5;
  */
 const GUARD_RUN_SPEED = 8;
 
+/**
+ * Damage modifier applied when the guard is unaware of the player
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_SNEAK_MODIFIER = 1.5;
+
+/**
+ * The delay (in milliseconds) between the guard switching modes. (Allows for sneak attack in investigate mode.)
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_REACTION_TIME = 250;
+
 function Guard(startX, startY, direction){
   this.x = startX;
   this.y = startY;
@@ -102,6 +118,11 @@ function Guard(startX, startY, direction){
   this.mode = 'STATION';
 
   this.path = [];
+
+  this.alive = true;
+  this.health = 75;
+
+  this.modeSwitchTimestamp = Date.now();
 
   // TODO: Make the guard's movement seem more natural by adding a speedX and speedY, and changing them similar to the way the player does
 
@@ -240,6 +261,30 @@ function Guard(startX, startY, direction){
 
   this.update = function() {
 
+    if(!this.alive) {
+      return undefined;
+    }
+
+    // Check for damage by bullets
+    // TODO: Damage modifier if the guard is unaware?
+    for (var i = 0; i < game.bullets.length; i++) {
+      if(game.bullets[i].shooter !== this &&  camera.distance(game.bullets[i].x, game.bullets[i].y, this.x, this.y) <= this.width) {
+        if(this.mode === 'FIGHT' || (this.mode === 'INVESTIGATE' && Date.now() > this.modeSwitchTimestamp)) {
+          // TODO: Should the sneak damage modifier be applied when the guard is investigating? Maybe a lesser modifier?
+          this.health -= game.bullets[i].damage;
+          console.log("sneak modifier not used");
+        } else {
+          this.health -= game.bullets[i].damage * GUARD_SNEAK_MODIFIER;
+          console.log("sneak modifier used");
+        }
+
+        game.bullets[i].active = false;
+      }
+    }
+
+    if(this.health <= 0) {
+      this.alive = false;
+    }
 
 
     if (this.mode === 'STATION') {
@@ -253,6 +298,7 @@ function Guard(startX, startY, direction){
       // Check for can see player
       if(this.canSeePlayer()) {
         this.mode = 'FIGHT';
+        this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
       }
 
       // Check for noise
@@ -262,6 +308,7 @@ function Guard(startX, startY, direction){
 
           // Begin an investigation
           this.mode = 'INVESTIGATE';
+          this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
           this.target.x = game.world.noise[i].x;
           this.target.y = game.world.noise[i].y;
           this.setPath(this.target.x, this.target.y);
@@ -281,6 +328,7 @@ function Guard(startX, startY, direction){
       // Check for can see player
       if(this.canSeePlayer()) {
         this.mode = 'FIGHT';
+        this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
       }
 
       // TODO: Should the guard continually check for noise while investigating?
@@ -291,6 +339,7 @@ function Guard(startX, startY, direction){
 
           // Begin an investigation
           this.mode = 'INVESTIGATE';
+          this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
           this.target.x = game.world.noise[i].x;
           this.target.y = game.world.noise[i].y;
           this.setPath(this.target.x, this.target.y);
@@ -305,6 +354,7 @@ function Guard(startX, startY, direction){
 
           // Begin an investigation
           this.mode = 'INVESTIGATE';
+          this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
           this.target.x = game.world.noise[i].x;
           this.target.y = game.world.noise[i].y;
           this.setPath(this.target.x, this.target.y);

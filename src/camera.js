@@ -423,7 +423,7 @@ let camera = {
     if (room.visibility > 0) {
       // Draw covering
       // TEMP: divided by two to allow me to see what's going on. This must be changed for the final build
-      this.setFill('rgba(0, 0, 0, ' + room.visibility / 2 + ')');
+      this.setFill('rgba(0, 0, 0, ' + room.visibility / 1 + ')');
       this.renderRect(room.x, room.y, room.width, room.height);
     }
 
@@ -450,6 +450,11 @@ let camera = {
    * @return {undefined}        no return value
    */
   renderGuard: function(guard) {
+
+    if(!guard.alive) {
+      return undefined;
+      // TODO: Render guard body?
+    }
     this.setFill(guard.color);
 
     this.renderEllipse(guard.x, guard.y, guard.width, guard.height);
