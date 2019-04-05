@@ -14,12 +14,14 @@ const BULLET_MOVE_STEPS = 10;
  * @param       {Number} dirY the amount (in wu) to move the bullet in one game step in the y direction
  * @constructor
  */
-function Bullet(x, y, dirX, dirY) {
+function Bullet(x, y, dirX, dirY, shooter, damage) {
   this.x = x;
   this.y = y;
   this.dirX = dirX;
   this.dirY = dirY;
   this.active = true;
+  this.shooter = shooter;
+  this.damage = damage;
 
   // TODO: make bullet movement seem "smoother"
   this.move = function() {

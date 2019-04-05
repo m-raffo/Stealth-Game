@@ -57,6 +57,7 @@ let player = {
   height: 100,
   speedX: 0,
   speedY: 0,
+  health: 50,
 
   /**
    * Stores all of the information about the player's current weapon
@@ -117,6 +118,8 @@ let player = {
      */
     noise: 1500,
 
+    damage: 10,
+
     /**
      * Updates the on-screen display to reflect the current ammo state
      * @return {undefined} no return value
@@ -135,6 +138,10 @@ let player = {
    */
   move: function() {
     // controls.logControls();
+    if(this.health <= 0) {
+      console.log(this.health);
+      
+    }
 
     // Calculates player's movement based on inputted controls
 
@@ -316,7 +323,7 @@ let player = {
           speedY *= -1;
         }
 
-        game.bullets.push(new Bullet(player.x, player.y, speedX, speedY));
+        game.bullets.push(new Bullet(player.x, player.y, speedX, speedY, this, this.weapon.damage));
         game.world.noise.push(new Noise(player.x, player.y, this.weapon.noise));
       } else {
         // TODO: Replace this with a click sound effect
@@ -344,6 +351,15 @@ let player = {
     }
 
     this.weapon.updateAmmoDisplay();
+
+
+    // Take damage from bullets
+    for (var i = 0; i < game.bullets.length; i++) {
+      if(game.bullets[i].shooter !== this &&  camera.distance(game.bullets[i].x, game.bullets[i].y, this.x, this.y) <= this.width) {
+        this.health -= game.bullets[i].damage;
+        game.bullets[i].active = false;
+      }
+    }
 
 
   },

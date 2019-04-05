@@ -73,7 +73,7 @@ const GUARD_SHOOT_DELAY = 200;
  * @constant
  * @default
  */
-const GUARD_ACCURACY = 15;
+const GUARD_ACCURACY = 5;
 
 /**
  * The speed of the guard when walking
@@ -182,6 +182,9 @@ function Guard(startX, startY, direction){
      */
     noise: 1500,
 
+
+    damage: 10,
+
   };
 
   /**
@@ -221,7 +224,7 @@ function Guard(startX, startY, direction){
 
         // TODO: Prevent bullets from hurting the person that shot them. Probably add atrb. 'shooter' or something and only damage if target != shooter
 
-        game.bullets.push(new Bullet(this.x, this.y, speedX, speedY));
+        game.bullets.push(new Bullet(this.x, this.y, speedX, speedY, this, this.weapon.damage));
         game.world.noise.push(new Noise(this.x, this.y, this.weapon.noise));
       } else {
         // Reload
