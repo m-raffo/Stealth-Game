@@ -891,13 +891,13 @@ let camera = {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   },
 
-  /**
-   * Converts and angle (in degrees) to a slope
-   * @param  {Number} angle the angle in degrees
-   * @return {Number}       the slope
-   */
+
   slopeToAngle: function(slope) {
     return this.radToDeg(Math.atan(slope));
+  },
+
+  angleToSlope: function(angle) {
+    return Math.tan(this.degToRad(angle));
   },
 
   degToRad: function (degree) {

@@ -43,6 +43,22 @@ const GUARD_PIVOT_SPEED = 5;
  */
 const GUARD_FOV = 50;
 
+/**
+ * An additional delay for the guard between shots.
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_SHOOT_DELAY = 200;
+
+/**
+ * The number of degrees that the guard's shots can be off of perfect target.
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_ACCURACY = 15;
+
 function Guard(startX, startY, direction){
   this.x = startX;
   this.y = startY;
@@ -139,30 +155,48 @@ function Guard(startX, startY, direction){
    * @return {undefined} no return value
    */
   this.shoot = function() {
-    if(this.weapon.resetTimestamp > Date.now() && this.weapon.ammo > 0) {
-      this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReset;
-      this.weapon.ammo -= 1;
-      this.weapon.ammoTotal -= 1;
+    if(this.weapon.resetTimestamp < Date.now()) {
+      if(this.weapon.ammo > 0) {
+        this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReset + GUARD_SHOOT_DELAY;
+        this.weapon.ammo -= 1;
+        this.weapon.ammoTotal -= 1;
 
-      // Slope from guard to player
-      var m = (this.y - player.y) / (this.x - this.y);
-      var d = BULLET_SPEED;
+        // Slope from guard to player
+        var m = (this.y - player.y) / (this.x - player.x);
+        var angle = camera.slopeToAngle(m);
 
-      var r = Math.sqrt(1 + (m * m));
+        // BUG: If this causes the bullet to pass the 360 degree mark, it will cause the guard to shoot backwards
+        angle += camera.map(Math.random(), 0, 1, GUARD_ACCURACY * -1, GUARD_ACCURACY);
+        var m = camera.angleToSlope(angle);
+        var d = BULLET_SPEED;
 
-      var speedX = 0 + (d / r);
-      var speedY = 0 + (d * m / r);
+        var r = Math.sqrt(1 + (m * m));
 
-      if(player.x < this.x) {
-        speedX *= -1;
-        speedY *= -1;
+        var speedX = 0 + (d / r);
+        var speedY = 0 + (d * m / r);
+
+        if(player.x < this.x) {
+          speedX *= -1;
+          speedY *= -1;
+
+        }
+
+
+
+
+
+        // TODO: Prevent bullets from hurting the person that shot them. Probably add atrb. 'shooter' or something and only damage if target != shooter
+
+        console.log("bullet added");
+        game.bullets.push(new Bullet(this.x, this.y, speedX, speedY));
+        game.world.noise.push(new Noise(this.x, this.y, this.weapon.noise));
+      } else {
+        // Reload
+        // Don't bother to get the ammoTotal, because guards have infinite ammo
+        this.weapon.ammo = this.weapon.ammoPerClip;
+        console.log("Guard reloading");
+        this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReload;
       }
-
-      // TODO: Prevent bullets from hurting the person that shot them. Probably add atrb. 'shooter' or something and only damage if target != shooter
-
-      game.bullets.push(new Bullet(this.x, this.y, speedX, speedY));
-      game.world.noise.push(new Noise(this.x, this.y, this.weapon.noise));
-
 
     }
   }
@@ -197,9 +231,7 @@ function Guard(startX, startY, direction){
         }
       }
 
-    }
-
-    if (this.mode === 'INVESTIGATE') {
+    } else if (this.mode === 'INVESTIGATE') {
 
       if(Date.now() >= this.target.investigate_done) {
         this.target.x = this.station.x;
@@ -207,6 +239,11 @@ function Guard(startX, startY, direction){
         this.setPath(this.target.x, this.target.y);
         this.mode = 'STATION';
         this.target.investigate_done = undefined;
+      }
+
+      // Check for can see player
+      if(this.canSeePlayer()) {
+        this.mode = 'FIGHT';
       }
 
       // TODO: Should the guard continually check for noise while investigating?
@@ -237,6 +274,20 @@ function Guard(startX, startY, direction){
         }
       }
 
+
+    } else if (this.mode === 'FIGHT') {
+      this.shoot();
+      var m = (this.y - player.y) / (this.x - player.x);
+      this.target.direction = camera.slopeToAngle(m);
+      if(this.x < player.x) {
+        this.target.direction += 180;
+      }
+
+      // Point toward player
+      if (this.direction !== this.target.direction) {
+        // only use the x value of this function
+        this.direction = camera.moveToward(this.direction, 0, this.target.direction, 0, GUARD_PIVOT_SPEED)[0];
+      }
 
     }
 
