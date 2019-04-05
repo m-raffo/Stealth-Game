@@ -920,6 +920,35 @@ let camera = {
 
   },
 
+  /**
+   * Finds an array of nodes that are a given distance from the given point
+   * @param  {Number} x        Coordinates of the point
+   * @param  {Number} y        Coordinates of the point
+   * @param  {Number} distance This distance to find nodes at
+   * @param  {Number} range    The range of distances to accept
+   * @return {Array.Object.Node}          An array of nodes
+   */
+  findNodeDistance: function(x, y, distance, range) {
+    var final = [];
+    for (var i = 0; i < game.world.nodes.length; i++) {
+      for (var j = 0; j < game.world.nodes[i].length; j++) {
+
+
+        var node = game.world.nodes[i][j];
+        if(!node) {
+          continue;
+        }
+        var dist = camera.distance(x, y, node.x, node.y);
+
+        if(dist < distance + range && dist > distance - range) {
+          final.push(node);
+        }
+      }
+    }
+
+    return final;
+  },
+
 
 
  };

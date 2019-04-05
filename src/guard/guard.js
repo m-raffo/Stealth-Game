@@ -44,6 +44,22 @@ const GUARD_PIVOT_SPEED = 5;
 const GUARD_FOV = 50;
 
 /**
+ * The minimun distance between the guard and the player in fight mode
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_FIGHT_MIN_DISTANCE = 400;
+
+/**
+ * The minimun distance between the guard and the player in fight mode
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_FIGHT_MAX_DISTANCE = 700;
+
+/**
  * An additional delay for the guard between shots.
  * @type {Number}
  * @constant
@@ -58,6 +74,22 @@ const GUARD_SHOOT_DELAY = 200;
  * @default
  */
 const GUARD_ACCURACY = 15;
+
+/**
+ * The speed of the guard when walking
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_WALK_SPEED = 5;
+
+/**
+ * The speed of the guard when running
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const GUARD_RUN_SPEED = 8;
 
 function Guard(startX, startY, direction){
   this.x = startX;
@@ -79,6 +111,8 @@ function Guard(startX, startY, direction){
    * @default
    */
   this.color = '#c31515';
+
+  this.currentSpeed = GUARD_WALK_SPEED;
 
   this.station = {
     x: startX,
@@ -187,7 +221,6 @@ function Guard(startX, startY, direction){
 
         // TODO: Prevent bullets from hurting the person that shot them. Probably add atrb. 'shooter' or something and only damage if target != shooter
 
-        console.log("bullet added");
         game.bullets.push(new Bullet(this.x, this.y, speedX, speedY));
         game.world.noise.push(new Noise(this.x, this.y, this.weapon.noise));
       } else {
@@ -207,6 +240,7 @@ function Guard(startX, startY, direction){
 
 
     if (this.mode === 'STATION') {
+      this.currentSpeed = GUARD_WALK_SPEED;
       if (this.target.x !== this.station.x || this.target.y !== this.station.y) {
         this.target.x = this.station.x;
         this.target.y = this.station.y;
@@ -232,7 +266,7 @@ function Guard(startX, startY, direction){
       }
 
     } else if (this.mode === 'INVESTIGATE') {
-
+      this.currentSpeed = GUARD_WALK_SPEED;
       if(Date.now() >= this.target.investigate_done) {
         this.target.x = this.station.x;
         this.target.y = this.station.y;
@@ -276,6 +310,23 @@ function Guard(startX, startY, direction){
 
 
     } else if (this.mode === 'FIGHT') {
+      // TODO: Don't allow a door to be in the way.
+      this.currentSpeed = GUARD_RUN_SPEED;
+
+      // If not in the correct range of the player, move to the correct distance
+      var dist = camera.distance(this.x, this.y, player.x, player.y);
+      var target_dist = camera.distance(this.target.x, this.target.y, player.x, player.y);
+      if (((dist < GUARD_FIGHT_MIN_DISTANCE || dist > GUARD_FIGHT_MAX_DISTANCE) && this.path.length === 0) || target_dist < GUARD_FIGHT_MIN_DISTANCE || target_dist > GUARD_FIGHT_MAX_DISTANCE) {
+        // Find a new node in the correct range
+
+        var newTargets = camera.findNodeDistance(player.x, player.y, (GUARD_FIGHT_MIN_DISTANCE + GUARD_FIGHT_MAX_DISTANCE) / 2, Math.abs(GUARD_FIGHT_MIN_DISTANCE - GUARD_FIGHT_MAX_DISTANCE) / 2);
+
+        var randomNode = newTargets[Math.floor(Math.random()*newTargets.length)];
+        this.target.x = randomNode.x;
+        this.target.y = randomNode.y;
+        this.setPath(this.target.x, this.target.y);
+      }
+
       this.shoot();
       var m = (this.y - player.y) / (this.x - player.x);
       this.target.direction = camera.slopeToAngle(m);
@@ -294,7 +345,7 @@ function Guard(startX, startY, direction){
     // Move toward target defined by this.target.x and this.target.y
 
     if (this.path.length > 0) {
-      var newCoords = camera.moveToward(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y, 5);
+      var newCoords = camera.moveToward(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y, this.currentSpeed);
 
       var changeX = this.x - newCoords[0];
       var changeY = this.y - newCoords[1];
@@ -310,7 +361,7 @@ function Guard(startX, startY, direction){
       this.y = newCoords[1];
 
     } else if(this.x !== this.target.x || this.y !== this.target.y) {
-      var newCoords = camera.moveToward(this.x, this.y, this.target.x, this.target.y, 5);
+      var newCoords = camera.moveToward(this.x, this.y, this.target.x, this.target.y, this.currentSpeed);
 
       this.x = newCoords[0];
       this.y = newCoords[1];
