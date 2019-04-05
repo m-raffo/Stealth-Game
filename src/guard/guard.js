@@ -144,7 +144,7 @@ function Guard(startX, startY, direction){
   this.target = {
     x: startX,
     y: startY,
-    direction: 0,
+    direction: direction,
     investigate_done: undefined,
   };
 

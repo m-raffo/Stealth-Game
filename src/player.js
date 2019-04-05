@@ -36,7 +36,7 @@ const ACCEL_SPEED_WALK = 100;
  * @constant
  * @default
  */
-const BULLET_SPEED = 40;
+const BULLET_SPEED = 80;
 
 /**
  * The object for the main player of the game.
@@ -140,6 +140,7 @@ let player = {
     // controls.logControls();
     if(this.health <= 0) {
       console.log("YOU DEAD!!!");
+      alert("YOU DEAD!!!");
 
     }
 

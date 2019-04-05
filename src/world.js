@@ -104,7 +104,7 @@ let game = {
      * @type {Array.Guard}
      */
     guards: [
-      new Guard(1500, 500, 10),
+      new Guard(1500, 500, -90),
       new Guard(-500, 500, 10),
     ],
   },
