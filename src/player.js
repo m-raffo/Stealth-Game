@@ -74,7 +74,7 @@ let player = {
      * True if the mouse has been released since the last shot, false if not
      * @type {Boolean}
      */
-    mouseReleased: true,
+    mouseRelease: true,
 
     /**
      * True if the weapon requires the mosue to be released in between shoots
@@ -299,6 +299,7 @@ let player = {
     3. Enough time has passed to allow for another shot
      */
     if (controls.leftMouseDown && (this.weapon.mouseRelease || !this.weapon.requireMouseRelease) && Date.now() > this.weapon.resetTimestamp) {
+      console.log("Starting shoot");
       if (this.weapon.ammo > 0) {
         // Set wait until the weapon can be fired again and remove one bullet
         this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReset;

@@ -49,7 +49,7 @@ let game = {
            * The time in milliseconds that the weapon needs until it is ready to be fired
            * @type {Number}
            */
-          timeToReset: 750,
+          timeToReset: 500,
 
           /**
            * The number of bullets in the current clip of the weapon

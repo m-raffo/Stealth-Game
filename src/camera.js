@@ -127,7 +127,7 @@ let camera = {
     for (var i = 0; i < game.world.items.length; i++) {
       if(game.world.items[i].active) {
         this.renderItem(game.world.items[i]);
-        
+
       }
     }
 
@@ -138,6 +138,7 @@ let camera = {
       this.renderGuard(guard);
     }
 
+    this.setFill('#202020');
     // Draw all bullets
     for (var i = 0; i < game.bullets.length; i++) {
       // TODO: Bullets should not be visible in hidden rooms
