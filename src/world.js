@@ -37,7 +37,7 @@ let game = {
            * True if the mouse has been released since the last shot, false if not
            * @type {Boolean}
            */
-          mouseReleased: true,
+          mouseRelease: true,
 
           /**
            * True if the weapon requires the mosue to be released in between shoots
