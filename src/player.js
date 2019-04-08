@@ -154,7 +154,7 @@ let player = {
     // controls.logControls();
     if(this.health <= 0) {
       console.log("YOU DEAD!!!");
-      alert("YOU DEAD!!!");
+      alert("YOU'RE DEAD!!!");
 
     }
 
