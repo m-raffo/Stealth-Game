@@ -99,14 +99,14 @@ let player = {
      * Mostly used for shotguns
      * @type {Number}
      */
-    bulletsPerShot: 1,
+    bulletsPerShot: 5,
 
     /**
      * The accuracty of each bullet leaving the gun.
      * Higher numbers means a less accurate weapon
      * @type {Number}
      */
-    accuracy: 5,
+    accuracy: 10,
 
     /**
      * The number of bullets in a full clip of the weapon
@@ -132,7 +132,7 @@ let player = {
      */
     noise: 1500,
 
-    damage: 25,
+    damage: 9,
 
     /**
      * Updates the on-screen display to reflect the current ammo state
@@ -320,31 +320,33 @@ let player = {
         worldMouseX = worldMouseX[0];
 
 
+        for(var i = 0; i < this.weapon.bulletsPerShot; i++) {
+          // slope from player to mouse
+          var m = (this.y - worldMouseY) / (this.x - worldMouseX);
+          var angle = camera.slopeToAngle(m);
 
-        // slope from player to mouse
-        var m = (this.y - worldMouseY) / (this.x - worldMouseX);
-        var angle = camera.slopeToAngle(m);
+          angle += camera.map(Math.random(), 0, 1, this.weapon.accuracy * -1, this.weapon.accuracy);
 
-        angle += camera.map(Math.random(), 0, 1, this.weapon.accuracy * -1, this.weapon.accuracy);
-
-        m = camera.angleToSlope(angle);
+          m = camera.angleToSlope(angle);
 
 
-        // distance for the bullet to move
-        var d = BULLET_SPEED;
+          // distance for the bullet to move
+          var d = BULLET_SPEED;
 
-        // something
-        var r = Math.sqrt(1 + (m * m));
+          // something
+          var r = Math.sqrt(1 + (m * m));
 
-        var speedX = 0 + (d / r);
-        var speedY = 0 + (d * m / r);
+          var speedX = 0 + (d / r);
+          var speedY = 0 + (d * m / r);
 
-        if (worldMouseX < player.x) {
-          speedX *= -1;
-          speedY *= -1;
+          if (worldMouseX < player.x) {
+            speedX *= -1;
+            speedY *= -1;
+          }
+
+          game.bullets.push(new Bullet(player.x, player.y, speedX, speedY, this, this.weapon.damage));
         }
 
-        game.bullets.push(new Bullet(player.x, player.y, speedX, speedY, this, this.weapon.damage));
         game.world.noise.push(new Noise(player.x, player.y, this.weapon.noise));
       } else {
         // TODO: Replace this with a click sound effect

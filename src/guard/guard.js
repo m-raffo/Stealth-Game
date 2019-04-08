@@ -105,7 +105,7 @@ const GUARD_SNEAK_MODIFIER = 1.5;
  * @constant
  * @default
  */
-const GUARD_REACTION_TIME = 250;
+const GUARD_REACTION_TIME = 100;
 
 function Guard(startX, startY, direction){
   this.x = startX;
