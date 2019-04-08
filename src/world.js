@@ -62,14 +62,14 @@ let game = {
            * Mostly used for shotguns
            * @type {Number}
            */
-          bulletsPerShot: 5,
+          bulletsPerShot: 15,
 
           /**
            * The accuracty of each bullet leaving the gun.
            * Higher numbers means a less accurate weapon
            * @type {Number}
            */
-          accuracy: 10,
+          accuracy: 13,
 
           /**
            * The number of bullets in a full clip of the weapon
@@ -95,7 +95,7 @@ let game = {
            */
           noise: 1500,
 
-          damage: 9,
+          damage: 8,
 
           /**
            * Updates the on-screen display to reflect the current ammo state
