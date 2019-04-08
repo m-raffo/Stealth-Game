@@ -180,6 +180,20 @@ function Guard(startX, startY, direction){
     ammo: 10,
 
     /**
+     * The number of bullets that are fired per shot.
+     * Mostly used for shotguns
+     * @type {Number}
+     */
+    bulletsPerShot: 1,
+
+    /**
+     * The accuracty of each bullet leaving the gun.
+     * Higher numbers means a less accurate weapon
+     * @type {Number}
+     */
+    accuracy: 5,
+
+    /**
      * The number of bullets in a full clip of the weapon
      * @type {Number}
      */
@@ -225,7 +239,7 @@ function Guard(startX, startY, direction){
 
         // BUG: If this causes the bullet to pass the 360 degree mark, it will cause the guard to shoot backwards
         angle += camera.map(Math.random(), 0, 1, GUARD_ACCURACY * -1, GUARD_ACCURACY);
-        var m = camera.angleToSlope(angle);
+        m = camera.angleToSlope(angle);
         var d = BULLET_SPEED;
 
         var r = Math.sqrt(1 + (m * m));
@@ -242,8 +256,6 @@ function Guard(startX, startY, direction){
 
 
 
-
-        // TODO: Prevent bullets from hurting the person that shot them. Probably add atrb. 'shooter' or something and only damage if target != shooter
 
         game.bullets.push(new Bullet(this.x, this.y, speedX, speedY, this, this.weapon.damage));
         game.world.noise.push(new Noise(this.x, this.y, this.weapon.noise));

@@ -95,6 +95,20 @@ let player = {
     ammo: 10,
 
     /**
+     * The number of bullets that are fired per shot.
+     * Mostly used for shotguns
+     * @type {Number}
+     */
+    bulletsPerShot: 1,
+
+    /**
+     * The accuracty of each bullet leaving the gun.
+     * Higher numbers means a less accurate weapon
+     * @type {Number}
+     */
+    accuracy: 5,
+
+    /**
      * The number of bullets in a full clip of the weapon
      * @type {Number}
      */
@@ -309,6 +323,12 @@ let player = {
 
         // slope from player to mouse
         var m = (this.y - worldMouseY) / (this.x - worldMouseX);
+        var angle = camera.slopeToAngle(m);
+
+        angle += camera.map(Math.random(), 0, 1, this.weapon.accuracy * -1, this.weapon.accuracy);
+
+        m = camera.angleToSlope(angle);
+
 
         // distance for the bullet to move
         var d = BULLET_SPEED;
