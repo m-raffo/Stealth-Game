@@ -73,7 +73,7 @@ function Door(x, y, openX, openY, width, height) {
         }
       }
 
-      if(camera.distance(this.x + (this.width / 2), this.y + (this.height / 2), player.x, player.y) < 350 && controls.isControlPressed('ACTION')) {
+      if(camera.distance(this.x + (this.width / 2), this.y + (this.height / 2), player.x, player.y) < 350 && controls.isControlPressed('DOOR_ACTION')) {
         this.open();
       }
 

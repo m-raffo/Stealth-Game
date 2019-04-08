@@ -19,6 +19,99 @@ let game = {
     noise: [],
 
     /**
+     * An array of all the items in the world
+     * @type {Array}
+     */
+    items: [
+      new Item(100, 100, 100, 100, '#242424', function() {
+        console.log('Player activated me!');
+        // TODO: Move this weapon defintion to its own file (it is a basic shotgun)
+        var newWeapon = {
+          /**
+           * The time in milliseconds that the player's weapon will be ready to fire again.
+           * @type {Number}
+           */
+          resetTimestamp: Date.now(),
+
+          /**
+           * True if the mouse has been released since the last shot, false if not
+           * @type {Boolean}
+           */
+          mouseReleased: true,
+
+          /**
+           * True if the weapon requires the mosue to be released in between shoots
+           * @type {Boolean}
+           */
+          requireMouseRelease: true,
+
+          /**
+           * The time in milliseconds that the weapon needs until it is ready to be fired
+           * @type {Number}
+           */
+          timeToReset: 750,
+
+          /**
+           * The number of bullets in the current clip of the weapon
+           * @type {Number}
+           */
+          ammo: 10,
+
+          /**
+           * The number of bullets that are fired per shot.
+           * Mostly used for shotguns
+           * @type {Number}
+           */
+          bulletsPerShot: 5,
+
+          /**
+           * The accuracty of each bullet leaving the gun.
+           * Higher numbers means a less accurate weapon
+           * @type {Number}
+           */
+          accuracy: 10,
+
+          /**
+           * The number of bullets in a full clip of the weapon
+           * @type {Number}
+           */
+          ammoPerClip: 10,
+
+          /**
+           * The number of remaining bullets (total).
+           * @type {Number}
+           */
+          ammoTotal: 25,
+
+          /**
+           * The time in milliseconds to reload the weapon with another clip
+           * @type {Number}
+           */
+          timeToReload: 1000,
+
+          /**
+           * The amount of noise produced by the weapon when fired.
+           * @type {Number}
+           */
+          noise: 1500,
+
+          damage: 9,
+
+          /**
+           * Updates the on-screen display to reflect the current ammo state
+           * @return {undefined} no return value
+           */
+          updateAmmoDisplay: function() {
+            $('#ammoDisplay').text(this.ammo + ' / ' + (this.ammoTotal - this.ammo));
+          }
+        };
+
+        player.weapon = newWeapon;
+        this.active = false;
+      }),  // a sample weapon box
+    ],
+
+    /**
      * A list of room objects that contains all of the rooms in the level.
      * @type {Array}
      */
@@ -137,6 +230,15 @@ let game = {
     for (var i = game.world.noise.length -1; i >= 0; i--) {
       if(game.world.noise[i].timeEnd > Date.now()) {
         game.world.noise.splice(i, 1);
+      }
+    }
+
+
+    // Check if player has activated an object
+    for (var i = 0; i < game.world.items.length; i++) {
+      var currentItem = game.world.items[i];
+      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentItem.x, currentItem.y) <= currentItem.width + player.width) {
+        currentItem.onPlayerActivate();
       }
     }
 

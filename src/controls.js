@@ -17,7 +17,8 @@ let controls = {
     'CROUCH': [16], // shift
     'SPRINT': [32], // space
     'RELOAD' : [82],  // 'r'
-    'ACTION': [70], // 'f'
+    'DOOR_ACTION': [70], // 'f'
+    'ACTIVATE': [69], // 'e'
   },
 
   /**

@@ -123,6 +123,13 @@ let camera = {
 
     }
 
+    // Draw items
+    for (var i = 0; i < game.world.items.length; i++) {
+      if(game.world.items[i].active) {
+        this.renderItem(game.world.items[i]);
+        
+      }
+    }
 
 
     // Draw the guards
@@ -137,6 +144,7 @@ let camera = {
       var bullet = game.bullets[i];
       camera.renderEllipse(bullet.x, bullet.y, 10, 10);
     }
+
 
     // render room coverings
     for (var i = 0; i < game.world.rooms.length; i++) {
@@ -465,6 +473,18 @@ let camera = {
 
     this.setFill("#000000");
     this.renderRect(guard.x + x, guard.y + y, 25, 25);
+  },
+
+  /**
+   * Renders an item to the screen (weapon, health pack, etc.)
+   * @param  {Object.Item} item the item to draw (draw using attributes)
+   * @return {undefined}      no return value
+   */
+  renderItem: function(item) {
+    // TODO: Implement drawing images / using a render function specific to the object
+
+    this.setFill(item.color);
+    this.renderRect(item.x, item.y, item.width, item.height);
   },
 
   /**
