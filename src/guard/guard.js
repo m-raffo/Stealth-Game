@@ -122,7 +122,7 @@ function Guard(startX, startY, direction){
   this.alive = true;
   this.health = 75;
 
-  this.modeSwitchTimestamp = Date.now();
+  this.modeSwitchTimestamp = clock.now();
 
   // TODO: Make the guard's movement seem more natural by adding a speedX and speedY, and changing them similar to the way the player does
 
@@ -153,7 +153,7 @@ function Guard(startX, startY, direction){
      * The time in milliseconds that the player's weapon will be ready to fire again.
      * @type {Number}
      */
-    resetTimestamp: Date.now(),
+    resetTimestamp: clock.now(),
 
     /**
      * True if the mouse has been released since the last shot, false if not
@@ -227,9 +227,9 @@ function Guard(startX, startY, direction){
    * @return {undefined} no return value
    */
   this.shoot = function() {
-    if(this.weapon.resetTimestamp < Date.now()) {
+    if(this.weapon.resetTimestamp < clock.now()) {
       if(this.weapon.ammo > 0) {
-        this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReset + GUARD_SHOOT_DELAY;
+        this.weapon.resetTimestamp = clock.now() + this.weapon.timeToReset + GUARD_SHOOT_DELAY;
         this.weapon.ammo -= 1;
         this.weapon.ammoTotal -= 1;
 
@@ -264,7 +264,7 @@ function Guard(startX, startY, direction){
         // Don't bother to get the ammoTotal, because guards have infinite ammo
         this.weapon.ammo = this.weapon.ammoPerClip;
         console.log("Guard reloading");
-        this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReload;
+        this.weapon.resetTimestamp = clock.now() + this.weapon.timeToReload;
       }
 
     }
@@ -281,7 +281,7 @@ function Guard(startX, startY, direction){
     // TODO: Damage modifier if the guard is unaware?
     for (var i = 0; i < game.bullets.length; i++) {
       if(game.bullets[i].shooter !== this &&  camera.distance(game.bullets[i].x, game.bullets[i].y, this.x, this.y) <= this.width) {
-        if(this.mode === 'FIGHT' || (this.mode === 'INVESTIGATE' && Date.now() > this.modeSwitchTimestamp)) {
+        if(this.mode === 'FIGHT' || (this.mode === 'INVESTIGATE' && clock.now() > this.modeSwitchTimestamp)) {
           // TODO: Should the sneak damage modifier be applied when the guard is investigating? Maybe a lesser modifier?
           this.health -= game.bullets[i].damage;
           console.log("sneak modifier not used");
@@ -310,7 +310,7 @@ function Guard(startX, startY, direction){
       // Check for can see player
       if(this.canSeePlayer()) {
         this.mode = 'FIGHT';
-        this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
+        this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
       }
 
       // Check for noise
@@ -320,7 +320,7 @@ function Guard(startX, startY, direction){
 
           // Begin an investigation
           this.mode = 'INVESTIGATE';
-          this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
+          this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
           this.target.x = game.world.noise[i].x;
           this.target.y = game.world.noise[i].y;
           this.setPath(this.target.x, this.target.y);
@@ -329,7 +329,7 @@ function Guard(startX, startY, direction){
 
     } else if (this.mode === 'INVESTIGATE') {
       this.currentSpeed = GUARD_WALK_SPEED;
-      if(Date.now() >= this.target.investigate_done) {
+      if(clock.now() >= this.target.investigate_done) {
         this.target.x = this.station.x;
         this.target.y = this.station.y;
         this.setPath(this.target.x, this.target.y);
@@ -340,7 +340,7 @@ function Guard(startX, startY, direction){
       // Check for can see player
       if(this.canSeePlayer()) {
         this.mode = 'FIGHT';
-        this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
+        this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
       }
 
       // TODO: Should the guard continually check for noise while investigating?
@@ -351,7 +351,7 @@ function Guard(startX, startY, direction){
 
           // Begin an investigation
           this.mode = 'INVESTIGATE';
-          this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
+          this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
           this.target.x = game.world.noise[i].x;
           this.target.y = game.world.noise[i].y;
           this.setPath(this.target.x, this.target.y);
@@ -366,7 +366,7 @@ function Guard(startX, startY, direction){
 
           // Begin an investigation
           this.mode = 'INVESTIGATE';
-          this.modeSwitchTimestamp = Date.now() + GUARD_REACTION_TIME;
+          this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
           this.target.x = game.world.noise[i].x;
           this.target.y = game.world.noise[i].y;
           this.setPath(this.target.x, this.target.y);
@@ -441,7 +441,7 @@ function Guard(startX, startY, direction){
     if(this.path.length > 0 && camera.distance(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y) < 100) {
       this.path.pop();
       if(this.path.length <= 0 && this.mode === 'INVESTIGATE') {
-        this.target.investigate_done = Date.now() + 3000;
+        this.target.investigate_done = clock.now() + 3000;
       }
     }
 

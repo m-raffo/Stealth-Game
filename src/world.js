@@ -7,6 +7,36 @@ let game = {
   delta: 0,
 
   /**
+   * True if the game is running. False if not (ie paused)
+   * @type {Boolean}
+   */
+  running: true,
+
+  pause: function() {
+    // BUG: Will delayed function calls mess up the pause? Yes. Better question, are there any important delayed function calls. I forget what they are called
+    if(this.running) {
+      this.running = false;
+      clock.pause();
+    }
+  },
+
+  play: function() {
+    if(!this.running) {
+      this.running = true;
+      clock.play();
+    }
+  },
+
+  togglePlayPause: function() {
+    if(this.running) {
+      this.pause();
+    } else {
+      this.play();
+    }
+  },
+
+
+  /**
    * The object that contains all of the data about the current level.
    * @type {Object}
    */
@@ -31,7 +61,7 @@ let game = {
            * The time in milliseconds that the player's weapon will be ready to fire again.
            * @type {Number}
            */
-          resetTimestamp: Date.now(),
+          resetTimestamp: clock.now(),
 
           /**
            * True if the mouse has been released since the last shot, false if not
@@ -117,7 +147,7 @@ let game = {
            * The time in milliseconds that the player's weapon will be ready to fire again.
            * @type {Number}
            */
-          resetTimestamp: Date.now(),
+          resetTimestamp: clock.now(),
 
           /**
            * True if the mouse has been released since the last shot, false if not
@@ -292,54 +322,78 @@ let game = {
     ],
   },
 
-  update: function(delta) {
-    box.pos += box.velocity * delta;
-    // Switch directions if we go too far
-    if (box.pos >= box.limit || box.pos <= 0) box.velocity = -box.velocity;
+  /**
+   * Has the pause key been released since being pressed?
+   * Prevents very fast switching between paused and unpaused
+   * @type {Boolean}
+   */
+  pauseKeyReleased: true,
 
+  update: function(delta) {
     camera.updateSize();
     camera.updatePosition();
 
-    player.move();
-
-    for (var i = 0; i < game.world.guards.length; i++) {
-      game.world.guards[i].update();
-
-    }
-
-    // Loop backwards to not mess up i if a bullet is removed
-    for (var i = game.bullets.length -1; i >= 0; i--) {
-      game.bullets[i].move();
-
-      if (!game.bullets[i].active) {
-        game.bullets.splice(i, 1);
+    if(controls.isControlPressed('PAUSE')) {
+      if(this.pauseKeyReleased) {
+        this.pauseKeyReleased = false;
+        this.togglePlayPause();
       }
+    } else {
+      this.pauseKeyReleased = true;
     }
 
-    // Remove expired noises
-    for (var i = game.world.noise.length -1; i >= 0; i--) {
-      if(game.world.noise[i].timeEnd > Date.now()) {
-        game.world.noise.splice(i, 1);
+    if(this.running) {
+      player.move();
+
+      for (var i = 0; i < game.world.guards.length; i++) {
+        game.world.guards[i].update();
+
       }
-    }
 
+      // Loop backwards to not mess up i if a bullet is removed
+      for (var i = game.bullets.length -1; i >= 0; i--) {
+        game.bullets[i].move();
 
-    // Check if player has activated an object
-    for (var i = 0; i < game.world.items.length; i++) {
-      var currentItem = game.world.items[i];
-      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentItem.x + (currentItem.width / 2), currentItem.y + (currentItem.height / 2)) <= currentItem.width + player.width) {
-        currentItem.onPlayerActivate();
+        if (!game.bullets[i].active) {
+          game.bullets.splice(i, 1);
+        }
       }
-    }
+
+      // Remove expired noises
+      for (var i = game.world.noise.length -1; i >= 0; i--) {
+        if(game.world.noise[i].timeEnd > clock.now()) {
+          game.world.noise.splice(i, 1);
+        }
+      }
 
 
-    // Update crates
-    for (var i = 0; i < game.world.crates.length; i++) {
-      var currentCrate = game.world.crates[i];
-      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentCrate.x + (currentCrate.width / 2), currentCrate.y + (currentCrate.height / 2)) <= currentCrate.width + player.width) {
-        currentCrate.open();
-      } else {
-        currentCrate.close();
+      // Check if player has activated an object
+      for (var i = 0; i < game.world.items.length; i++) {
+        var currentItem = game.world.items[i];
+        if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentItem.x + (currentItem.width / 2), currentItem.y + (currentItem.height / 2)) <= currentItem.width + player.width) {
+          currentItem.onPlayerActivate();
+        }
+      }
+
+
+      // Update crates
+      for (var i = 0; i < game.world.crates.length; i++) {
+        var currentCrate = game.world.crates[i];
+        if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentCrate.x + (currentCrate.width / 2), currentCrate.y + (currentCrate.height / 2)) <= currentCrate.width + player.width) {
+          currentCrate.open();
+        } else {
+          currentCrate.close();
+        }
+      }
+
+      for (var i = 0; i < game.world.rooms.length; i++) {
+        var room = game.world.rooms[i];
+          // Update Doors
+          for (var j = 0; j < room.doors.length; j++) {
+            var door = room.doors[j];
+            door.update();
+
+          }
       }
     }
 
@@ -366,7 +420,7 @@ let game = {
    * Holds all of the bullet objects in the world
    * @type {Array}
    */
-  bullets: []
+  bullets: [],
 };
 
 /**

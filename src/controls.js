@@ -13,12 +13,13 @@ let controls = {
     'MOVE_UP': [38, 87], // up arrow and 'w' key
     'MOVE_LEFT': [37, 65], // left arrow and 'a' key
     'MOVE_RIGHT': [39, 68], // right arrow and 'd' key
-    'MOVE_DOWN': [40, 83], // down arrow and 'd' key
+    'MOVE_DOWN': [40, 83], // down arrow and 's' key
     'CROUCH': [16], // shift
     'SPRINT': [32], // space
     'RELOAD' : [82],  // 'r'
     'DOOR_ACTION': [70], // 'f'
     'ACTIVATE': [69], // 'e'
+    'PAUSE': [27], // esc
   },
 
   /**

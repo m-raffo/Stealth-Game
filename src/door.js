@@ -44,7 +44,7 @@ function Door(x, y, openX, openY, width, height) {
     this.width = width;
     this.height = height;
 
-    this.resetTime = Date.now();
+    this.resetTime = clock.now();
 
     this.state = 'CLOSED';
 
@@ -77,7 +77,7 @@ function Door(x, y, openX, openY, width, height) {
         this.open();
       }
 
-      if (this.state === 'OPEN' && this.resetTime < Date.now()) {
+      if (this.state === 'OPEN' && this.resetTime < clock.now()) {
         this.close();
       }
     }
@@ -89,7 +89,7 @@ function Door(x, y, openX, openY, width, height) {
     this.open = function() {
       this.targetX = this.openX;
       this.targetY = this.openY;
-      this.resetTime = Date.now() + DOOR_OPEN_TIME;
+      this.resetTime = clock.now() + DOOR_OPEN_TIME;
       this.state = 'OPEN';
     }
 

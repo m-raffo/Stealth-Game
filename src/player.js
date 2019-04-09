@@ -68,7 +68,7 @@ let player = {
      * The time in milliseconds that the player's weapon will be ready to fire again.
      * @type {Number}
      */
-    resetTimestamp: Date.now(),
+    resetTimestamp: clock.now(),
 
     /**
      * True if the mouse has been released since the last shot, false if not
@@ -300,11 +300,11 @@ let player = {
     2. The the mouse has been released since the last shot OR that it is not required to have been released
     3. Enough time has passed to allow for another shot
      */
-    if (controls.leftMouseDown && (this.weapon.mouseRelease || !this.weapon.requireMouseRelease) && Date.now() > this.weapon.resetTimestamp) {
+    if (controls.leftMouseDown && (this.weapon.mouseRelease || !this.weapon.requireMouseRelease) && clock.now() > this.weapon.resetTimestamp) {
       console.log("Starting shoot");
       if (this.weapon.ammo > 0) {
         // Set wait until the weapon can be fired again and remove one bullet
-        this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReset;
+        this.weapon.resetTimestamp = clock.now() + this.weapon.timeToReset;
         this.weapon.ammo -= 1;
         this.weapon.ammoTotal -= 1;
 
@@ -365,7 +365,7 @@ let player = {
       // TODO: Replace this with a reloading sound effect
       // TODO: Add a progress bar for reloading
       console.log("RELOADING...");
-      this.weapon.resetTimestamp = Date.now() + this.weapon.timeToReload;
+      this.weapon.resetTimestamp = clock.now() + this.weapon.timeToReload;
 
       if (this.weapon.ammoTotal < this.weapon.ammoPerClip) {
         this.weapon.ammo = this.weapon.ammoTotal;

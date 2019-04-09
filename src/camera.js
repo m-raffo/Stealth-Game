@@ -227,6 +227,14 @@ let camera = {
     // TEMP: Draw a circle showing the player's weapon noise radius
     this.setFill('rgba(100, 100, 0, .22)');
     this.renderEllipse(player.x, player.y, player.weapon.noise, player.weapon.noise);
+
+    // If the game is paused, draw a 'misty' effect over the screen
+    // TODO: Paused world be ligher or darker?
+    if(!game.running) {
+      this.setFill('rgba(255, 255, 255, .5)');
+      this.drawBox(0, 0, game.canvas.element.width, game.canvas.element.height);
+
+    }
   },
 
   /**
@@ -459,7 +467,6 @@ let camera = {
     // Draw doors
     for (var i = 0; i < room.doors.length; i++) {
       var door = room.doors[i];
-      door.update();
       this.setFill(door.color);
       this.renderRect(door.x, door.y, door.width, door.height);
     }
