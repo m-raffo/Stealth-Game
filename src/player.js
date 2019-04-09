@@ -414,6 +414,14 @@ let player = {
       }
     }
 
+    // Check all crates
+    for (var i = 0; i < game.world.crates.length; i++) {
+      var currentCrate = game.world.crates[i];
+      if(currentCrate.active && this.checkCollision(currentCrate)) {
+        return true;
+      }
+    }
+
 
     return false;
   },

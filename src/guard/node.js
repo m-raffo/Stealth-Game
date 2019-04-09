@@ -31,8 +31,17 @@ function Node(x, y, gridX, gridY){
         }
       }
 
-      // don't check doors, because guards can walk through doors
+      // don't check doors, because guards can walk through
+
     }
+    // TODO: Remake node map after a crate is opened?
+    // Check crates
+    for (var i = 0; i < game.world.crates.length; i++) {
+      if(this.checkCollision(game.world.crates[i])) {
+        return true;
+      }
+    }
+
   }
 
 

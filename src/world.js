@@ -327,7 +327,7 @@ let game = {
     // Check if player has activated an object
     for (var i = 0; i < game.world.items.length; i++) {
       var currentItem = game.world.items[i];
-      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentItem.x, currentItem.y) <= currentItem.width + player.width) {
+      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentItem.x + (currentItem.width / 2), currentItem.y + (currentItem.height / 2)) <= currentItem.width + player.width) {
         currentItem.onPlayerActivate();
       }
     }
@@ -336,7 +336,7 @@ let game = {
     // Update crates
     for (var i = 0; i < game.world.crates.length; i++) {
       var currentCrate = game.world.crates[i];
-      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentCrate.x, currentCrate.y) <= currentCrate.width + player.width) {
+      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentCrate.x + (currentCrate.width / 2), currentCrate.y + (currentCrate.height / 2)) <= currentCrate.width + player.width) {
         currentCrate.open();
       } else {
         currentCrate.close();
