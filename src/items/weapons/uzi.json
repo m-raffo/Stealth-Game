@@ -1,0 +1,14 @@
+{
+    "resetTimestamp": 1554825040027,
+    "mouseRelease": true,
+    "requireMouseRelease": false,
+    "timeToReset": 100,
+    "ammo": 50,
+    "bulletsPerShot": 1,
+    "accuracy": 13,
+    "ammoPerClip": 50,
+    "ammoTotal": 150,
+    "timeToReload": 750,
+    "noise": 1000,
+    "damage": 10
+}

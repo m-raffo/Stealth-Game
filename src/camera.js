@@ -222,6 +222,11 @@ let camera = {
         }
       }
     }
+
+
+    // TEMP: Draw a circle showing the player's weapon noise radius
+    this.setFill('rgba(100, 100, 0, .22)');
+    this.renderEllipse(player.x, player.y, player.weapon.noise, player.weapon.noise);
   },
 
   /**
@@ -439,7 +444,7 @@ let camera = {
     if (room.visibility > 0) {
       // Draw covering
       // TEMP: divided by two to allow me to see what's going on. This must be changed for the final build
-      this.setFill('rgba(0, 0, 0, ' + room.visibility / 1 + ')');
+      this.setFill('rgba(0, 0, 0, ' + room.visibility / 2 + ')');
       this.renderRect(room.x, room.y, room.width, room.height);
     }
 

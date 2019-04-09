@@ -27,16 +27,16 @@ function WeaponCrate (x, y, width, height, weapon) {
 
   this.endOpen = undefined;
   this.active = true;
-
+// TODO: Add collision for bullets, players, and guards for weaponscrates
   this.open = function() {
     if(this.endOpen === undefined) {
       this.endOpen = Date.now() + CRATE_OPEN_TIME;
-    } else if(this.endOpen < Date.now()) {
+    } else if(this.active && this.endOpen < Date.now()) {
       this.active = false;
       game.world.items.push(new Item(this.x, this.y, 100, 100, '#545454', function() {
         player.weapon = this.newWeapon;
         this.active = false;
-      }, weapons.shotgun));
+      }, weapons[this.weapon]));
     }
   }
 
