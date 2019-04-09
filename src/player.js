@@ -134,13 +134,15 @@ let player = {
 
     damage: 25,
 
-    /**
-     * Updates the on-screen display to reflect the current ammo state
-     * @return {undefined} no return value
-     */
-    updateAmmoDisplay: function() {
-      $('#ammoDisplay').text(this.ammo + ' / ' + (this.ammoTotal - this.ammo));
-    }
+
+  },
+
+  /**
+   * Updates the on-screen display to reflect the current ammo state
+   * @return {undefined} no return value
+   */
+  updateAmmoDisplay: function() {
+    $('#ammoDisplay').text(this.weapon.ammo + ' / ' + (this.weapon.ammoTotal - this.weapon.ammo));
   },
 
 
@@ -374,7 +376,7 @@ let player = {
 
     }
 
-    this.weapon.updateAmmoDisplay();
+    this.updateAmmoDisplay();
 
 
     // Take damage from bullets

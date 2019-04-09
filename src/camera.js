@@ -131,6 +131,13 @@ let camera = {
       }
     }
 
+    // Draw crates
+    for (var i = 0; i < game.world.crates.length; i++) {
+      if(game.world.crates[i].active) {
+        this.renderItem(game.world.crates[i])
+      }
+    }
+
 
     // Draw the guards
     for (var i = 0; i < game.world.guards.length; i++) {

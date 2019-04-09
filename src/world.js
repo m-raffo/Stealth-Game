@@ -197,6 +197,10 @@ let game = {
       }),  // a sample weapon box (rifle)
     ],
 
+    crates: [
+      new WeaponCrate(450, 450, 200, 200, weapons.shotgun),
+    ],
+
     /**
      * A list of room objects that contains all of the rooms in the level.
      * @type {Array}
@@ -325,6 +329,17 @@ let game = {
       var currentItem = game.world.items[i];
       if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentItem.x, currentItem.y) <= currentItem.width + player.width) {
         currentItem.onPlayerActivate();
+      }
+    }
+
+
+    // Update crates
+    for (var i = 0; i < game.world.crates.length; i++) {
+      var currentCrate = game.world.crates[i];
+      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentCrate.x, currentCrate.y) <= currentCrate.width + player.width) {
+        currentCrate.open();
+      } else {
+        currentCrate.close();
       }
     }
 
