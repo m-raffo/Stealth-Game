@@ -160,6 +160,10 @@ $(document).mouseup(function(event) {
     }
 });
 
+$(window).on("blur", function(e) {
+console.log("Game blured!");
+} );
+
 // Get mouse movements
 document.addEventListener("mousemove", function(e) {
   controls.mouseX = e.clientX;

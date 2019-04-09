@@ -450,7 +450,7 @@ function Guard(startX, startY, direction){
       for (var j = 0; j < game.world.rooms[i].doors.length; j++) {
         var door = game.world.rooms[i].doors[j];
         if (camera.distance(this.x, this.y, door.x + (door.width / 2), door.y + (door.height / 2)) < 200) {
-          door.open();
+          door.guardOpen();
         }
       }
     }

@@ -26,15 +26,30 @@ const DOOR_OPEN_TIME = 3000;
  *
  * @constructor
  */
-function Door(x, y, openX, openY, width, height) {
+function Door(x, y, openX, openY, width, height, beginLocked=false, name=undefined) {
     this.closeX = x;
     this.closeY = y;
+
+    this.name = name;
 
     this.x = x;
     this.y = y;
 
     this.openX = openX;
     this.openY = openY;
+
+    /**
+     * The passcode to unlock the door.
+     * A random number between 1000 and 9999
+     * (A 4 digit passcode)
+     * @type {Number}
+     */
+    this.passcode = Math.floor(Math.random() * 9999);
+    this.passcode = this.passcode.toString().padStart(4, '0');
+    console.log(this.passcode)
+    if(this.name) {
+      game.world.doorCodes[this.name] = passcode;
+    }
 
     this.targetX = this.x;
     this.targetY = this.y;
@@ -44,9 +59,11 @@ function Door(x, y, openX, openY, width, height) {
     this.width = width;
     this.height = height;
 
+    this.unlockKeyReleased = true;
     this.resetTime = clock.now();
 
     this.state = 'CLOSED';
+    this.locked = beginLocked;
 
     this.update = function() {
       if (Math.abs(this.targetX - this.x) < 1) {
@@ -73,8 +90,18 @@ function Door(x, y, openX, openY, width, height) {
         }
       }
 
-      if(camera.distance(this.x + (this.width / 2), this.y + (this.height / 2), player.x, player.y) < 350 && controls.isControlPressed('DOOR_ACTION')) {
-        this.open();
+      if(camera.distance(this.x + (this.width / 2), this.y + (this.height / 2), player.x, player.y) < 350) {
+        if (controls.isControlPressed('DOOR_ACTION')) {
+          this.open();
+        } else if (controls.isControlPressed('ACTIVATE')) {
+          if(this.unlockKeyReleased && this.locked) {
+            this.unlock();
+          }
+
+          this.unlockKeyReleased = false;
+        } else {
+          this.unlockKeyReleased = true;
+        }
       }
 
       if (this.state === 'OPEN' && this.resetTime < clock.now()) {
@@ -87,6 +114,29 @@ function Door(x, y, openX, openY, width, height) {
      * @return {undefined} no return value
      */
     this.open = function() {
+      if(this.state === 'OPEN') {
+        return; // if already open, just return
+      }
+      if(this.locked) {
+        var coords = camera.lerp(this.x, this.y, this.openX, this.openY, 0.07)
+        this.targetX = coords[0];
+        this.targetY = coords[1];
+        this.resetTime = clock.now() ;
+        this.state = 'OPEN';
+      } else {
+        this.targetX = this.openX;
+        this.targetY = this.openY;
+        this.resetTime = clock.now() + DOOR_OPEN_TIME;
+        this.state = 'OPEN';
+      }
+
+    }
+
+    /**
+     * Opens the door, even if it's locked.
+     * @return {undefined} no return value
+     */
+    this.guardOpen = function() {
       this.targetX = this.openX;
       this.targetY = this.openY;
       this.resetTime = clock.now() + DOOR_OPEN_TIME;
@@ -101,6 +151,13 @@ function Door(x, y, openX, openY, width, height) {
       this.targetX = this.closeX;
       this.targetY = this.closeY;
       this.state = 'CLOSED';
+    }
+
+    this.unlock = function() {
+      var attempt = prompt('Enter the passcode:', '****');
+      if (attempt === this.passcode) {
+        this.locked = false;
+      }
     }
 
     /**

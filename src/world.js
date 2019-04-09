@@ -49,6 +49,13 @@ let game = {
     noise: [],
 
     /**
+     * An object containing all of the door codes by door name. Used to place
+     * the codes in the world for the player to find, as they change every game
+     * @type {Object}
+     */
+    doorCodes: {},
+
+    /**
      * An array of all the items in the world
      * @type {Array}
      */
@@ -258,7 +265,7 @@ let game = {
       ],
 
       [
-        new Door(1110, 990, 1510, 990, 400, 50),
+        new Door(1110, 990, 1510, 990, 400, 50, true),
       ]),
 
       new Room(-990, 10, 1000, 1000, [
