@@ -224,9 +224,12 @@ let camera = {
     }
 
 
-    // TEMP: Draw a circle showing the player's weapon noise radius
-    this.setFill('rgba(100, 100, 0, .22)');
+    // TEMP: Draw a circle showing the player's  noise radius
+    this.setFill('rgba(100, 100, 0, .12)');
     this.renderEllipse(player.x, player.y, player.weapon.noise, player.weapon.noise);
+
+    this.setFill('rgba(21,14,237,.22)');
+    this.renderEllipse(player.x, player.y, player.noiseLevel, player.noiseLevel);
 
     // If the game is paused, draw a 'misty' effect over the screen
     // TODO: Paused world be ligher or darker?

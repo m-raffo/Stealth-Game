@@ -39,6 +39,22 @@ const ACCEL_SPEED_WALK = 100;
 const BULLET_SPEED = 80;
 
 /**
+ * The amount of noise the player makes when they walk
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const PLAYER_NOISE_WALK = 350;
+
+/**
+ * The amount of noise the player makes when they run
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const PLAYER_NOISE_RUN = 525;
+
+/**
  * The object for the main player of the game.
  *
  * @type {Object}
@@ -288,6 +304,21 @@ let player = {
     }
 
     // If the player is in collision with any walls, move them back
+
+    // Add noise given the player's walking speed
+    // Noise level is calculated using a ratio of speed and noise levels given above
+    var totalSpeed = camera.distance(0, 0, this.speedX, this.speedY);
+    var noiseLevel = camera.map(totalSpeed, MOVE_SPEED_WALK, MOVE_SPEED_RUN, PLAYER_NOISE_WALK, PLAYER_NOISE_RUN);
+    var crouchSpeed = camera.distance(0, 0, MOVE_SPEED_CROUCH, MOVE_SPEED_CROUCH);
+
+    if (totalSpeed > crouchSpeed) {
+      game.world.noise.push(new Noise(player.x, player.y, noiseLevel));
+      this.noiseLevel = noiseLevel;
+    } else {
+      this.noiseLevel = 0;
+    }
+
+
 
 
     // Shooting
