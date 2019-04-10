@@ -162,6 +162,12 @@ $(document).mouseup(function(event) {
 
 $(window).on("blur", function(e) {
 console.log("Game blured!");
+game.pause();
+} );
+
+$(window).on("focus", function(e) {
+console.log("Game focused!");
+game.play();
 } );
 
 // Get mouse movements

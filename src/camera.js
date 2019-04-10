@@ -100,6 +100,9 @@ let camera = {
 
     // TODO: Draw the dark boxes covering hidden rooms last (to cover anything visible: bullets, guards, etc.)
 
+    var healthWidth = camera.map(player.health, 0, 100, 0, 40);
+    $('.healthDisplayRemaining').width(healthWidth + "%");
+
 
 
     // Draw all rooms

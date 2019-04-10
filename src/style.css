@@ -18,3 +18,27 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.healthDisplay {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+
+  left: 30%;
+
+  width: 40%;
+  height: 5%;
+  background-color: #c12727;
+}
+
+.healthDisplayRemaining {
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+
+  left: 30%;
+
+  width: 35%;
+  height: 5%;
+  background-color: #17710d;
+}
