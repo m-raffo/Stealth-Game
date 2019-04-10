@@ -27,7 +27,7 @@
   left: 30%;
 
   width: 40%;
-  height: 5%;
+  height: 3%;
   background-color: #c12727;
 }
 
@@ -39,6 +39,41 @@
   left: 30%;
 
   width: 35%;
-  height: 5%;
+  height: 3%;
   background-color: #17710d;
+}
+
+.info{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+
+    background-color: black;
+
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-color: #9f9b9e;
+    border-style: solid;
+    border-width: 10px;
+    border-radius: 2px;
+  }
+
+.infoBody {
+  margin: 100px;
+  color: #80ff00;
+  font-family: monospace;
+}
+
+.infoBody h1 {
+  font-size: 3em;
+}
+
+.infoBody p {
+  font-size: 2em;
+}
+
+.infoBody a:hover {
+  cursor: pointer;
 }

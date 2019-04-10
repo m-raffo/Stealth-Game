@@ -20,6 +20,7 @@ let controls = {
     'DOOR_ACTION': [70], // 'f'
     'ACTIVATE': [69], // 'e'
     'PAUSE': [27], // esc
+    'VIEW_NOISE': [20], // caps lock
   },
 
   /**
