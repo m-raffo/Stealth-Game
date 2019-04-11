@@ -82,7 +82,7 @@ let game = {
     ],
 
     crates: [
-      new WeaponCrate(450, 450, 200, 200, 'uzi'),
+      new WeaponCrate(450, 450, 200, 200, weapons.uzi),
     ],
 
     /**
