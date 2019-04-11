@@ -12,6 +12,11 @@ let game = {
    */
   running: true,
 
+  hideInfo: function() {
+    this.play();
+    $('.info').hide();
+  },
+
   pause: function() {
     // BUG: Will delayed function calls mess up the pause? Yes. Better question, are there any important delayed function calls. I forget what they are called
     if(this.running) {
@@ -60,6 +65,7 @@ let game = {
      * @type {Array}
      */
     items: [
+      new Computer(150, 150, []),
       new Item(100, 100, 100, 100, '#242424', function() {
         console.log('Player activated me!');
         // TODO: Move this weapon defintion to its own file (it is a basic shotgun)
