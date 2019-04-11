@@ -21,6 +21,7 @@ let controls = {
     'ACTIVATE': [69], // 'e'
     'PAUSE': [27], // esc
     'VIEW_NOISE': [20], // caps lock
+    'MAKE_NOISE': [86], // 'v'
   },
 
   /**

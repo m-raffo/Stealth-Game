@@ -71,6 +71,14 @@ const PLAYER_MAX_INAC = 10;
 const PLAYER_MAX_HEALTH = 100;
 
 /**
+ * The amount of noise that the player makes when they whistle/make noise
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const PLAYER_MAKE_NOISE_LEVEL = 900;
+
+/**
  * The object for the main player of the game.
  *
  * @type {Object}
@@ -189,7 +197,11 @@ let player = {
     if(this.health <= 0) {
       console.log("YOU DEAD!!!");
       alert("YOU'RE DEAD!!!");
+    }
 
+    if(controls.isControlPressed('MAKE_NOISE')) {
+      game.world.noise.push(new Noise(player.x, player.y, PLAYER_MAKE_NOISE_LEVEL));
+      console.log("making noise");
     }
 
     // Calculates player's movement based on inputted controls
