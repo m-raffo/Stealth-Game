@@ -249,6 +249,8 @@ let camera = {
 
     }
 
+
+
   },
 
   /**
@@ -365,6 +367,10 @@ let camera = {
     game.canvas.ctx.closePath();
   },
 
+  drawImage: function(img, x, y, width, height) {
+    game.canvas.ctx.drawImage(img, x, y, width, height);
+  },
+
   /**
    * Sets the fill color to the given color
    * @param  {color} color the color to fill
@@ -442,6 +448,20 @@ let camera = {
     camera.drawBox(pixelX, pixelY, pixelWidth, pixelHeight);
   },
 
+  renderImage: function(img, x, y, width, height) {
+    var pixelX = ((x - camera.x) * game.canvas.element.width) / camera.width;
+    var pixelY = ((y - camera.y) * game.canvas.element.height) / camera.height;
+
+    /*
+    width / camera.width = ?(pixelWidth) / canvas.width
+    (width / camera.width) * canvas.width = ?(pixelWidth)
+     */
+    var pixelWidth = (width / camera.width) * game.canvas.element.width;
+    var pixelHeight = (height / camera.height) * game.canvas.element.height;
+
+    this.drawImage(img, pixelX, pixelY, pixelWidth, pixelHeight);
+  },
+
   /**
    * Draws a rectangle to the screen taking input in world units
    * @param  {Number} x      x coordinate (in world units) of the top left corner
@@ -498,7 +518,7 @@ let camera = {
     var pixelY1 = ((y1 - camera.y) * game.canvas.element.height) / camera.height;
 
     var pixelX2 = ((x2 - camera.x) * game.canvas.element.width) / camera.width;
-    var pixelY2 = ((y2 - camera.y) * game.canvas.element.height) / camera.height;
+    var pixelY2 = ((y2 - camera.y) ``* game.canvas.element.height) / camera.height;
 
     this.drawLine(pixelX1, pixelY1, pixelX2, pixelY2);
   },
