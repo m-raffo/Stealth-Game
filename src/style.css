@@ -82,7 +82,7 @@
 }
 
 .panel{
-  /* display: none; */
+  display: none;
 
     position: fixed;
     top: 50%;

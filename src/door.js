@@ -155,11 +155,21 @@ function Door(x, y, openX, openY, width, height, beginLocked=false, name=undefin
 
     this.unlock = function() {
       game.pause();
-      var attempt = prompt('Enter the passcode:', '****');
-      if (attempt === this.passcode) {
-        this.locked = false;
+      $(".panel").show();
+      var attempt = undefined;
+      keypad.passcode = this.passcode;
+      keypad.door = this;
+      var check = function(attempt) {
+        if (attempt === this.passcode) {
+          this.door.locked = false;
+        }
+        $(".panel").hide();
+        game.play();
+        this.clear();
+
       }
-      game.play();
+      keypad.onCodeEntered = check;
+
     }
 
     /**

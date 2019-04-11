@@ -2,13 +2,24 @@ let keypad = {
   current: '',
 
   getInput: function() {
-    if(this.current.length <= 4) {
+    if(this.current.length >= 4) {
       var output = this.current;
       this.current = '';
       return output;
     } else {
       return undefined;
     }
+  },
+
+  onCodeEntered: function(code) {
+
+  },
+
+  clear: function() {
+    $('#d1').text('*');
+    $('#d2').text('*');
+    $('#d3').text('*');
+    $('#d4').text('*');
   },
 
   pressed: function(number) {
@@ -33,6 +44,11 @@ let keypad = {
       $('#d4').text('*');
     } else {
       $('#d4').text(this.current.charAt(3));
+    }
+
+    if(this.current.length >= 4) {
+      this.onCodeEntered(this.current);
+      this.current = '';
     }
 
   },
