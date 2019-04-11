@@ -80,3 +80,86 @@
 .infoBody a:hover {
   cursor: pointer;
 }
+
+.panel{
+  /* display: none; */
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 20%;
+    height: 50%;
+
+    background-color: #9f9b9e;
+
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-color: black;
+    border-style: solid;
+    border-width: 10px;
+    border-radius: 2px;
+}
+
+.panelBody {
+  color: #80ff00;
+  font-family: monospace;
+
+  overflow-y: auto;
+
+  user-select: none;
+       -moz-user-select: none;
+       -khtml-user-select: none;
+       -webkit-user-select: none;
+       -o-user-select: none;
+}
+
+/* .button-container {
+  width: 520px;
+  background: gray;
+
+} */
+
+.panelBody > a {
+  display: block;
+    width: 28%;
+    height: 20%;
+    padding-top:  8%;
+    padding-bottom:  8%;
+    float: left;
+    background: lightgray;
+    margin: 2%;
+    text-align: center;
+    color: black;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.panelBody > a:active {
+  display: block;
+    width: 28%;
+    height: 20%;
+    padding-top:  8%;
+    padding-bottom:  8%;
+    float: left;
+    background: darkgrey;
+    margin: 2%;
+    text-align: center;
+    color: black;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.panelBody > h1 {
+  display: block;
+    width: 19%;
+    padding-top:  5%;
+    padding-bottom:  5%;
+    float: left;
+    background: lightgray;
+    margin: 2%;
+    text-align: center;
+    color: black;
+    border: solid;
+    border-radius: 2px;
+    border-width: 2px;
+}
