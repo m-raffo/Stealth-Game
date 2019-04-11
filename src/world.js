@@ -1,4 +1,12 @@
 /**
+ * An object containing all of the door codes by door name. Used to place
+ * the codes in the world for the player to find, as they change every game
+ * @type {Object}
+ */
+let doorCodes = {};
+
+
+/**
  * Define the namespace for all game operations
  * @namespace
  */
@@ -53,19 +61,21 @@ let game = {
      */
     noise: [],
 
-    /**
-     * An object containing all of the door codes by door name. Used to place
-     * the codes in the world for the player to find, as they change every game
-     * @type {Object}
-     */
-    doorCodes: {},
+
 
     /**
      * An array of all the items in the world
      * @type {Array}
      */
     items: [
-      new Computer(150, 150, []),
+      new Computer(200, 200, {
+        to: "fdavidson@chemlab.com",
+        from: 'no-reply@chemlab.com',
+        subject: 'WEEKLY DOOR CODES',
+        get body() {
+          return 'Hello Fred, \nThe door code for your office this week is ' + doorCodes['office'] + '. This code will take effect on 9am at the start of this week. \n  \n For security reasons, DELETE THIS MESSAGE AFTER READING!'
+        }
+      }),
       new Item(100, 100, 100, 100, '#242424', function() {
         console.log('Player activated me!');
         // TODO: Move this weapon defintion to its own file (it is a basic shotgun)
@@ -271,7 +281,7 @@ let game = {
       ],
 
       [
-        new Door(1110, 990, 1510, 990, 400, 50, true),
+        new Door(1110, 990, 1510, 990, 400, 50, true, 'office'),
       ]),
 
       new Room(-990, 10, 1000, 1000, [

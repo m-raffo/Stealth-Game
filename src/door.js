@@ -48,7 +48,7 @@ function Door(x, y, openX, openY, width, height, beginLocked=false, name=undefin
     this.passcode = this.passcode.toString().padStart(4, '0');
     console.log(this.passcode)
     if(this.name) {
-      game.world.doorCodes[this.name] = passcode;
+      doorCodes[this.name] = this.passcode;
     }
 
     this.targetX = this.x;

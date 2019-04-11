@@ -69,11 +69,12 @@
 }
 
 .infoBody h1 {
-  font-size: 3em;
+  font-size: 2.5em;
 }
 
 .infoBody p {
   font-size: 2em;
+  white-space: pre-line
 }
 
 .infoBody a:hover {
