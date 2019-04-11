@@ -55,6 +55,22 @@ const PLAYER_NOISE_WALK = 350;
 const PLAYER_NOISE_RUN = 525;
 
 /**
+ * The amount that the player's gun is inaccurate when they are moving at full speed.
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const PLAYER_MAX_INAC = 10;
+
+/**
+ * Maximum health that the player can have
+ * @type {Number}
+ * @constant
+ * @default
+ */
+const PLAYER_MAX_HEALTH = 100;
+
+/**
  * The object for the main player of the game.
  *
  * @type {Object}
@@ -73,7 +89,7 @@ let player = {
   height: 100,
   speedX: 0,
   speedY: 0,
-  health: 100,
+  health: PLAYER_MAX_HEALTH,
 
   /**
    * Stores all of the information about the player's current weapon
@@ -353,13 +369,15 @@ let player = {
         var worldMouseY = worldMouseX[1];
         worldMouseX = worldMouseX[0];
 
+        var noiseLevelInaccuracy = camera.map(this.noiseLevel, 0, PLAYER_NOISE_RUN, 0, PLAYER_MAX_INAC);
 
         for(var i = 0; i < this.weapon.bulletsPerShot; i++) {
           // slope from player to mouse
           var m = (this.y - worldMouseY) / (this.x - worldMouseX);
           var angle = camera.slopeToAngle(m);
 
-          angle += camera.map(Math.random(), 0, 1, this.weapon.accuracy * -1, this.weapon.accuracy);
+          // Add inaccuracy of the gun AND the player's movements
+          angle += camera.map(Math.random(), 0, 1, (this.weapon.accuracy + noiseLevelInaccuracy) * -1, this.weapon.accuracy  + noiseLevelInaccuracy);
 
           m = camera.angleToSlope(angle);
 

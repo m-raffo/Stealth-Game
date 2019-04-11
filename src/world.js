@@ -68,6 +68,7 @@ let game = {
      * @type {Array}
      */
     items: [
+      new Medpack(1500, 300, 50),
       new Computer(200, 200, {
         to: "fdavidson@chemlab.com",
         from: 'no-reply@chemlab.com',
