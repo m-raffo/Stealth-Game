@@ -163,6 +163,11 @@ let camera = {
       this.renderRoomCovering(currentRoom);
     }
 
+    // Draw guard marks
+    for (var i = 0; i < game.world.guards.length; i++) {
+      camera.renderGuardMarks(game.world.guards[i]);
+    }
+
 
     // TODO: Draw the player sprite (instead of box)
 
@@ -243,9 +248,6 @@ let camera = {
       this.drawBox(0, 0, game.canvas.element.width, game.canvas.element.height);
 
     }
-    this.setFont("bold 30px Arial");
-    this.setFill('#ffa800');
-    this.renderTextCenter(100, 100, "HEllo world");
   },
 
   /**
@@ -507,7 +509,7 @@ let camera = {
     if (room.visibility > 0) {
       // Draw covering
       // TEMP: divided by two to allow me to see what's going on. This must be changed for the final build
-      this.setFill('rgba(0, 0, 0, ' + room.visibility / 2 + ')');
+      this.setFill('rgba(0, 0, 0, ' + room.visibility / 1+ ')');
       this.renderRect(room.x, room.y, room.width, room.height);
     }
 
@@ -548,6 +550,58 @@ let camera = {
 
     this.setFill("#000000");
     this.renderRect(guard.x + x, guard.y + y, 25, 25);
+
+
+  },
+
+  /**
+   * Renders the '?' and '!' to the screen
+   * @param  {Object.Guard} guard the guard to be drawn
+   * @return {undefined}        no return value
+   */
+  renderGuardMarks: function(guard) {
+    if(!guard.alive) {
+      return;
+    }
+    var time = clock.now() - guard.exclaimStart;
+    if (time > 0 && time < ANIM_MARK_STAY_TIME + ANIM_MARK_APPEAR_TIME + ANIM_MARK_APPEAR_TIME) {
+      if(time < ANIM_MARK_APPEAR_TIME) {
+        this.setFont("bold "  + camera.map(time, 0, ANIM_MARK_APPEAR_TIME, 0, 30) + "px arial");
+      } else if (time < ANIM_MARK_APPEAR_TIME + ANIM_MARK_STAY_TIME) {
+        this.setFont("bold 30px arial");
+      } else {
+        this.setFont("bold "  + camera.map(time, 500 + ANIM_MARK_APPEAR_TIME, ANIM_MARK_STAY_TIME + ANIM_MARK_APPEAR_TIME + ANIM_MARK_APPEAR_TIME, 0, 30) + "px arial");
+      }
+
+      // TODO: Make this animation smoother
+
+      this.setFontAlign("center");
+      this.setFill("#ff0505");
+
+      this.renderTextCenter(guard.x, guard.y - 125, '!');
+    } else {
+      time = clock.now() - guard.questionStart;
+      if (time > 0 && time < ANIM_MARK_STAY_TIME + ANIM_MARK_APPEAR_TIME + ANIM_MARK_APPEAR_TIME) {
+        if(time < ANIM_MARK_APPEAR_TIME) {
+          this.setFont("bold "  + camera.map(time, 0, ANIM_MARK_APPEAR_TIME, 0, 30) + "px arial");
+        } else if (time < ANIM_MARK_APPEAR_TIME + ANIM_MARK_STAY_TIME) {
+          this.setFont("bold 30px arial");
+        } else {
+          this.setFont("bold "  + camera.map(time, 500 + ANIM_MARK_APPEAR_TIME, ANIM_MARK_STAY_TIME + ANIM_MARK_APPEAR_TIME + ANIM_MARK_APPEAR_TIME, 0, 30) + "px arial");
+        }
+
+        // TODO: Make this animation smoother
+
+        this.setFontAlign("center");
+        this.setFill("#d96918");
+
+        this.renderTextCenter(guard.x, guard.y - 125, '?');
+      }
+    }
+
+
+
+
   },
 
   /**

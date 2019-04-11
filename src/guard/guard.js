@@ -107,6 +107,9 @@ const GUARD_SNEAK_MODIFIER = 1.5;
  */
 const GUARD_REACTION_TIME = 100;
 
+const ANIM_MARK_APPEAR_TIME = 80;
+const ANIM_MARK_STAY_TIME = 1000;
+
 function Guard(startX, startY, direction){
   this.x = startX;
   this.y = startY;
@@ -121,6 +124,20 @@ function Guard(startX, startY, direction){
 
   this.alive = true;
   this.health = 75;
+
+  this.startQuestion = function() {
+    if (this.questionStart + ANIM_MARK_APPEAR_TIME + ANIM_MARK_APPEAR_TIME +  ANIM_MARK_STAY_TIME < clock.now()) {
+      this.questionStart = clock.now();
+    }
+  }
+  this.questionStart = -10000;
+
+  this.startExclaim = function() {
+    if (this.exclaimStart + ANIM_MARK_APPEAR_TIME + ANIM_MARK_APPEAR_TIME +  ANIM_MARK_STAY_TIME < clock.now()) {
+      this.exclaimStart = clock.now();
+    }
+  }
+  this.exclaimStart = -10000;
 
   this.modeSwitchTimestamp = clock.now();
 
@@ -310,6 +327,7 @@ function Guard(startX, startY, direction){
       // Check for can see player
       if(this.canSeePlayer()) {
         this.mode = 'FIGHT';
+        this.startExclaim();
         this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
       }
 
@@ -320,6 +338,7 @@ function Guard(startX, startY, direction){
 
           // Begin an investigation
           this.mode = 'INVESTIGATE';
+          this.startQuestion();
           this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
           this.target.x = game.world.noise[i].x;
           this.target.y = game.world.noise[i].y;
@@ -340,6 +359,7 @@ function Guard(startX, startY, direction){
       // Check for can see player
       if(this.canSeePlayer()) {
         this.mode = 'FIGHT';
+        this.startExclaim();
         this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
       }
 
@@ -351,6 +371,7 @@ function Guard(startX, startY, direction){
 
           // Begin an investigation
           this.mode = 'INVESTIGATE';
+          this.startQuestion();
           this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
           this.target.x = game.world.noise[i].x;
           this.target.y = game.world.noise[i].y;
@@ -366,6 +387,7 @@ function Guard(startX, startY, direction){
 
           // Begin an investigation
           this.mode = 'INVESTIGATE';
+          this.startQuestion();
           this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
           this.target.x = game.world.noise[i].x;
           this.target.y = game.world.noise[i].y;
