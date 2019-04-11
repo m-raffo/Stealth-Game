@@ -243,6 +243,9 @@ let camera = {
       this.drawBox(0, 0, game.canvas.element.width, game.canvas.element.height);
 
     }
+    this.setFont("bold 30px Arial");
+    this.setFill('#ffa800');
+    this.renderTextCenter(100, 100, "HEllo world");
   },
 
   /**
@@ -345,6 +348,24 @@ let camera = {
   },
 
   /**
+   * Sets the font for drawing text on screen
+   * @param  {String} font the font. ex: "30px Arial"
+   * @return {undefined}      no return value
+   */
+  setFont: function(font) {
+    game.canvas.ctx.font = font;
+  },
+
+  /**
+   * Sets the align for drawing text on screen
+   * @param  {String} font the align ex: "center"
+   * @return {undefined}      no return value
+   */
+  setFontAlign: function(align) {
+    game.canvas.ctx.textAlign = align;
+  },
+
+  /**
    * Sets the stroke color for drawings
    * @param  {String} color The color to change to
    * @return {undefined}       no return value
@@ -431,6 +452,32 @@ let camera = {
     var pixelY2 = ((y2 - camera.y) * game.canvas.element.height) / camera.height;
 
     this.drawLine(pixelX1, pixelY1, pixelX2, pixelY2);
+  },
+
+  /**
+   * Renders the given text to the screen
+   * @param  {Number} x    the coordinate of the upper left corner of the text
+   * @param  {Number} y    the coordinate of the upper left corner of the text
+   * @param  {String} text the text to draw
+   * @return {undefined}      no return value
+   */
+  renderTextCenter: function(x, y, text) {
+    var pixelX = ((x - camera.x) * game.canvas.element.width) / camera.width;
+    var pixelY = ((y - camera.y) * game.canvas.element.height) / camera.height;
+
+    this.drawTextCenter(pixelX, pixelY, text);
+  },
+
+  /**
+   * Draws the given text to the given pixel coordinates
+   * @param  {Number} x    the coordinate of the upper left corner of the text
+   * @param  {Number} y    the coordinate of the upper left corner of the text
+   * @param  {String} text the text to draw
+   * @return {undefined}      no return value
+   */
+  drawTextCenter: function(x, y, text) {
+    this.setFontAlign('center');
+    game.canvas.ctx.fillText(text, x, y);
   },
 
   /**
