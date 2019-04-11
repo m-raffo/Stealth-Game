@@ -248,6 +248,7 @@ let camera = {
       this.drawBox(0, 0, game.canvas.element.width, game.canvas.element.height);
 
     }
+
   },
 
   /**
@@ -261,6 +262,30 @@ let camera = {
   drawBox: function(x, y, width, height) {
     game.canvas.ctx.beginPath();
     game.canvas.ctx.rect(x, y, width, height);
+    game.canvas.ctx.fill();
+    game.canvas.ctx.closePath();
+  },
+
+  /**
+   * Draws a rectangle with rounded edges to the screen
+   * @param  {Number} x coordinates of the upper left corner
+   * @param  {Number} y coordinates of the upper left corner
+   * @param  {Number} w width
+   * @param  {Number} h height
+   * @param  {Number} r radius of the corners
+   * @return {undefined}   no return value
+   */
+  drawRectangleRound: function(x, y, w, h, r){
+    game.canvas.ctx.beginPath();
+    game.canvas.ctx.moveTo(x+r, y);
+    game.canvas.ctx.lineTo(x+w-r, y);
+    game.canvas.ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+    game.canvas.ctx.lineTo(x+w, y+h-r);
+    game.canvas.ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    game.canvas.ctx.lineTo(x+r, y+h);
+    game.canvas.ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+    game.canvas.ctx.lineTo(x, y+r);
+    game.canvas.ctx.quadraticCurveTo(x, y, x+r, y);
     game.canvas.ctx.fill();
     game.canvas.ctx.closePath();
   },
@@ -418,6 +443,28 @@ let camera = {
   },
 
   /**
+   * Draws a rectangle to the screen taking input in world units
+   * @param  {Number} x      x coordinate (in world units) of the top left corner
+   * @param  {Number} y      y coordinate (in world units) of the top left corner
+   * @param  {Number} width  width in world units
+   * @param  {Number} height height in world units
+   * @param  {Number} radius radius of the corner
+   * @return {undefined}        no return value
+   */
+  renderRectRadius: function(x, y, width, height, radius) {
+    var pixelX = ((x - camera.x) * game.canvas.element.width) / camera.width;
+    var pixelY = ((y - camera.y) * game.canvas.element.height) / camera.height;
+
+    /*
+    width / camera.width = ?(pixelWidth) / canvas.width
+    (width / camera.width) * canvas.width = ?(pixelWidth)
+     */
+    var pixelWidth = (width / camera.width) * game.canvas.element.width;
+    var pixelHeight = (height / camera.height) * game.canvas.element.height;
+    this.drawRectangleRound(pixelX, pixelY, pixelWidth, pixelHeight, radius);
+  },
+
+  /**
    * Same as renderRect(), but for ellipse instead
    * @param  {Number} x       x position (in wu)
    * @param  {Number} y       y position (in wu)
@@ -509,7 +556,7 @@ let camera = {
     if (room.visibility > 0) {
       // Draw covering
       // TEMP: divided by two to allow me to see what's going on. This must be changed for the final build
-      this.setFill('rgba(0, 0, 0, ' + room.visibility / 1+ ')');
+      this.setFill('rgba(0, 0, 0, ' + room.visibility / 2+ ')');
       this.renderRect(room.x, room.y, room.width, room.height);
     }
 
@@ -550,6 +597,16 @@ let camera = {
 
     this.setFill("#000000");
     this.renderRect(guard.x + x, guard.y + y, 25, 25);
+
+    this.setFill('#fe0a0a');
+    this.renderRectRadius(guard.x - (guard.width * 1.25), guard.y + guard.height + 25, guard.width * 2 * 1.25, 40, 3);
+
+    var healthBarWidth = this.map(guard.health, 0, 75, 0, guard.width * 2 * 1.25)
+
+    this.setFill('#0e8113');
+    this.renderRectRadius(guard.x - (guard.width * 1.25), guard.y + guard.height + 25, healthBarWidth, 40, 3);
+
+
 
 
   },
