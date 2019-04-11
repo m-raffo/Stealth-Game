@@ -34,8 +34,11 @@ function WeaponCrate (x, y, width, height, weapon) {
     } else if(this.active && this.endOpen < clock.now()) {
       this.active = false;
       game.world.items.push(new Item(this.x + (this.width/2) - 50, this.y + (this.height/2) - 50, 100, 100, '#545454', function() {
+        var oldWeapon = player.weapon;
         player.weapon = this.newWeapon;
         this.active = false;
+
+
       }, weapons[this.weapon]));
     }
   }
