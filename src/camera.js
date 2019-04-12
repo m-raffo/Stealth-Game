@@ -695,7 +695,7 @@ let camera = {
       this.setFill(item.color);
       this.renderRect(item.x, item.y, item.width, item.height);
     } else {
-      this.renderImage(item.img, item.x, item.y, item.width, item.height);
+      this.renderImage(assets.images[item.img], item.x, item.y, item.width, item.height);
     }
 
   },

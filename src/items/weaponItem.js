@@ -1,4 +1,4 @@
-function WeaponItem(x, y, width, height, color, newWeapon, img=undefined) {
+function WeaponItem(x, y, width, height, color, newWeapon) {
   this.x = x;
   this.y = y;
   this.width = width;
@@ -6,9 +6,8 @@ function WeaponItem(x, y, width, height, color, newWeapon, img=undefined) {
   this.color = color;
   this.active = true;
 
-  if(img) {
-    this.img = images[img];
-    this.imgString = img;
+  if(newWeapon.img) {
+    this.img = newWeapon.img;
   }
 
   this.newWeapon = newWeapon;
@@ -25,7 +24,7 @@ function WeaponItem(x, y, width, height, color, newWeapon, img=undefined) {
       var oldWeapon = player.weapon;
       player.weapon = this.newWeapon;
       this.active = false;
-      game.world.items.push(new WeaponItem(player.x, player.y, oldWeapon.width, oldWeapon.height, oldWeapon.color, oldWeapon, oldWeapon.imgString));
+      game.world.items.push(new WeaponItem(player.x, player.y, oldWeapon.width, oldWeapon.height, oldWeapon.color, oldWeapon));
 
     }
   }
