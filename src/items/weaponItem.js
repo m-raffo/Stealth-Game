@@ -5,6 +5,8 @@ function WeaponItem(x, y, width, height, color, newWeapon) {
   this.height = height;
   this.color = color;
   this.active = true;
+  this.bounceHeight = 25;
+  this.haveShadow = true;
 
   if(newWeapon.img) {
     this.img = newWeapon.img;

@@ -696,7 +696,20 @@ let camera = {
       this.setFill(item.color);
       this.renderRect(item.x, item.y, item.width, item.height);
     } else {
-      this.renderImage(assets.images[item.img], item.x, item.y, item.width, item.height);
+      var extra;
+      if(item.bounceHeight) {
+        extra = item.bounceHeight * (Math.sin(clock.now() / 250));
+      } else {
+        extra = 0;
+      }
+
+      if(item.haveShadow) {
+        this.setFill('rgba(130,130,130,.63)');
+        this.renderEllipse(item.x + item.width / 2, item.y + 100, 75, 38);
+
+      }
+
+      this.renderImage(assets.images[item.img], item.x, item.y + extra, item.width, item.height);
     }
 
   },

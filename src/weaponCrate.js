@@ -28,6 +28,8 @@ function WeaponCrate (x, y, width, height, weapon) {
   this.endOpen = undefined;
   this.active = true;
 
+  this.img = 'crate';
+
   this.open = function() {
     if(this.endOpen === undefined) {
       this.endOpen = clock.now() + CRATE_OPEN_TIME;
