@@ -24,7 +24,7 @@ function WeaponItem(x, y, width, height, color, newWeapon) {
       var oldWeapon = player.weapon;
       player.weapon = this.newWeapon;
       this.active = false;
-      game.world.items.push(new WeaponItem(player.x, player.y, oldWeapon.width, oldWeapon.height, oldWeapon.color, oldWeapon));
+      game.world.items.push(new WeaponItem(this.x, this.y, oldWeapon.width, oldWeapon.height, oldWeapon.color, oldWeapon));
 
     }
   }
