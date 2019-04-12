@@ -95,9 +95,7 @@ function Node(x, y, gridX, gridY){
   }
 }
 
-game.world.nodes = [];
-
-{
+function defineNodes() {
   var index = {
     x: 0,
     y: 0

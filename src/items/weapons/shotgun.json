@@ -10,5 +10,6 @@
     "ammoTotal": 25,
     "timeToReload": 1000,
     "noise": 1500,
-    "damage": 12
+    "damage": 12,
+    "name": "shotgun"
 }

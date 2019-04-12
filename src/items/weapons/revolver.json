@@ -10,5 +10,6 @@
     "ammoTotal": 12,
     "timeToReload": 3500,
     "noise": 1250,
-    "damage": 50
+    "damage": 50,
+    "name": "revolver"
 }

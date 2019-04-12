@@ -10,5 +10,6 @@
     "ammoTotal": 30,
     "timeToReload": 1000,
     "noise": 1000,
-    "damage": 20
+    "damage": 20,
+    "name": "pistol"
 }

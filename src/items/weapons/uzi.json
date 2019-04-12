@@ -13,5 +13,6 @@
     "damage": 10,
     "imgString": "pistol",
     "width": 150,
-    "height": 150
+    "height": 150,
+    "name": "uzi"
 }
