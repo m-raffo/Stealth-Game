@@ -15,3 +15,6 @@ $.getJSON('/items/weapons/revolver.json', function(data) {
 $.getJSON('/items/weapons/uzi.json', function(data) {
   weapons.uzi = data;
 });
+
+
+player.weapon = JSON.parse(JSON.stringify(weapons.uzi));

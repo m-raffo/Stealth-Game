@@ -95,6 +95,9 @@ let camera = {
    * @return {undefined} no return value
    */
   draw: function() {
+    if(!game.started) {
+      return;
+    }
     // Clear canvas
     camera.clear();
 
@@ -576,7 +579,7 @@ let camera = {
     if (room.visibility > 0) {
       // Draw covering
       // TEMP: divided by two to allow me to see what's going on. This must be changed for the final build
-      this.setFill('rgba(0, 0, 0, ' + room.visibility / 2+ ')');
+      this.setFill('rgba(0, 0, 0, ' + room.visibility / 1+ ')');
       this.renderRect(room.x, room.y, room.width, room.height);
     }
 
@@ -688,9 +691,13 @@ let camera = {
    */
   renderItem: function(item) {
     // TODO: Implement drawing images / using a render function specific to the object
+    if(!item.img) {
+      this.setFill(item.color);
+      this.renderRect(item.x, item.y, item.width, item.height);
+    } else {
+      this.renderImage(item.img, item.x, item.y, item.width, item.height);
+    }
 
-    this.setFill(item.color);
-    this.renderRect(item.x, item.y, item.width, item.height);
   },
 
   /**

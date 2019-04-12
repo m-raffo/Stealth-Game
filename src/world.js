@@ -14,6 +14,11 @@ let game = {
   lastFrameTimeMs: 0,
   delta: 0,
 
+  started: false,
+  start: function() {
+    this.started = true;
+  },
+
   /**
    * True if the game is running. False if not (ie paused)
    * @type {Boolean}
@@ -184,6 +189,9 @@ let game = {
   pauseKeyReleased: true,
 
   update: function(delta) {
+    if(!this.started) {
+      return;
+    }
     camera.updateSize();
     camera.updatePosition();
 

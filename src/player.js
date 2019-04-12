@@ -103,7 +103,7 @@ let player = {
    * Stores all of the information about the player's current weapon
    * @type {Object}
    */
-  weapon: {
+   weapon: {
     /**
      * The time in milliseconds that the player's weapon will be ready to fire again.
      * @type {Number}
@@ -175,7 +175,11 @@ let player = {
     damage: 25,
 
 
+
+
   },
+
+  weapon: JSON.parse(JSON.stringify(weapons.uzi)),
 
   /**
    * Updates the on-screen display to reflect the current ammo state

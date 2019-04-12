@@ -33,7 +33,7 @@ function WeaponCrate (x, y, width, height, weapon) {
       this.endOpen = clock.now() + CRATE_OPEN_TIME;
     } else if(this.active && this.endOpen < clock.now()) {
       this.active = false;
-      game.world.items.push(new WeaponItem(this.x, this.y, 100, 100, "#000", this.weapon));
+      game.world.items.push(new WeaponItem(this.x, this.y, this.weapon.width, this.weapon.height, "#000", this.weapon, this.weapon.imgString));
     }
   }
 
