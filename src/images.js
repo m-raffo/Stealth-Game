@@ -15,6 +15,8 @@ let assetManager = {
     'ak47': 'assets/ak47.png',
     'uzi': 'assets/uzi.png',
     'crate': 'assets/crate.png',
+    'concrete': 'assets/concrete.png',
+    'computer': 'assets/computer.png'
   },
 
   weaponSources: {

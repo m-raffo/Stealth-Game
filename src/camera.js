@@ -100,6 +100,8 @@ let camera = {
     }
     // Clear canvas
     camera.clear();
+    this.setFill('#666');
+    this.drawBox(0, 0, game.canvas.element.width, game.canvas.element.height);
 
     // TODO: Draw the dark boxes covering hidden rooms last (to cover anything visible: bullets, guards, etc.)
 
@@ -563,12 +565,36 @@ let camera = {
     this.setFill(room.floorColor);
     this.renderRect(room.x, room.y, room.width, room.height);
 
+    this.renderTiledFloor(assets.images.concrete, room.x, room.y, room.width, room.height);
+
     // Draw items
     for (var i = 0; i < room.items.length; i++) {
       this.setFill(room.items[i].color);
       this.renderRect(room.items[i].x, room.items[i].y, room.items[i].width, room.items[i].height);
     }
 
+  },
+
+  renderTiledFloor: function(img, startx, starty, width, height) {
+    for(var x = startx; x < startx + width; x += img.width) {
+      for(var y = starty; y < starty + height; y += img.height) {
+        if(x + img.width > startx + width || y + img.height > starty + height) {
+
+
+          var pixelX = ((x - camera.x) * game.canvas.element.width) / camera.width;
+          var pixelY = ((y - camera.y) * game.canvas.element.height) / camera.height;
+
+          var pixelWidth = ((startx + width - x) / camera.width) * game.canvas.element.width;
+          var pixelHeight = ((starty + height - y) / camera.height) * game.canvas.element.height;
+
+
+          game.canvas.ctx.drawImage(img, 0, 0, startx + width - x, starty + height - y, pixelX, pixelY, pixelWidth, pixelHeight);
+        } else {
+          this.renderImage(img, x, y, img.width, img.height);
+
+        }
+      }
+    }
   },
 
   /**
@@ -704,7 +730,7 @@ let camera = {
       }
 
       if(item.haveShadow) {
-        this.setFill('rgba(130,130,130,.63)');
+        this.setFill('rgba(60,60,60,.83)');
         this.renderEllipse(item.x + item.width / 2, item.y + 100, 75, 38);
 
       }

@@ -1,12 +1,14 @@
 function Computer(x, y, info) {
   this.x = x;
   this.y = y;
-  this.width = 100;
-  this.height = 100;
+  this.width = 150;
+  this.height = 150;
 
   this.color = '#9f9f9f';
   this.active = true;
   this.info = info;
+
+  this.img = 'computer'
 
   this.onPlayerActivate = function() {
     // Pause the game
