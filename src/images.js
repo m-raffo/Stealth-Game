@@ -11,7 +11,9 @@ let assetManager = {
   errorCount: 0,
   weaponsLoaded: 0,
   imageSources: {
-    'pistol': '/assets/pistol.png'
+    'pistol': '/assets/pistol.png',
+    'ak47': 'assets/ak47.png',
+    'uzi': 'assets/uzi.png'
   },
 
   weaponSources: {

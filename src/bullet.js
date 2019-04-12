@@ -60,7 +60,7 @@ function Bullet(x, y, dirX, dirY, shooter, damage) {
     // Check all crates
     for (var i = 0; i < game.world.crates.length; i++) {
       var currentCrate = game.world.crates[i];
-      if(camera.pointInRect(this.x, this.y, currentCrate.x, currentCrate.y, currentCrate.width, currentCrate.height)) {
+      if(currentCrate.active && camera.pointInRect(this.x, this.y, currentCrate.x, currentCrate.y, currentCrate.width, currentCrate.height)) {
         return true;
       }
     }

@@ -181,7 +181,7 @@ function definePlayer() {
 
     },
 
-    weapon: JSON.parse(JSON.stringify(weapons.uzi)),
+    weapon: JSON.parse(JSON.stringify(weapons.pistol)),
 
     /**
      * Updates the on-screen display to reflect the current ammo state

@@ -11,8 +11,8 @@
     "timeToReload": 750,
     "noise": 1000,
     "damage": 10,
-    "img": "pistol",
-    "width": 150,
-    "height": 150,
+    "img": "uzi",
+    "width": 225,
+    "height": 112,
     "name": "uzi"
 }

@@ -371,6 +371,7 @@ let camera = {
   },
 
   drawImage: function(img, x, y, width, height) {
+    game.canvas.ctx.imageSmoothingEnabled = false;
     game.canvas.ctx.drawImage(img, x, y, width, height);
   },
 
