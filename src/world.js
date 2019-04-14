@@ -98,21 +98,18 @@ function defineGame() {
        * @type {Array}
        */
       items: [
-        new WeaponItem(500, 100, 100, 100,'#000', weapons.shotgun),
-        new Medpack(1500, 300, 50),
-        new Computer(200, 200, {
-          to: "fdavidson@chemlab.com",
-          from: 'no-reply@chemlab.com',
-          subject: 'WEEKLY DOOR CODES',
-          get body() {
-            return 'Hello Fred, \nThe door code for your office this week is ' + doorCodes['office'] + '. This code will take effect on 9am at the start of this week. \n  \n For security reasons, DELETE THIS MESSAGE AFTER READING!'
-          }
-        }),
+        // new Computer(200, 200, {
+        //   to: "fdavidson@chemlab.com",
+        //   from: 'no-reply@chemlab.com',
+        //   subject: 'WEEKLY DOOR CODES',
+        //   get body() {
+        //     return 'Hello Fred, \nThe door code for your office this week is ' + doorCodes['office'] + '. This code will take effect on 9am at the start of this week. \n  \n For security reasons, DELETE THIS MESSAGE AFTER READING!'
+        //   }
+        // }),
 
       ],
 
       crates: [
-        new WeaponCrate(450, 450, 200, 200, weapons.ar),
       ],
 
       /**
@@ -120,80 +117,35 @@ function defineGame() {
        * @type {Array}
        */
       rooms:[
-        new Room(10, 10, 1000, 1000, [
-          new Wall(10, 10, 25, 1000),
-          new Wall(10, 10, 1000, 25),
-          new Wall(1010, 10, 25, 1000),
-          new Wall(10, 1010, 100, 25),
-          new Wall(510, 1010, 525, 25),
-        ],
+        new Room(0, 0, 1500, 1000, [
+          new Wall(-25, -25, 825.0, 50),
+		new Wall(1200.0, -25, 325.0, 50),
 
-        [
-          new Door(110, 990, 510, 990, 400, 50),
-        ]
-      ),
+          new Wall(-25.0, 975.0, 1550, 50),
+          new Wall(-25.0, -25.0, 50, 1050),
+          new Wall(1475.0, -25.0, 50, 1050),
 
-        new Room(1010, 10, 1000, 1000, [
-          new Wall(1010, 10, 25, 1000),
-          new Wall(1010, 10, 1000, 25),
-          new Wall(2010, 10, 25, 5000),
-          new Wall(1010, 1010, 100, 25),
-          new Wall(1510, 1010, 525, 25),
-        ],
+        	],
 
-        [
-          new Door(1110, 990, 1510, 990, 400, 50, true, 'office'),
-        ]),
+          [
+            new Door(790.0, -37, 390.0, -37, 420, 75)
+          ]
+        ),
+        new Room(0, -2000, 1500, 2000, [
+          new Wall(-25.0, -2025.0, 1550, 50),
 
-        new Room(-990, 10, 1000, 1000, [
-          new Wall(-990, 10, 25, 5000),
-          new Wall(-990, 10, 1000, 25),
-          new Wall(10, 10, 25, 1000),
-          new Wall(-990, 1010, 100, 25),
-          new Wall(-490, 1010, 525, 25),
-        ],
+          new Wall(-25, -25, 825.0, 50),
+		new Wall(1200.0, -25, 325.0, 50),
 
-        [
-          new Door(-890, 990, -490, 990, 400, 50),
-        ]),
+          new Wall(-25.0, -2025.0, 50, 2050),
+          new Wall(1475.0, -2025.0, 50, 2050),
 
+        	],
 
-        new Room(10, 2035, 1000, 1000, [
-          new Wall(10, 2010, 25, 1000),
-          new Wall(10, 3010, 1000, 25),
-          new Wall(1010, 2010, 25, 1000),
-          new Wall(10, 2010, 100, 25),
-          new Wall(510, 2010, 525, 25),
-        ],
-
-        [
-          new Door(110, 1990, 510, 1990, 400, 50)
-        ]
-      ),
-
-        new Room(1010, 2035, 1000, 1000, [
-          new Wall(1010, 2010, 25, 1000),
-          new Wall(1010, 3010, 1000, 25),
-          new Wall(2010, 2010, 25, 1025),
-          new Wall(1010, 2010, 100, 25),
-          new Wall(1510, 2010, 525, 25),
-        ],
-
-        [
-          new Door(1110, 1990, 1510, 1990, 400, 50)
-        ]),
-
-        new Room(-990, 2035, 1000, 1000, [
-          new Wall(-990, 2010, 25, 1000),
-          new Wall(-990, 3010, 1000, 25),
-          new Wall(10, 2010, 25, 1000),
-          new Wall(-990, 2010, 100, 25),
-          new Wall(-490, 2010, 525, 25),
-        ],
-
-        [
-          new Door(-890, 1990, -490, 1990, 400, 50)
-        ]),
+          [
+            // doors
+          ]
+        ),
       ],
 
       /**
@@ -201,8 +153,8 @@ function defineGame() {
        * @type {Array.Guard}
        */
       guards: [
-        new Guard(1500, 500, -90),
-        new Guard(-500, 500, 10),
+        // new Guard(1500, 500, -90),
+        // new Guard(-500, 500, 10),
       ],
     },
 

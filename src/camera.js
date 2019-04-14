@@ -168,6 +168,18 @@ let camera = {
       this.renderRoomCovering(currentRoom);
     }
 
+    // render room walls
+    for (var i = 0; i < game.world.rooms.length; i++) {
+      var currentRoom = game.world.rooms[i];
+      this.renderRoomWall(currentRoom);
+    }
+
+    // render room doors
+    for (var i = 0; i < game.world.rooms.length; i++) {
+      var currentRoom = game.world.rooms[i];
+      this.renderRoomDoor(currentRoom);
+    }
+
     // Draw guard marks
     for (var i = 0; i < game.world.guards.length; i++) {
       camera.renderGuardMarks(game.world.guards[i]);
@@ -597,6 +609,27 @@ let camera = {
     }
   },
 
+  renderRoomWall: function(room) {
+    this.setFill('#358c67');
+    // Draw walls
+    for (var i = 0; i < room.walls.length; i++) {
+      var wall = room.walls[i];
+
+      this.renderRect(wall.x, wall.y, wall.width, wall.height);
+    }
+
+
+  },
+
+  renderRoomDoor: function(room) {
+    // Draw doors
+    for (var i = 0; i < room.doors.length; i++) {
+      var door = room.doors[i];
+      this.setFill(door.color);
+      this.renderRect(door.x, door.y, door.width, door.height);
+    }
+  },
+
   /**
    * Renders the inputted room's covering to the screen
    * @param  {Object.Room} room The room to be drawn
@@ -610,20 +643,7 @@ let camera = {
       this.renderRect(room.x, room.y, room.width, room.height);
     }
 
-    this.setFill('#358c67');
-    // Draw walls
-    for (var i = 0; i < room.walls.length; i++) {
-      var wall = room.walls[i];
 
-      this.renderRect(wall.x, wall.y, wall.width, wall.height);
-    }
-
-    // Draw doors
-    for (var i = 0; i < room.doors.length; i++) {
-      var door = room.doors[i];
-      this.setFill(door.color);
-      this.renderRect(door.x, door.y, door.width, door.height);
-    }
   },
 
   /**
