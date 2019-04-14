@@ -106,10 +106,21 @@ function defineGame() {
         //     return 'Hello Fred, \nThe door code for your office this week is ' + doorCodes['office'] + '. This code will take effect on 9am at the start of this week. \n  \n For security reasons, DELETE THIS MESSAGE AFTER READING!'
         //   }
         // }),
+        //
+        new Computer(2030, -1700, {
+          to: "fdavidson@chemtec.com",
+          from: "manager@chemtec.com",
+          subject: "New assignment",
+          get body() {
+            return "Fred,\nI know that you have been recently bored with your normal patrol, and as Mr. Weston will be out this week, I'm giving you his position as the entry guard.\nYou are responsible for only allowing those with the proper clearance into the building. The door code for the main entry is: " + doorCodes['mainentry'] +"\nI expect no unauthorized visitors.\n\nSincerely,\nMr. Manager";
+          }
+        })
 
       ],
 
       crates: [
+        new WeaponCrate(200, -500, 300, 300, weapons.silentpistol),
+
       ],
 
       /**
@@ -119,51 +130,89 @@ function defineGame() {
       rooms:[
         new Room(0, 0, 1500, 1000, [ // room 0
           new Wall(-25, -25, 825.0, 50),
-		new Wall(1200.0, -25, 325.0, 50),
+          new Wall(1200.0, -25, 325.0, 50),
 
           new Wall(-25.0, 975.0, 1550, 50),
           new Wall(-25.0, -25.0, 50, 1050),
           new Wall(1475.0, -25.0, 50, 1050),
 
-        	],
+        ],
 
-          [
-            new Door(790.0, -37, 390.0, -37, 420, 75)
-          ]
-        ),
-        new Room(0, -1500, 1500, 1500, [ // room 1
-          new Wall(-25, -1525, 200.0, 50),
-		new Wall(575.0, -1525, 425.0, 50),
-		new Wall(1400.0, -1525, 125.0, 50),
-
-
-
-
-          new Wall(-25, -25, 825.0, 50),
-		new Wall(1200.0, -25, 325.0, 50),
-
-
-    new Wall(-25, -1525, 50, 75.0),
-
-
-		new Wall(-25, -1050.0, 50, 1075.0),
-
-
-          new Wall(1475.0, -1525.0, 50, 1550),
-
-        	],
-
-          [
-            new Door(-37, -1460.0, -37, -1060.0, 75, 420),
-            new Door(990.0, -1537, 1390.0, -1537, 420, 75, true),
-            new Door(165.0, -1537, 565.0, -1537, 420, 75, true)
-
-
-
-          ]
-        ),
+        [
+          new Door(790.0, -37, 390.0, -37, 420, 75)
+        ]
+      ),
+      new Room(0, -1500, 1500, 1500, [ // room 1
+        new Wall(-25, -1525, 200.0, 50),
+        new Wall(575.0, -1525, 425.0, 50),
+        new Wall(1400.0, -1525, 125.0, 50),
+        new Wall(-25, -25, 825.0, 50),
+        new Wall(1200.0, -25, 325.0, 50),
+        new Wall(-25, -1525, 50, 75.0),
+        new Wall(-25, -1050.0, 50, 1075.0),
+        new Wall(1475.0, -1525.0, 50, 1550),
 
       ],
+
+      [
+        new Door(-37, -1460.0, -37, -1060.0, 75, 420),
+        new Door(990.0, -1537, 1390.0, -1537, 420, 75, true),
+        new Door(165.0, -1537, 565.0, -1537, 420, 75, true)
+      ]
+    ),
+
+    new Room(-375, -2250, 375, 1250, [  // room 2
+      new Wall(-400.0, -2275.0, 425, 50),
+      new Wall(-400.0, -1025.0, 425, 50),
+      new Wall(-400.0, -2275.0, 50, 1300),
+      new Wall(-25, -2275, 50, 150.0),
+      new Wall(-25, -1725.0, 50, 275.0),
+      new Wall(-25, -1050.0, 50, 75.0),
+    ],
+
+    [
+      new Door(-37, -2135.0, -37, -2535.0, 75, 420)
+    ]
+  ),
+
+  new Room(0, -3000, 1500, 1500, [ // Room 3
+    // new Wall(-25.0, -3025.0, 1550, 50),
+    new Wall(-25, -3025, 551.0, 50),
+		new Wall(926.0, -3025, 599.0, 50),
+
+
+    new Wall(-25.0, -3025.0, 50, 900),
+    // new Wall(1475.0, -3025.0, 50, 1550),
+    new Wall(1475, -3025, 50, 325.0),
+		new Wall(1475, -2300.0, 50, 825.0),
+
+  ],
+
+  [
+    new Door(516.0, -3037, 916.0, -3037, 420, 75, true, 'mainentry')
+  ]
+),
+
+new Room(1500, -3000, 750, 1500, [
+          new Wall(1475.0, -3025.0, 800, 50),
+          new Wall(1475.0, -1525.0, 800, 50),
+          // new Wall(1475.0, -3025.0, 50, 1550),
+          new Wall(2225.0, -3025.0, 50, 1550),
+
+        	],
+
+          [
+            new Door(1463, -2710.0, 1463, -2310.0, 75, 420)
+          ]
+        ),
+
+
+
+
+
+
+
+  ],
 
       /**
        * An array containing all of the guards
@@ -172,6 +221,7 @@ function defineGame() {
       guards: [
         // new Guard(1500, 500, -90),
         // new Guard(-500, 500, 10),
+        new Guard(1000, -1100, 130)
       ],
     },
 

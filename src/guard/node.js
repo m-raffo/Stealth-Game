@@ -7,7 +7,7 @@ function Node(x, y, gridX, gridY){
   this.gridX = gridX;
   this.gridY = gridY;
 
-  this.radius = 150;
+  this.radius = 125;
 
   this.score = {
     g:0,  // current cost
@@ -102,10 +102,10 @@ function defineNodes() {
   };
 
   // create all nodes
-  for (var i = -1000; i < 2200; i += 60) {
+  for (var i = -1000; i < 1300; i += 60) {
     game.world.nodes.push([]);
     index.x = 0;
-    for (var j = 0; j < 3000; j += 60) {
+    for (var j = -5000; j < 1700; j += 60) {
 
       var node = new Node(i, j, index.x, index.y);
       if (!node.isTouchingWall()) {

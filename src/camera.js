@@ -95,6 +95,10 @@ let camera = {
    * @return {undefined} no return value
    */
   draw: function() {
+    if(controls.isControlPressed("ACTIVATE")) {
+      console.log(this.screenToWorldPoint(controls.mouseX, controls.mouseY))
+
+    }
     if(!game.started) {
       return;
     }
@@ -198,7 +202,7 @@ let camera = {
     // draw the navigation nodes
     // TEMP: remove this, it's for testing only
     this.setFill('#9430e3');
-    if (false) {
+    if (0) {
       for (var i = 0; i < game.world.nodes.length; i++) {
         for (var j = 0; j < game.world.nodes[i].length; j++) {
 
@@ -231,7 +235,7 @@ let camera = {
 
     // TEMP: Only for testing guard.canSee();
     // Creates a grid of which points you can see
-    if (false) {
+    if (true) {
       for(var x = 0; x < 3000; x += 25) {
         for (var y = 1250; y < 10000; y+= 25) {
           if(game.world.guards[0].canSee(x, y)) {
@@ -536,7 +540,7 @@ let camera = {
     var pixelY1 = ((y1 - camera.y) * game.canvas.element.height) / camera.height;
 
     var pixelX2 = ((x2 - camera.x) * game.canvas.element.width) / camera.width;
-    var pixelY2 = ((y2 - camera.y) ``* game.canvas.element.height) / camera.height;
+    var pixelY2 = ((y2 - camera.y) * game.canvas.element.height) / camera.height;
 
     this.drawLine(pixelX1, pixelY1, pixelX2, pixelY2);
   },

@@ -24,6 +24,7 @@ let assetManager = {
     'sniper': 'assets/sniper.png',
     'dmr': 'assets/dmr.png',
     'ar': 'assets/ar.png',
+    'silentpistol': 'assets/silentpistol.png',
   },
 
   weaponSources: {
