@@ -1,0 +1,18 @@
+{
+    "resetTimestamp": 0,
+    "mouseRelease": true,
+    "requireMouseRelease": false,
+    "timeToReset": 150,
+    "ammo": 25,
+    "bulletsPerShot": 1,
+    "accuracy": 3,
+    "ammoPerClip": 25,
+    "ammoTotal": 100,
+    "timeToReload": 1000,
+    "noise": 1000,
+    "damage": 10,
+    "name": "ar",
+    "width": 235,
+    "height": 115,
+    "img": "ar"
+}

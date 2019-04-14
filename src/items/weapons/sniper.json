@@ -1,0 +1,18 @@
+{
+    "resetTimestamp": 0,
+    "mouseRelease": true,
+    "requireMouseRelease": true,
+    "timeToReset": 1000,
+    "ammo": 2,
+    "bulletsPerShot": 1,
+    "accuracy": 0,
+    "ammoPerClip": 2,
+    "ammoTotal": 8,
+    "timeToReload": 2500,
+    "noise": 2750,
+    "damage": 1000000000000,
+    "name": "sniper",
+    "width": 290,
+    "height": 100,
+    "img": "sniper"
+}

@@ -16,7 +16,14 @@ let assetManager = {
     'uzi': 'assets/uzi.png',
     'crate': 'assets/crate.png',
     'concrete': 'assets/concrete.png',
-    'computer': 'assets/computer.png'
+    'computer': 'assets/computer.png',
+    'revolver': 'assets/revolver.png',
+    'pumpshot': 'assets/pumpshot.png',
+    'dbshot': 'assets/dbshot.png',
+    'minigun': 'assets/minigun.png',
+    'sniper': 'assets/sniper.png',
+    'dmr': 'assets/dmr.png',
+    'ar': 'assets/ar.png',
   },
 
   weaponSources: {
@@ -24,6 +31,13 @@ let assetManager = {
     'pistol': '/items/weapons/pistol.json',
     'revolver': '/items/weapons/revolver.json',
     'uzi': '/items/weapons/uzi.json',
+    'ak': '/items/weapons/ak.json',
+    'dbshot': '/items/weapons/dbshotgun.json',
+    'minigun': '/items/weapons/minigun.json',
+    'sniper': '/items/weapons/sniper.json',
+    'dmr': '/items/weapons/dmr.json',
+    'silentpistol': '/items/weapons/silentpistol.json',
+    'ar': '/items/weapons/ar.json',
   },
 
   isDone: function() {

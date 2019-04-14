@@ -9,10 +9,10 @@
     "ammoPerClip": 10,
     "ammoTotal": 30,
     "timeToReload": 1000,
-    "noise": 750,
+    "noise": 200,
     "damage": 20,
-    "name": "pistol",
-    "width": 100,
+    "name": "silentpistol",
+    "width": 200,
     "height": 100,
-    "img": "pistol"
+    "img": "silentpistol"
 }

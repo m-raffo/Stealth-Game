@@ -1,0 +1,18 @@
+{
+    "resetTimestamp": 0,
+    "mouseRelease": true,
+    "requireMouseRelease": false,
+    "timeToReset": 150,
+    "ammo": 50,
+    "bulletsPerShot": 1,
+    "accuracy": 5,
+    "ammoPerClip": 50,
+    "ammoTotal": 150,
+    "timeToReload": 1000,
+    "noise": 1000,
+    "damage": 15,
+    "name": "ak",
+    "width": 235,
+    "height": 115,
+    "img": "ak47"
+}

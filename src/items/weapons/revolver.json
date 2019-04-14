@@ -2,7 +2,7 @@
     "resetTimestamp": 0,
     "mouseRelease": true,
     "requireMouseRelease": true,
-    "timeToReset": 750,
+    "timeToReset": 500,
     "ammo": 6,
     "bulletsPerShot": 1,
     "accuracy": 2,
@@ -11,5 +11,8 @@
     "timeToReload": 3500,
     "noise": 1250,
     "damage": 50,
-    "name": "revolver"
+    "width": 125,
+    "height": 125,
+    "name": "revolver",
+    "img": "revolver"
 }

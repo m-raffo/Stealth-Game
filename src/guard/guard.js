@@ -208,7 +208,7 @@ function Guard(startX, startY, direction){
      * Higher numbers means a less accurate weapon
      * @type {Number}
      */
-    accuracy: 5,
+    accuracy: 8,
 
     /**
      * The number of bullets in a full clip of the weapon
@@ -235,7 +235,7 @@ function Guard(startX, startY, direction){
     noise: 1500,
 
 
-    damage: 10,
+    damage: 7,
 
   };
 
