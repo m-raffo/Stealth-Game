@@ -95,6 +95,8 @@ function definePlayer() {
     // Basic values
     x: 200,
     y: 200,
+    // x: 800,
+    // y: -3700,
     width: 100,
     height: 100,
     speedX: 0,

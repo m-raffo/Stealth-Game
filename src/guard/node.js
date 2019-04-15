@@ -102,7 +102,7 @@ function defineNodes() {
   };
 
   // create all nodes
-  for (var i = -1000; i < 1300; i += 60) {
+  for (var i = -1500; i < 3500; i += 60) {
     game.world.nodes.push([]);
     index.x = 0;
     for (var j = -5000; j < 1700; j += 60) {

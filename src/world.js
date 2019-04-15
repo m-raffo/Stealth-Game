@@ -1,8 +1,8 @@
 /**
- * An object containing all of the door codes by door name. Used to place
- * the codes in the world for the player to find, as they change every game
- * @type {Object}
- */
+* An object containing all of the door codes by door name. Used to place
+* the codes in the world for the player to find, as they change every game
+* @type {Object}
+*/
 let doorCodes = {};
 
 let game = {};
@@ -17,11 +17,11 @@ function startGame() {
   requestAnimationFrame(game.mainLoop);
 
   /**
-   * The canvas element.
-   * @type {Object}
-   */
+  * The canvas element.
+  * @type {Object}
+  */
   game.canvas = {
-      element: document.getElementById("myCanvas")
+    element: document.getElementById("myCanvas")
   }
 
   game.canvas.ctx = game.canvas.element.getContext("2d");
@@ -32,9 +32,9 @@ function startGame() {
 
 function defineGame() {
   /**
-   * Define the namespace for all game operations
-   * @namespace
-   */
+  * Define the namespace for all game operations
+  * @namespace
+  */
   game = {
     lastFrameTimeMs: 0,
     delta: 0,
@@ -45,9 +45,9 @@ function defineGame() {
     },
 
     /**
-     * True if the game is running. False if not (ie paused)
-     * @type {Boolean}
-     */
+    * True if the game is running. False if not (ie paused)
+    * @type {Boolean}
+    */
     running: true,
 
     hideInfo: function() {
@@ -80,23 +80,23 @@ function defineGame() {
 
 
     /**
-     * The object that contains all of the data about the current level.
-     * @type {Object}
-     */
+    * The object that contains all of the data about the current level.
+    * @type {Object}
+    */
     world: {
 
       /**
-       * An array of all the noise in the world
-       * @type {Array}
-       */
+      * An array of all the noise in the world
+      * @type {Array}
+      */
       noise: [],
 
 
 
       /**
-       * An array of all the items in the world
-       * @type {Array}
-       */
+      * An array of all the items in the world
+      * @type {Array}
+      */
       items: [
         // new Computer(200, 200, {
         //   to: "fdavidson@chemlab.com",
@@ -107,26 +107,34 @@ function defineGame() {
         //   }
         // }),
         //
-        new Computer(2030, -1700, {
+        new Computer(2030, -1700, { // MAIN ENTRY COMPUTER
           to: "fdavidson@chemtec.com",
           from: "manager@chemtec.com",
           subject: "New assignment",
           get body() {
             return "Fred,\nI know that you have been recently bored with your normal patrol, and as Mr. Weston will be out this week, I'm giving you his position as the entry guard.\nYou are responsible for only allowing those with the proper clearance into the building. The door code for the main entry is: " + doorCodes['mainentry'] +"\nI expect no unauthorized visitors.\n\nSincerely,\nMr. Manager";
           }
-        })
+        }),
+
+        // ROOM 6 Medpack
+        new Medpack(2125, -4338, 30),
+
+        // ROOM 7 Medpack
+        new Medpack(-1318, -3284, 30),
+        new Medpack(-1168, -3284, 30),
 
       ],
 
       crates: [
-        new WeaponCrate(200, -500, 300, 300, weapons.silentpistol),
+        new WeaponCrate(200, -500, 300, 300, weapons.silentpistol), // room 1
+        new WeaponCrate(-400, -3650, 300, 300, weapons.shotgun), // room 7
 
       ],
 
       /**
-       * A list of room objects that contains all of the rooms in the level.
-       * @type {Array}
-       */
+      * A list of room objects that contains all of the rooms in the level.
+      * @type {Array}
+      */
       rooms:[
         new Room(0, 0, 1500, 1000, [ // room 0
           new Wall(-25, -25, 825.0, 50),
@@ -178,13 +186,13 @@ function defineGame() {
   new Room(0, -3000, 1500, 1500, [ // Room 3
     // new Wall(-25.0, -3025.0, 1550, 50),
     new Wall(-25, -3025, 551.0, 50),
-		new Wall(926.0, -3025, 599.0, 50),
+    new Wall(926.0, -3025, 599.0, 50),
 
 
     new Wall(-25.0, -3025.0, 50, 900),
     // new Wall(1475.0, -3025.0, 50, 1550),
     new Wall(1475, -3025, 50, 325.0),
-		new Wall(1475, -2300.0, 50, 825.0),
+    new Wall(1475, -2300.0, 50, 825.0),
 
   ],
 
@@ -193,16 +201,59 @@ function defineGame() {
   ]
 ),
 
-new Room(1500, -3000, 750, 1500, [
-          new Wall(1475.0, -3025.0, 800, 50),
-          new Wall(1475.0, -1525.0, 800, 50),
-          // new Wall(1475.0, -3025.0, 50, 1550),
-          new Wall(2225.0, -3025.0, 50, 1550),
+new Room(1500, -3000, 750, 1500, [ // room 4
+  new Wall(1475.0, -3025.0, 800, 50),
+  new Wall(1475.0, -1525.0, 800, 50),
+  // new Wall(1475.0, -3025.0, 50, 1550),
+  new Wall(2225.0, -3025.0, 50, 1550),
+
+],
+
+[
+  new Door(1463, -2710.0, 1463, -2310.0, 75, 420)
+]
+),
+
+new Room(0, -4500, 1500, 1500, [ // room 5
+  // new Wall(-25.0, -4525.0, 1550, 50),
+  // new Wall(-25.0, -4525.0, 50, 1550),
+
+
+  new Wall(-25, -4525, 50, 325.0),
+  		new Wall(-25, -3800.0, 50, 825.0),
+
+
+  new Wall(1475, -4525, 50, 825.0),
+  new Wall(1475, -3300.0, 50, 325.0),
+
+],
+
+[
+  new Door(1463, -3710.0, 1463, -3310.0, 75, 420)
+]
+),
+
+new Room(1500, -4500, 750, 1500, [ // room 6
+  new Wall(1475.0, -4525.0, 800, 50),
+  new Wall(1475.0, -3025.0, 800, 50),
+  new Wall(2225.0, -4525.0, 50, 1550),
+
+],
+
+[
+  // doors
+]
+),
+
+new Room(-1500, -4500, 1500, 1500, [  // room 7
+          new Wall(-1525.0, -4525.0, 1550, 50),
+          new Wall(-1525.0, -3025.0, 1550, 50),
+          new Wall(-1525.0, -4525.0, 50, 1550),
 
         	],
 
           [
-            new Door(1463, -2710.0, 1463, -2310.0, 75, 420)
+            new Door(-37, -4210.0, -37, -4610.0, 75, 420)
           ]
         ),
 
@@ -212,141 +263,147 @@ new Room(1500, -3000, 750, 1500, [
 
 
 
-  ],
+],
 
-      /**
-       * An array containing all of the guards
-       * @type {Array.Guard}
-       */
-      guards: [
-        // new Guard(1500, 500, -90),
-        // new Guard(-500, 500, 10),
-        new Guard(1000, -1100, 130)
-      ],
-    },
+/**
+* An array containing all of the guards
+* @type {Array.Guard}
+*/
+guards: [
+  // new Guard(1500, 500, -90),
+  // new Guard(-500, 500, 10),
+  new Guard(1000, -1100, 130),
+  new Guard(1900, -1700, 180),  // room 4
+  new Guard(1800, -4100, 180),  // room 6
 
-    /**
-     * Has the pause key been released since being pressed?
-     * Prevents very fast switching between paused and unpaused
-     * @type {Boolean}
-     */
-    pauseKeyReleased: true,
+  new Guard(-1235, -4200, 0),  // room 7
+  new Guard(-1235, -3800, 45),  // room 7
+  new Guard(-1035, -4000, 20),  // room 7
+],
+},
 
-    update: function(delta) {
-      if(!this.started) {
-        return;
+/**
+* Has the pause key been released since being pressed?
+* Prevents very fast switching between paused and unpaused
+* @type {Boolean}
+*/
+pauseKeyReleased: true,
+
+update: function(delta) {
+  if(!this.started) {
+    return;
+  }
+  camera.updateSize();
+  camera.updatePosition();
+
+  if(controls.isControlPressed('PAUSE')) {
+    if(this.pauseKeyReleased) {
+      this.pauseKeyReleased = false;
+      this.togglePlayPause();
+    }
+  } else {
+    this.pauseKeyReleased = true;
+  }
+
+  if(this.running) {
+    player.move();
+
+    for (var i = 0; i < game.world.guards.length; i++) {
+      game.world.guards[i].update();
+
+    }
+
+    // Loop backwards to not mess up i if a bullet is removed
+    for (var i = game.bullets.length -1; i >= 0; i--) {
+      game.bullets[i].move();
+
+      if (!game.bullets[i].active) {
+        game.bullets.splice(i, 1);
       }
-      camera.updateSize();
-      camera.updatePosition();
+    }
 
-      if(controls.isControlPressed('PAUSE')) {
-        if(this.pauseKeyReleased) {
-          this.pauseKeyReleased = false;
-          this.togglePlayPause();
-        }
+    // Remove expired noises
+    for (var i = game.world.noise.length -1; i >= 0; i--) {
+      if(game.world.noise[i].timeEnd > clock.now()) {
+        game.world.noise.splice(i, 1);
+      }
+    }
+
+
+    // Check if player has activated an object
+    for (var i = 0; i < game.world.items.length; i++) {
+      var currentItem = game.world.items[i];
+      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentItem.x + (currentItem.width / 2), currentItem.y + (currentItem.height / 2)) <= currentItem.width + player.width) {
+        currentItem.onPlayerActivate();
+      }
+    }
+
+
+    // Update crates
+    for (var i = 0; i < game.world.crates.length; i++) {
+      var currentCrate = game.world.crates[i];
+      if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentCrate.x + (currentCrate.width / 2), currentCrate.y + (currentCrate.height / 2)) <= currentCrate.width + player.width) {
+        currentCrate.open();
       } else {
-        this.pauseKeyReleased = true;
+        currentCrate.close();
       }
+    }
 
-      if(this.running) {
-        player.move();
+    for (var i = 0; i < game.world.rooms.length; i++) {
+      var room = game.world.rooms[i];
+      // Update Doors
+      for (var j = 0; j < room.doors.length; j++) {
+        var door = room.doors[j];
+        door.update();
 
-        for (var i = 0; i < game.world.guards.length; i++) {
-          game.world.guards[i].update();
-
-        }
-
-        // Loop backwards to not mess up i if a bullet is removed
-        for (var i = game.bullets.length -1; i >= 0; i--) {
-          game.bullets[i].move();
-
-          if (!game.bullets[i].active) {
-            game.bullets.splice(i, 1);
-          }
-        }
-
-        // Remove expired noises
-        for (var i = game.world.noise.length -1; i >= 0; i--) {
-          if(game.world.noise[i].timeEnd > clock.now()) {
-            game.world.noise.splice(i, 1);
-          }
-        }
-
-
-        // Check if player has activated an object
-        for (var i = 0; i < game.world.items.length; i++) {
-          var currentItem = game.world.items[i];
-          if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentItem.x + (currentItem.width / 2), currentItem.y + (currentItem.height / 2)) <= currentItem.width + player.width) {
-            currentItem.onPlayerActivate();
-          }
-        }
-
-
-        // Update crates
-        for (var i = 0; i < game.world.crates.length; i++) {
-          var currentCrate = game.world.crates[i];
-          if(controls.isControlPressed('ACTIVATE') &&  camera.distance(player.x, player.y, currentCrate.x + (currentCrate.width / 2), currentCrate.y + (currentCrate.height / 2)) <= currentCrate.width + player.width) {
-            currentCrate.open();
-          } else {
-            currentCrate.close();
-          }
-        }
-
-        for (var i = 0; i < game.world.rooms.length; i++) {
-          var room = game.world.rooms[i];
-            // Update Doors
-            for (var j = 0; j < room.doors.length; j++) {
-              var door = room.doors[j];
-              door.update();
-
-            }
-        }
       }
+    }
+  }
 
-    },
+},
 
-    mainLoop: function(timestamp) {
-      // Throttle the frame rate.
-      if (timestamp < game.lastFrameTimeMs + (1000 / MAX_FPS)) {
-          requestAnimationFrame(game.mainLoop);
-          return;
-      }
-      game.delta += timestamp - game.lastFrameTimeMs;
-      game.lastFrameTimeMs = timestamp;
+mainLoop: function(timestamp) {
+  // Throttle the frame rate.
+  if (timestamp < game.lastFrameTimeMs + (1000 / MAX_FPS)) {
+    requestAnimationFrame(game.mainLoop);
+    return;
+  }
+  game.delta += timestamp - game.lastFrameTimeMs;
+  game.lastFrameTimeMs = timestamp;
 
-      while (game.delta >= TIMESTEP) {
-          game.update(TIMESTEP);
-          game.delta -= TIMESTEP;
-      }
-      camera.draw();
-      requestAnimationFrame(game.mainLoop);
-    },
+  while (game.delta >= TIMESTEP) {
+    game.update(TIMESTEP);
+    game.delta -= TIMESTEP;
+  }
+  camera.draw();
+  requestAnimationFrame(game.mainLoop);
+},
 
-    /**
-     * Holds all of the bullet objects in the world
-     * @type {Array}
-     */
-    bullets: [],
-  };
+/**
+* Holds all of the bullet objects in the world
+* @type {Array}
+*/
+bullets: [],
+};
 
-  game.world.nodes = [];
+game.world.nodes = [];
 }
 
 
 
 
 /**
- * Stores the maximum number of frames to render per second.
- * @type {Number}
- * @default
- * @constant
- */
+* Stores the maximum number of frames to render per second.
+* @type {Number}
+* @default
+* @constant
+*/
 const MAX_FPS = 60;
 
 /**
- * The time constant for each render step of the world
- * @type {Number}
- * @constant
- * @default
- */
+* The time constant for each render step of the world
+* @type {Number}
+* @constant
+* @default
+*/
 const TIMESTEP = 1000 / 60;
