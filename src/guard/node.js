@@ -102,7 +102,8 @@ function defineNodes() {
   };
 
   // create all nodes
-  for (var i = -1500; i < 3500; i += 60) {
+  for (var i = -3000; i < 3500; i += 60) {
+    // TODO: Remove nodes that are not in a room to improve guard pathfinding time
     game.world.nodes.push([]);
     index.x = 0;
     for (var j = -5000; j < 1700; j += 60) {

@@ -93,10 +93,11 @@ function definePlayer() {
     First step: remove deltaTime from this function
      */
     // Basic values
-    x: 200,
-    y: 200,
-    // x: 800,
-    // y: -3700,
+    // x: 200,
+    // y: 200,
+    // [-2712.7365177195643, -3849.4838212634786]
+    x: -2712,
+    y: -3849,
     width: 100,
     height: 100,
     speedX: 0,

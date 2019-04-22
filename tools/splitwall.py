@@ -20,11 +20,17 @@ tempdoor = '''      new Door({0}, {1}, {2}, {3}, {4}, {5})
 
 doors = ''
 
-vorh = input('Vertical or horizontal: ')
+# vorh = input('Vertical or horizontal: ')
 
 upordown = input("Door open '+' or '-':")
 
 split = int(input('Where to split: '))
+
+if width > height:
+    vorh = 'h'
+else:
+    vorh = 'v'
+
 #
 # vorh = 'h'
 #

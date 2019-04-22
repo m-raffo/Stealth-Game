@@ -512,6 +512,7 @@ function Guard(startX, startY, direction){
    * @return {undefined}   no return value
    */
   this.setPath = function(x, y) {
+    // TODO: Path finding is causing delays in rendering, move pathfinding to another thread and continue rendering frames in the meantime
     var currentNode = this.findClosestNode();
     var targetNode = camera.findNodeAtPoint(x, y);
     this.path = game.world.astar.findPath(currentNode.gridX, currentNode.gridY, targetNode.gridX, targetNode.gridY);

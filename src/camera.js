@@ -202,7 +202,7 @@ let camera = {
     // draw the navigation nodes
     // TEMP: remove this, it's for testing only
     this.setFill('#9430e3');
-    if (0) {
+    if (false) {
       for (var i = 0; i < game.world.nodes.length; i++) {
         for (var j = 0; j < game.world.nodes[i].length; j++) {
 
