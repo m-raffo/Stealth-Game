@@ -144,7 +144,21 @@ function defineGame() {
           get body() {
             return "Hello H. Rossum!\n\nIt has come to my attention that your team has been having problems collaborating and working together well. These issues have recently progressed to the level that they are diminishing overall company productivity and profits.\nI recommend that you have your team complete 'team-building exercises in the conference room ever day before work. The room is on the East side of this section, right before the secure door to the next sector. The code for the conference room door is " + doorCodes['room12'] + ".\nI hope you are able to resolve this shortly.\n\nSincerely,\nMr. Manager";
           }
-        })
+        }),
+
+        // ROOM 12 Medpack and computer
+        // [2379.3312788905987, -3566.6194144838178]
+        new Medpack(2379, -3566, 30),
+        new Medpack(2379, -3366, 30),
+
+        new Computer(3457, -3294, {
+          to: "manager@chemtec.com",
+          from: "no-reply@chemtec.com",
+          subject: "[AUTO] SECUTIRY CODES",
+          get body() {
+            return "Mr. Manager,\nThese are the door codes for the following weeks for every section in the building. Please ensure the saftey of these codes, as they allow anyone full access to the building. For security reasons, DESTROY THIS EMAIL AFTER MEMORIZING THESE CODES. <i>This email was sent automatically, please to not reply. If there is an issue, contant it@chemtec.com</i>\n\n=====ATTACHMENT RECOVERED=====\n\nDOOR CODES\nSECTION 1 (Current section)   " + doorCodes["mainentry"] +"\nSECTION 2                     " + doorCodes["section2"] +"\nSECTION 3         o>#^,~Z^zsKF,v<VX<Pi&&Nv|2UEcXa-.*4*v|$bxHOA3GP7<O7v7I<1U7;<KW^DPS*&>e=Peh^7[^a!n34zoIDx1(To*=L72eq&rEH-VrE:!=vBL1fvjzJ-Yk9o6]9wgAy&|>XR.:e8YhpPW&}Cvl^&cFopLi*?{ph(:=964l)]U9UF*wFihGl3Pf{3!$!TiJub)X*RF{]R+=7ko/(Y2ZlDX7(i;qW%XNF5=[Gl/*Z#/=q~je<wd8%mz@fN#U5XcbF9<iW0VK;HQ!ygSW(-=+W$UaqxVtV*jmVQ~FR%wn3VGw_9w_Rl5=2=^}2GLY(403n|=e1[k&nyYf$>Bd_d.@Wc/6i,P_e$Dkpi*pKSeg>}:rsU&4&Na4}{AZ)[KKy)-Se+o%#+(_=?ckGw-h./2_r_@eJiUA9T@!L.+,0;h2r=.=bUb7(?oP\+XFk/XC6/PVHf-SK|MHEFI1tx2O9:{fd8>qpG5zyv%NZ/3@_:lbrnrg=86.>fVwb/dv!N29dTITBD]g,Cfiwf>#F,fR-e+O.6W%fU+u|^eK5;V7@gsXL;NDtZUn.D%4yX&Gh04c_==G-e7MJwZSXJ=v*eHm^W$XSZ5k@D9oe,(X.R>*+0T[JSx+N1S{M-6XTX~Vde&QHzJ-X4{GjRW64v[HMO6*R&7V>N$&aUML;~<ZZ+d1iio%@?m>Nyf?MN7r.!Ikb^Q>f^[DobD]J;Zm|G^hUY)1WcF![;jzYrRpU,z2e)QSf=W.%tU1d{XCF^5w}MMR-Tf{^|tN!-=if^ksAm@Jw1>iz&9lm]5U>wA#mzW^Xxi[teRltMn;YVP?A=3:Y#]vNR(AcJ3})y\n\n\n========END OF ATTACHMENT========"
+          }
+        }),
 
 
 
@@ -156,6 +170,8 @@ function defineGame() {
         new WeaponCrate(200, -500, 300, 300, weapons.silentpistol), // room 1
         new WeaponCrate(-400, -3650, 300, 300, weapons.shotgun), // room 7
         new WeaponCrate(-1954, -1991, 300, 300, weapons.uzi), // room 10
+        new WeaponCrate(2520, -4273, 300, 300, weapons.ak), // room 12
+
 
       ],
 
@@ -340,6 +356,21 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
                     ]
                   ),
 
+                  new Room(-3000, -5500, 6750, 1000, [ // room 11
+                           new Wall(-3025.0, -5525.0, 6800, 50),
+                           // new Wall(-3025.0, -4525.0, 6800, 50),
+                           new Wall(-3025.0, -5525.0, 50, 1050),
+                           // new Wall(3725.0, -5525.0, 50, 1050),
+                           new Wall(3725, -5525, 50, 325.0),
+                new Wall(3725, -4800.0, 50, 325.0),
+
+                                 ],
+
+                           [
+                             new Door(3713, -5210.0, 3713, -5610.0, 75, 420, true, 'section2')
+                           ]
+                         ),
+
 
                   new Room(2250, -4500, 1500, 1500, [ // room 12
                             // new Wall(2225.0, -4525.0, 1550, 50),
@@ -349,6 +380,9 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
                             new Wall(2225.0, -3025.0, 1550, 50),
                             new Wall(2225.0, -4525.0, 50, 1550),
                             new Wall(3725.0, -4525.0, 50, 1550),
+
+                            // new Wall(3725, -4525, 50, 575.0),
+                // new Wall(3725, -3550.0, 50, 575.0),
 
                                   ],
 
@@ -384,6 +418,13 @@ guards: [
 
   new Guard(-1706, -2608, 180), // ROOM 10
   new Guard(-1137, -2683, 35), // ROOM 10
+
+  // ROOM 12
+  new Guard(2685, -3684, 180),
+  new Guard(2685, -3284, -180),
+  new Guard(3285, -3684, 0),
+  new Guard(3285, -3284, 0),
+
 
 ],
 },
