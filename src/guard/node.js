@@ -7,7 +7,7 @@ function Node(x, y, gridX, gridY){
   this.gridX = gridX;
   this.gridY = gridY;
 
-  this.radius = 125;
+  this.radius = 175;
 
   this.score = {
     g:0,  // current cost

@@ -170,8 +170,8 @@ function defineGame() {
         new WeaponCrate(200, -500, 300, 300, weapons.silentpistol), // room 1
         new WeaponCrate(-400, -3650, 300, 300, weapons.shotgun), // room 7
         new WeaponCrate(-1954, -1991, 300, 300, weapons.uzi), // room 10
-        new WeaponCrate(2520, -4273, 300, 300, weapons.ak), // room 12
-
+        new WeaponCrate(2720, -4273, 300, 300, weapons.ak), // room 12
+        new WeaponCrate(3299, -1867, 300, 300, weapons.silentpistol), // room 13
 
       ],
 
@@ -377,7 +377,7 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
                             new Wall(2225, -4525, 1004.0, 50),
                new Wall(3629.0, -4525, 146.0, 50),
 
-                            new Wall(2225.0, -3025.0, 1550, 50),
+                            // new Wall(2225.0, -3025.0, 1550, 50),
                             new Wall(2225.0, -4525.0, 50, 1550),
                             new Wall(3725.0, -4525.0, 50, 1550),
 
@@ -390,6 +390,37 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
                               new Door(3219.0, -4537, 2819.0, -4537, 420, 75, true, "room12")
                             ]
                           ),
+
+                          new Room(2250, -3000, 750, 1500, [  // dummy room to fill empty space
+                                    new Wall(2225.0, -3025.0, 800, 50),
+                                    new Wall(2225.0, -1525.0, 800, 50),
+                                    new Wall(2225.0, -3025.0, 50, 1550),
+                                    new Wall(2975.0, -3025.0, 50, 1550),
+
+                                          ],
+
+                                    [
+                                      // doors
+                                    ]
+                                  ),
+
+
+
+                          new Room(3000, -3000, 750, 1500, [ // room 13
+                                    // new Wall(2975.0, -3025.0, 800, 50),
+                                    new Wall(2975, -3025, 200.0, 50),
+                                                   new Wall(3575.0, -3025, 200.0, 50),
+
+                                    new Wall(2975.0, -1525.0, 800, 50),
+                                    new Wall(2975.0, -3025.0, 50, 1550),
+                                    new Wall(3725.0, -3025.0, 50, 1550),
+
+                                          ],
+
+                                    [
+                                     new Door(3165.0, -3037, 3565.0, -3037, 420, 75)
+                                   ]
+                                  ),
 
 
 
