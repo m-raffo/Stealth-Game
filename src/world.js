@@ -123,14 +123,30 @@ function defineGame() {
         new Medpack(-1318, -3284, 30),
         new Medpack(-1168, -3284, 30),
 
-        // ROOM 8 Computer (Useless - no code)
-        // [-2132.1446532813643, -3163.390103026756]
+        // ROOM 8 Computer (Code for room 10)
         new Computer(-2132, -3263, {
           to: "learling@chemtec.com",
           from: "qhildebrand@chemtec.com",
           subject: "Protect your lunch!",
-          body: "Mr. Earling,\n\nI understand your complaints regarding the mysterious disapperance of your lunch, however there is nothing that we are able to do about it at this time. If the problem continues, feel free to store your lunch somewhere else, I don't care where.\n\n-Mr.Hildebrand\n\nPS-I've heard enough of your complaints! If you want to complain, complain to someone else."
+          get body() {
+            return "Mr. Earling,\n\nI understand your complaints regarding the mysterious disapperance of your lunch, however there is nothing that we are able to do about it at this time. If the problem continues, feel free to store your lunch somewhere else, I don't care where.\n\n-Mr.Hildebrand\n\nPS-I've heard enough of your complaints! If you want to complain, complain to someone else.\nPPS-If you office has no lock, you can store you lunch in Rossum's office, right next to yours. The code is: " + doorCodes['ten'];
+          }
+        }),
+
+        // ROOM 10 Medpack
+        new Medpack(-673, -2745, 30),
+
+        // ROOM 10 Computer
+        new Computer(-796, -1768, {
+          to: "hrossum@chemtec.com",
+          from: "manager@chemtec.com",
+          subject: "Team building",
+          get body() {
+            return "Hello H. Rossum!\n\nIt has come to my attention that your team has been having problems collaborating and working together well. These issues have recently progressed to the level that they are diminishing overall company productivity and profits.\nI recommend that you have your team complete 'team-building exercises in the conference room ever day before work. The room is on the East side of this section, right before the secure door to the next sector. The code for the conference room door is " + doorCodes['room12'] + ".\nI hope you are able to resolve this shortly.\n\nSincerely,\nMr. Manager";
+          }
         })
+
+
 
 
 
@@ -139,6 +155,7 @@ function defineGame() {
       crates: [
         new WeaponCrate(200, -500, 300, 300, weapons.silentpistol), // room 1
         new WeaponCrate(-400, -3650, 300, 300, weapons.shotgun), // room 7
+        new WeaponCrate(-1954, -1991, 300, 300, weapons.uzi), // room 10
 
       ],
 
@@ -319,9 +336,26 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
                           ],
 
                     [
-                      new Door(-2287, -2462.0, -2287, -2062.0, 75, 420)
+                      new Door(-2287, -2462.0, -2287, -2062.0, 75, 420, true, 'ten')
                     ]
                   ),
+
+
+                  new Room(2250, -4500, 1500, 1500, [ // room 12
+                            // new Wall(2225.0, -4525.0, 1550, 50),
+                            new Wall(2225, -4525, 1004.0, 50),
+               new Wall(3629.0, -4525, 146.0, 50),
+
+                            new Wall(2225.0, -3025.0, 1550, 50),
+                            new Wall(2225.0, -4525.0, 50, 1550),
+                            new Wall(3725.0, -4525.0, 50, 1550),
+
+                                  ],
+
+                            [
+                              new Door(3219.0, -4537, 2819.0, -4537, 420, 75, true, "room12")
+                            ]
+                          ),
 
 
 
@@ -347,6 +381,9 @@ guards: [
 
   new Guard(-2654, -3998, 180), // ROOM 9
   new Guard(-2654, -2458, 180), // ROOM 9
+
+  new Guard(-1706, -2608, 180), // ROOM 10
+  new Guard(-1137, -2683, 35), // ROOM 10
 
 ],
 },
