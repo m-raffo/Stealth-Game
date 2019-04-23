@@ -93,11 +93,11 @@ function definePlayer() {
     First step: remove deltaTime from this function
      */
     // Basic values
-    // x: 200,
-    // y: 200,
+    x: 200,
+    y: 200,
     //  [2038.878692697791, -7515.10806192781]
-    x: 2038,
-    y: -7515,
+    // x: 2038,
+    // y: -7515,
     width: 100,
     height: 100,
     speedX: 0,
@@ -455,6 +455,12 @@ function definePlayer() {
           this.health -= game.bullets[i].damage;
           game.bullets[i].active = false;
         }
+      }
+
+
+       [-2837.3827378870255, -6362.325707489936]
+      if (camera.pointInRect(this.x, this.y, -2837, -6362, 800, 1000)) {
+        alert("You win!!!!!");
       }
 
 

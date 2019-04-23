@@ -91,6 +91,12 @@ let camera = {
   height: 100,
 
   /**
+   * True when the alarm is sounding/red flashing on screen
+   * @type {Boolean}
+   */
+  alarmSounding: false,
+
+  /**
    * Draws the current world state to the screen
    * @return {undefined} no return value
    */
@@ -270,7 +276,10 @@ let camera = {
 
     }
 
-
+    if(this.alarmSounding && clock.now() % 1000 < 500) {
+      this.setFill('rgba(179,0,0,.55)');
+      this.drawBox(0, 0, game.canvas.element.width, game.canvas.element.height);
+    }
 
   },
 
@@ -643,7 +652,7 @@ let camera = {
     if (room.visibility > 0) {
       // Draw covering
       // TEMP: divided by two to allow me to see what's going on. This must be changed for the final build
-      this.setFill('rgba(0, 0, 0, ' + room.visibility / 2 + ')');
+      this.setFill('rgba(0, 0, 0, ' + room.visibility / 1 + ')');
       this.renderRect(room.x, room.y, room.width, room.height);
     }
 

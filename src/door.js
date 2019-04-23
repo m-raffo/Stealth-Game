@@ -26,7 +26,7 @@ const DOOR_OPEN_TIME = 3000;
  *
  * @constructor
  */
-function Door(x, y, openX, openY, width, height, beginLocked=false, name=undefined) {
+function Door(x, y, openX, openY, width, height, beginLocked=false, name=undefined, openOnEnd = false) {
     this.closeX = x;
     this.closeY = y;
 
@@ -37,6 +37,20 @@ function Door(x, y, openX, openY, width, height, beginLocked=false, name=undefin
 
     this.openX = openX;
     this.openY = openY;
+
+    this.openOnEnd = openOnEnd;
+    this.forced = false;
+
+    this.forceOpen = function() {
+      if(this.state === 'OPEN') {
+        return;
+      }
+      this.targetX = this.openX;
+      this.targetY = this.openY;
+      this.resetTime = clock.now() + DOOR_OPEN_TIME;
+      this.state = 'OPEN';
+      this.forced = true;
+    }
 
     /**
      * The passcode to unlock the door.
@@ -104,7 +118,7 @@ function Door(x, y, openX, openY, width, height, beginLocked=false, name=undefin
         }
       }
 
-      if (this.state === 'OPEN' && this.resetTime < clock.now()) {
+      if (this.state === 'OPEN' && this.resetTime < clock.now() && !this.forced) {
         this.close();
       }
     }

@@ -120,6 +120,8 @@ function Guard(startX, startY, direction){
 
   this.mode = 'STATION';
 
+  this.isGuard = true;
+
   this.path = [];
 
   this.alive = true;
@@ -232,7 +234,7 @@ function Guard(startX, startY, direction){
      * The amount of noise produced by the weapon when fired.
      * @type {Number}
      */
-    noise: 1500,
+    noise: 500,
 
 
     damage: 7,
@@ -297,13 +299,31 @@ function Guard(startX, startY, direction){
     // Check for damage by bullets
     // TODO: Damage modifier if the guard is unaware?
     for (var i = 0; i < game.bullets.length; i++) {
-      if(game.bullets[i].shooter !== this &&  camera.distance(game.bullets[i].x, game.bullets[i].y, this.x, this.y) <= this.width) {
+      if((game.bullets[i].shooter !== this && !game.bullets[i].shooter.isGuard) &&  camera.distance(game.bullets[i].x, game.bullets[i].y, this.x, this.y) <= this.width) {
         if(this.mode === 'FIGHT' || (this.mode === 'INVESTIGATE' && clock.now() > this.modeSwitchTimestamp)) {
           // TODO: Should the sneak damage modifier be applied when the guard is investigating? Maybe a lesser modifier?
           this.health -= game.bullets[i].damage;
           console.log("sneak modifier not used");
+
+          if (this.mode === 'INVESTIGATE') {
+            this.mode = 'FIGHT';
+            this.startExclaim();
+            this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
+          }
         } else {
           this.health -= game.bullets[i].damage * GUARD_SNEAK_MODIFIER;
+          if(this.mode === 'STATION') {
+            this.mode = 'INVESTIGATE';
+            this.startQuestion();
+            this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
+            this.target.x = player.x;
+            this.target.y = player.y;
+            this.setPath(this.target.x, this.target.y);
+          } else if (this.mode === 'INVESTIGATE') {
+            this.mode = 'FIGHT';
+            this.startExclaim();
+            this.modeSwitchTimestamp = clock.now() + GUARD_REACTION_TIME;
+          }
           console.log("sneak modifier used");
         }
 

@@ -10,7 +10,7 @@
     "ammoTotal": 30,
     "timeToReload": 1000,
     "noise": 200,
-    "damage": 20,
+    "damage": 40,
     "name": "silentpistol",
     "width": 200,
     "height": 100,

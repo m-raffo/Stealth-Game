@@ -173,6 +173,21 @@ function defineGame() {
         new Medpack(3182, -6530, 30),
 
 
+        // ROOM 18 Computer
+        //[341.8919577822512, -6854.107236583138]
+        new Computer(341, -6854, {
+          to: "guard5148@chemtec.com",
+          from: "cgoodman@chemtec.com",
+          subject: "ASSIGNMENT CHANGE",
+          get body() {
+            return "Greetings Guard #5148:\nI have given you a new assignment for this week. You will remain stationed in front of the secure storage locker. You should never leave this post, and you must ensure only authorized personel are allowed inside at ALL TIMES! The cargo inside is very important.\nThe door code to the exterior entry door is " + doorCodes["vault"] +".\nThis is a very important job. I am trusting you not to mess this up.\n\n-Mr. Goodman, Chemtec Inc. Security Manager"
+          }
+        }),
+
+        new Medpack(344, -5731, 30),
+        new Medpack(204, -5731, 30),
+
+
 
 
 
@@ -184,8 +199,9 @@ function defineGame() {
         new WeaponCrate(-1954, -1991, 300, 300, weapons.uzi), // room 10
         new WeaponCrate(2720, -4273, 300, 300, weapons.ak), // room 12
         new WeaponCrate(3299, -1867, 300, 300, weapons.silentpistol), // room 13
-
-      ],
+        // Opening this crate will trigger the end of the game
+        new WeaponCrate(-1179, -6450, 500, 500, weapons.minigun, true), // room 19
+        ],
 
       /**
       * A list of room objects that contains all of the rooms in the level.
@@ -457,7 +473,7 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
                       new Room(-3000, -8000, 6750, 1000, [ // room 15
          new Wall(-3025.0, -8025.0, 6800, 50),
 
-         new Wall(-3025.0, -7025.0, 4025, 50),
+         // new Wall(-3025.0, -7025.0, 4025, 50),
          new Wall( 1700.0, -7025.0, 2050, 50),
 
 
@@ -512,7 +528,10 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
     new Room(150, -7000, 800, 1500, [     // room 18
               new Wall(125.0, -7025.0, 850, 50),
               new Wall(125.0, -5525.0, 850, 50),
-              new Wall(125.0, -7025.0, 50, 1550),
+              // new Wall(125.0, -7025.0, 50, 1550),
+              new Wall(125, -7025, 50, 575.0),
+                new Wall(125, -6050.0, 50, 575.0),
+
 
               // new Wall(925.0, -7025.0, 50, 1550),
               new Wall(925, -7025, 50, 575.0),
@@ -521,10 +540,43 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
             	],
 
               [
-                new Door(913, -6460.0, 913, -6060.0, 75, 420)
+                new Door(913, -6460.0, 913, -6060.0, 75, 420, true, "vault"),
+                  new Door(113, -6460.0, 113, -6060.0, 75, 420)
 
               ]
             ),
+
+
+            new Room(-1850, -7000, 2000, 1500, [ // room 19
+                   new Wall(-1875.0, -7025.0, 2050, 50),
+                   new Wall(-1875.0, -5525.0, 2050, 50),
+                   new Wall(-1875.0, -7025.0, 50, 1550),
+                   // new Wall(125.0, -7025.0, 50, 1550),
+
+                         ],
+
+                   [
+                     // doors
+                   ]
+                 ),
+
+
+                 new Room(-3000, -7000, 1150, 1500, [ //  room 20
+          // new Wall(-3025.0, -7025.0, 1200, 50),
+          new Wall(-3025, -7025, 400.0, 50),
+               new Wall(-2225.0, -7025, 400.0, 50),
+
+
+          new Wall(-3025.0, -5525.0, 1200, 50),
+          new Wall(-3025.0, -7025.0, 50, 1550),
+          new Wall(-1875.0, -7025.0, 50, 1550),
+
+                ],
+
+          [
+          new Door(-2635.0, -7037, -2235.0, -7037, 420, 75, true, 'finalroom', true)
+          ]
+        ),
 
 
 
@@ -568,7 +620,7 @@ guards: [
   new Guard(4198, -7265, 90),
 
   // ROOM 16
-  new Guard(1319, -6209, -30),
+  new Guard(469, -6209, -30),
 
   // ROOM 17
   // [2342.83033846154, -5918.118629220498]
