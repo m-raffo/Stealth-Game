@@ -535,6 +535,10 @@ guards: [
   // ROOM 13
   new Guard(4198, -7265, 90),
 
+  // ROOM 16
+  new Guard(1319, -6209, -30),
+
+
 
 ],
 },

@@ -201,7 +201,7 @@ let camera = {
 
     // draw the navigation nodes
     // TEMP: remove this, it's for testing only
-    this.setFill('#9430e3');
+    this.setFill('rgba(148, 48, 227, 0.09)');
     if (false) {
       for (var i = 0; i < game.world.nodes.length; i++) {
         for (var j = 0; j < game.world.nodes[i].length; j++) {
@@ -643,7 +643,7 @@ let camera = {
     if (room.visibility > 0) {
       // Draw covering
       // TEMP: divided by two to allow me to see what's going on. This must be changed for the final build
-      this.setFill('rgba(0, 0, 0, ' + room.visibility / 1+ ')');
+      this.setFill('rgba(0, 0, 0, ' + room.visibility / 2 + ')');
       this.renderRect(room.x, room.y, room.width, room.height);
     }
 

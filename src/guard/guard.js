@@ -412,6 +412,10 @@ function Guard(startX, startY, direction){
         this.target.x = randomNode.x;
         this.target.y = randomNode.y;
         this.setPath(this.target.x, this.target.y);
+        console.error("New path to: ",this.target.x, this.target.y);
+        console.error(this.path[this.path.length-1].x, this.path[this.path.length-1].y);
+        console.error(this.path[0].x, this.path[0].y);
+
       }
 
       this.shoot();
@@ -462,6 +466,7 @@ function Guard(startX, startY, direction){
 
     if(this.path.length > 0 && camera.distance(this.x, this.y, this.path[this.path.length - 1].x, this.path[this.path.length - 1].y) < 100) {
       this.path.pop();
+      console.log("Removed node!");
       if(this.path.length <= 0 && this.mode === 'INVESTIGATE') {
         this.target.investigate_done = clock.now() + 3000;
       }
