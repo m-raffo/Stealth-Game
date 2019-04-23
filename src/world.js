@@ -198,7 +198,7 @@ function defineGame() {
         new WeaponCrate(-400, -3650, 300, 300, weapons.shotgun), // room 7
         new WeaponCrate(-1954, -1991, 300, 300, weapons.uzi), // room 10
         new WeaponCrate(2720, -4273, 300, 300, weapons.ak), // room 12
-        new WeaponCrate(3299, -1867, 300, 300, weapons.silentpistol), // room 13
+        new WeaponCrate(3299, -1867, 300, 300, weapons.dbshotgun), // room 13
         // Opening this crate will trigger the end of the game
         new WeaponCrate(-1179, -6450, 500, 500, weapons.minigun, true), // room 19
         ],

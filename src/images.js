@@ -1,8 +1,10 @@
 let assets = {
   images: {},
+  sounds: {},
 };
 
-var weapons = {};
+var weapons = {
+};
 
 
 // window.onload = function() {
@@ -88,6 +90,12 @@ let assetManager = {
       }
     }
   },
+
+  downloadSounds: function() {
+    assets.sounds.pistol = new Howl({
+      src: ['/assets/sounds/pistol.mp3']
+    });
+  }
 
 
 }
