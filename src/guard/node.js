@@ -1,3 +1,5 @@
+var totalNodes = 0;
+
 function Node(x, y, gridX, gridY){
   this.x = x;
   this.y = y;
@@ -42,6 +44,17 @@ function Node(x, y, gridX, gridY){
       }
     }
 
+  }
+
+  this.inRoom = function() {
+    for (var i = 0; i < game.world.rooms.length; i++) {
+      var room = game.world.rooms[i];
+      if(camera.pointInRect(this.x, this.y, room.x, room.y, room.width, room.height)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
 
@@ -109,8 +122,9 @@ function defineNodes() {
     for (var j = -8000; j < 1700; j += 60) {
 
       var node = new Node(i, j, index.x, index.y);
-      if (!node.isTouchingWall()) {
+      if (!node.isTouchingWall() && node.inRoom()) {
         game.world.nodes[index.y][index.x] = node;
+        totalNodes++;
       } else {
         game.world.nodes[index.y][index.x] = undefined;
 

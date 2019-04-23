@@ -160,6 +160,18 @@ function defineGame() {
           }
         }),
 
+        // ROOM 17 COMPUTER
+        // [3355.275848095726, -5891.346955946678]
+        new Computer(3355, -5891, { // no code, only to give a 'hint' about the secure weapons storage
+          to: "jrush@chemtec.com",
+          from: "cgoodman@chemtec.com",
+          subject: "Weapons program",
+          body: "Hey Josh,\nI understand that your team's weapons program is making significant progress. I am very please to hear about its development. Such technology is very advanced, and will become (if it's not already) very valuable and the target of theft. As the company's security manager, I respectfully require that you increase the security around the weapon's storage.\n\nTo assist, I have already placed a passcode lock on the door to the storage room (across from your office), and stationed a guard inside full-time. Please see me to retrieve the code, I an wary to send it over the network.\n\nBest of luck,\nMr. Goodman, Chemtec Inc. Security Manager"
+        }),
+
+        new Medpack(3182, -6730, 30),
+        new Medpack(3182, -6530, 30),
+
 
 
 
@@ -466,7 +478,7 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
           new Wall(925, -7025, 225.0, 50),
 		new Wall(1550.0, -7025, 225.0, 50),
           // new Wall(925.0, -5525.0, 850, 50),
-          new Wall(925.0, -7025.0, 50, 1550),
+          // new Wall(925.0, -7025.0, 50, 1550),
 
 
           // new Wall(1725.0, -7025.0, 50, 1550),
@@ -482,6 +494,8 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
           ]
         ),
 
+
+
         new Room(1750, -7000, 2000, 1500, [ // room 17
                 // new Wall(1725.0, -7025.0, 2050, 50),
                 // new Wall(1725.0, -7025.0, 50, 1550),
@@ -493,6 +507,24 @@ new Room(-1500, -4500, 1500, 1500, [  // room 7
                   // doors
                 ]
               ),
+
+
+    new Room(150, -7000, 800, 1500, [     // room 18
+              new Wall(125.0, -7025.0, 850, 50),
+              new Wall(125.0, -5525.0, 850, 50),
+              new Wall(125.0, -7025.0, 50, 1550),
+
+              // new Wall(925.0, -7025.0, 50, 1550),
+              new Wall(925, -7025, 50, 575.0),
+		new Wall(925, -6050.0, 50, 575.0),
+
+            	],
+
+              [
+                new Door(913, -6460.0, 913, -6060.0, 75, 420)
+
+              ]
+            ),
 
 
 
@@ -537,6 +569,12 @@ guards: [
 
   // ROOM 16
   new Guard(1319, -6209, -30),
+
+  // ROOM 17
+  // [2342.83033846154, -5918.118629220498]
+  new Guard(2292, -6547, 30+180),
+  new Guard(2342, -5918, 180-30),
+
 
 
 
