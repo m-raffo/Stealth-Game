@@ -5,7 +5,7 @@
  * @constant
  * @default
  */
-const CAM_TARGET_HEIGHT = 3500;// * 2.5;
+const CAM_TARGET_HEIGHT = 3500 ;//* 2.5;
 /**
  * The ideal width for the camera, it is adjusted to meet the player's screen
  *   dimentions
@@ -13,7 +13,7 @@ const CAM_TARGET_HEIGHT = 3500;// * 2.5;
  * @constant
  * @default
  */
-const CAM_TARGET_WIDTH = 6200;//  * 2.5;
+const CAM_TARGET_WIDTH = 6200  ;//* 2.5;
 
 /**
  * The speed at which the camera tracks the player's movements
