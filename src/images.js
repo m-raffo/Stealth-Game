@@ -93,7 +93,7 @@ let assetManager = {
 
   downloadSounds: function() {
     assets.sounds.pistol = new Howl({
-      src: ['/assets/sounds/pistol.mp3']
+      src: ['/assets/sounds/pistol.wav'],
     });
   }
 

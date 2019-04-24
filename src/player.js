@@ -418,6 +418,7 @@ function definePlayer() {
             }
 
             game.bullets.push(new Bullet(player.x, player.y, speedX, speedY, this, this.weapon.damage));
+            assets.sounds.pistol.play();
           }
 
           game.world.noise.push(new Noise(player.x, player.y, this.weapon.noise));
