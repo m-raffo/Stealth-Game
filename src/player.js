@@ -431,6 +431,8 @@ function definePlayer() {
         } else {
           // TODO: Replace this with a click sound effect
           console.log("CLICK"); // The gun is empty
+          assets.sounds.click.play();
+          this.weapon.resetTimestamp = clock.now() + this.weapon.timeToReset;
         }
 
       }

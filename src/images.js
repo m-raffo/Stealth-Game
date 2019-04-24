@@ -130,6 +130,11 @@ let assetManager = {
       loop: true,
       autoplay: true,
     });
+
+    assets.sounds.click = new Howl({
+      src: ['/assets/sounds/click.wav'],
+
+    });
   }
 
 
