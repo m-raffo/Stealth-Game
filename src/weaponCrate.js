@@ -41,6 +41,7 @@ function WeaponCrate (x, y, width, height, weapon, triggerEnd = false) {
         setTimeout(function() {
           // Set off the alarm
           camera.alarmSounding = true;
+          assets.sounds.alarm.play();
           setTimeout( function() {
             // Force open the final door(s)
             for (var i = 0; i < game.world.rooms.length; i++) {

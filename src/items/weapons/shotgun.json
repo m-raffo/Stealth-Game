@@ -2,17 +2,18 @@
     "resetTimestamp": 0,
     "mouseRelease": true,
     "requireMouseRelease": true,
-    "timeToReset": 450,
+    "timeToReset": 1000,
     "ammo": 6,
     "bulletsPerShot": 5,
     "accuracy": 13,
     "ammoPerClip": 6,
-    "ammoTotal": 18,
+    "ammoTotal": 12,
     "timeToReload": 1000,
     "noise": 800,
-    "damage": 12,
+    "damage": 25,
     "width": 255,
     "height": 175,
     "name": "shotgun",
-    "img": "pumpshot"
+    "img": "pumpshot",
+    "sound": "shotgun"
 }

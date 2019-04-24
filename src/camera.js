@@ -171,12 +171,20 @@ let camera = {
       camera.renderEllipse(bullet.x, bullet.y, 10, 10);
     }
 
+    // Draw alarm notice in the (almost) final room
+      this.setFill("#000");
+      this.setFont("bold 40px arial");[-944.3727397908269, -6644.452177461085]
+    this.renderTextCenter(-944, -6644, "WARNING: This room is alarmed!");
 
-    // render room coverings
-    for (var i = 0; i < game.world.rooms.length; i++) {
-      var currentRoom = game.world.rooms[i];
-      this.renderRoomCovering(currentRoom);
+    // Don't draw the room coverings when the alarm light is on
+    if(!(this.alarmSounding && clock.now() % 1000 < 500)) {
+      // render room coverings
+      for (var i = 0; i < game.world.rooms.length; i++) {
+        var currentRoom = game.world.rooms[i];
+        this.renderRoomCovering(currentRoom);
+      }
     }
+
 
     // render room walls
     for (var i = 0; i < game.world.rooms.length; i++) {

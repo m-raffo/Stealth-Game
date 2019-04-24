@@ -179,12 +179,16 @@ function definePlayer() {
 
       damage: 25,
 
+      sound: 'pistol',
+
 
 
 
     },
 
     weapon: JSON.parse(JSON.stringify(weapons.pistol)),
+
+    makeNoiseAgain: clock.now(),
 
     /**
      * Updates the on-screen display to reflect the current ammo state
@@ -208,8 +212,10 @@ function definePlayer() {
         alert("YOU'RE DEAD!!!");
       }
 
-      if(controls.isControlPressed('MAKE_NOISE')) {
+      if(controls.isControlPressed('MAKE_NOISE') && clock.now() > this.makeNoiseAgain) {
+        this.makeNoiseAgain = clock.now() + 1000;
         game.world.noise.push(new Noise(player.x, player.y, PLAYER_MAKE_NOISE_LEVEL));
+        assets.sounds.whistle.play();
         console.log("making noise");
       }
 
@@ -418,7 +424,7 @@ function definePlayer() {
             }
 
             game.bullets.push(new Bullet(player.x, player.y, speedX, speedY, this, this.weapon.damage));
-            assets.sounds.pistol.play();
+            assets.sounds[this.weapon.sound].play();
           }
 
           game.world.noise.push(new Noise(player.x, player.y, this.weapon.noise));

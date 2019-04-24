@@ -612,8 +612,8 @@ guards: [
 
   // ROOM 12
   new Guard(2685, -3684, 180),
-  new Guard(2685, -3284, -180),
-  new Guard(3285, -3684, 0),
+  // new Guard(2685, -3284, -180),
+  // new Guard(3285, -3684, 0),
   new Guard(3285, -3284, 0),
 
   // ROOM 13

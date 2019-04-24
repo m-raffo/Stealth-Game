@@ -14,5 +14,6 @@
     "name": "minigun",
     "width": 235,
     "height": 115,
-    "img": "minigun"
+    "img": "minigun",
+    "sound" : "mini"
 }

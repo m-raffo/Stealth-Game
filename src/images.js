@@ -95,6 +95,41 @@ let assetManager = {
     assets.sounds.pistol = new Howl({
       src: ['/assets/sounds/pistol.wav'],
     });
+
+    assets.sounds.silenced = new Howl({
+      src: ['/assets/sounds/silenced.wav'],
+    });
+
+    assets.sounds.shotgun = new Howl({
+      src: ['/assets/sounds/shotgun.wav'],
+    });
+
+    assets.sounds.uzi = new Howl({
+      src: ['/assets/sounds/uzi.wav'],
+    });
+
+    assets.sounds.ak = new Howl({
+      src: ['/assets/sounds/ak.wav'],
+    });
+
+    assets.sounds.mini = new Howl({
+      src: ['/assets/sounds/minigun.wav'],
+    });
+
+    assets.sounds.alarm = new Howl({
+      src: ['/assets/sounds/alarm.wav'],
+      loop: true
+    });
+
+    assets.sounds.whistle = new Howl({
+      src: ['/assets/sounds/whistle.wav'],
+    });
+
+    assets.sounds.background = new Howl({
+      src: ['/assets/sounds/background.wav'],
+      loop: true,
+      autoplay: true,
+    });
   }
 
 
