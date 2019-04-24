@@ -277,6 +277,8 @@ function Guard(startX, startY, direction){
 
 
         game.bullets.push(new Bullet(this.x, this.y, speedX, speedY, this, this.weapon.damage));
+        assets.sounds.pistol.play();
+        
         game.world.noise.push(new Noise(this.x, this.y, this.weapon.noise));
       } else {
         // Reload
