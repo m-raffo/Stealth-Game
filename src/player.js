@@ -467,8 +467,8 @@ function definePlayer() {
       }
 
 
-       [-2837.3827378870255, -6362.325707489936]
-      if (camera.pointInRect(this.x, this.y, -2837, -6362, 800, 1000)) {
+      //  [-2837.3827378870255, -6362.325707489936]
+      if (camera.pointInRect(this.x, this.y, -2837, -6362, 800, 800)) {
         alert("You win!!!!!");
       }
 
