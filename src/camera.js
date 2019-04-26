@@ -762,6 +762,13 @@ let camera = {
     if(!item.img) {
       this.setFill(item.color);
       this.renderRect(item.x, item.y, item.width, item.height);
+
+      if(item.isMedpack) {
+        this.setFill('#c30000');
+        var barwidth = 20;
+        this.renderRect(item.x + (item.width / 2) - (barwidth / 2), item.y + 10, barwidth, item.height - 20);
+        this.renderRect(item.x + 10, item.y + (item.height / 2) - (barwidth / 2), item.width - 20, barwidth);
+      }
     } else {
       var extra;
       if(item.bounceHeight) {

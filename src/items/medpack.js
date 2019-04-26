@@ -2,6 +2,8 @@ function Medpack(x, y, healAmount) {
   this.x = x;
   this.y = y;
 
+  this.isMedpack = true;
+
   this.width = 100;
   this.height = 100;
 
