@@ -1,0 +1,167 @@
+#ammoDisplay{
+  position: absolute;
+  z-index: 2;
+  background: red;
+  right: 0;
+  bottom: 0;
+}
+
+#container {
+  position: relative;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.healthDisplay {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+
+  left: 30%;
+
+  width: 40%;
+  height: 3%;
+  background-color: #c12727;
+}
+
+.healthDisplayRemaining {
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+
+  left: 30%;
+
+  width: 35%;
+  height: 3%;
+  background-color: #17710d;
+}
+
+.info{
+  display: none;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+
+    background-color: black;
+
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-color: #9f9b9e;
+    border-style: solid;
+    border-width: 10px;
+    border-radius: 2px;
+
+    overflow: scroll;
+  }
+
+.infoBody {
+  margin: 10px;;
+  color: #80ff00;
+  font-family: monospace;
+}
+
+.infoBody h1 {
+  font-size: 1.2em;
+}
+
+.infoBody p {
+  font-size: 1em;
+  white-space: pre-line
+}
+
+.infoBody a:hover {
+  cursor: pointer;
+}
+
+.panel{
+  display: none;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 20%;
+    height: 50%;
+
+    background-color: #9f9b9e;
+
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-color: black;
+    border-style: solid;
+    border-width: 10px;
+    border-radius: 2px;
+}
+
+.panelBody {
+  color: #80ff00;
+  font-family: monospace;
+
+  overflow-y: auto;
+
+  user-select: none;
+       -moz-user-select: none;
+       -khtml-user-select: none;
+       -webkit-user-select: none;
+       -o-user-select: none;
+}
+
+/* .button-container {
+  width: 520px;
+  background: gray;
+
+} */
+
+.panelBody > a {
+  display: block;
+    width: 28%;
+    height: 20%;
+    padding-top:  8%;
+    padding-bottom:  8%;
+    float: left;
+    background: lightgray;
+    margin: 2%;
+    text-align: center;
+    color: black;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.panelBody > a:active {
+  display: block;
+    width: 28%;
+    height: 20%;
+    padding-top:  8%;
+    padding-bottom:  8%;
+    float: left;
+    background: darkgrey;
+    margin: 2%;
+    text-align: center;
+    color: black;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.panelBody > h1 {
+  display: block;
+    width: 19%;
+    padding-top:  5%;
+    padding-bottom:  5%;
+    float: left;
+    background: lightgray;
+    margin: 2%;
+    text-align: center;
+    color: black;
+    border: solid;
+    border-radius: 2px;
+    border-width: 2px;
+}

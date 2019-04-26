@@ -1,0 +1,18 @@
+{
+    "resetTimestamp": 0,
+    "mouseRelease": true,
+    "requireMouseRelease": true,
+    "timeToReset": 500,
+    "ammo": 15,
+    "bulletsPerShot": 1,
+    "accuracy": 3,
+    "ammoPerClip": 15,
+    "ammoTotal": 60,
+    "timeToReload": 1500,
+    "noise": 750,
+    "damage": 20,
+    "name": "dmr",
+    "width": 290,
+    "height": 100,
+    "img": "dmr"
+}

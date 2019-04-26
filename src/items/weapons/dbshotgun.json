@@ -1,0 +1,18 @@
+{
+    "resetTimestamp": 0,
+    "mouseRelease": true,
+    "requireMouseRelease": true,
+    "timeToReset": 300,
+    "ammo": 2,
+    "bulletsPerShot": 10,
+    "accuracy": 16,
+    "ammoPerClip": 2,
+    "ammoTotal": 12,
+    "timeToReload": 1250,
+    "noise": 1500,
+    "damage": 10,
+    "width": 215,
+    "height": 125,
+    "name": "dbshot",
+    "img": "dbshot"
+}

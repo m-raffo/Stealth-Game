@@ -1,10 +1,15 @@
 site_name: Stealth Game Docs
 nav:
-  - Main: sketch.js.md
-  - Item: item.js.md
-  - Camera: cam.js.md
-  - Controls: controls.js.md
-  - Player: player.js.md
+  - Home: index.md
+  - player: player.js.md
+  - camera: cam.js.md
+  - canvas: canvas.js.md
+  - controls: controls.js.md
+  - item: item.js.md
+  - level: level.js.md
+  - player: player.js.md
+  - setup: setup.js.md
+  - sketch: sketch.js.md
 
 
 

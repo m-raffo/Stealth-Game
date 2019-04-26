@@ -1,20 +1,139 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>p5.js example</title>
-    <style> body {padding: 0; margin: 0;} </style>
+    <title>Stealth Game</title>
 
-    <script src="p5.js"></script>
+    <style>
+        	* { padding: 0; margin: 0; }
+        	canvas { background: #eee; display: block; margin: 0 auto; }
+        </style>
 
-    <script src="item.js"></script>
-    <script src="controls.js"></script>
-    <script src="cam.js"></script>
-    <script src="player.js"></script>
-    <script src="sketch.js"></script>
+        <link rel="stylesheet" href="/style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js">
+
+  </script>
+
 
   </head>
-  <body>
+  <body oncontextmenu="return false;">
+    <div id="container">
+      <canvas id="myCanvas" width="480" height="480"></canvas>
+
+      <!-- TODO: Make this look nicer, it is looks TERRIBLE -->
+      <h1 id="ammoDisplay" class="unselectable">This is the display</h1>
+      <div class="healthDisplay">
+
+      </div>
+      <div class="healthDisplayRemaining">
+
+      </div>
+
+      <div class="info">
+        <div class="infoBody">
+          <h1>HACKING COMPUTER &lt&lt&ltEMAIL RECOVERED&gt&gt&gt</h1>
+
+          <br />
+          <p>============================</p>
+          <p id="infoTo">TO: me\</p>
+          <p id="infoFrom">FROM: you</p>
+          <p id="infoSubject">SUBJECT: Test message</p>
+
+          <p>============================</p>
+          <p id="infoBody">
+            This is a test message
+          </p>
+
+          <br />
+          <br />
+          <br />
+          <br />
+          <a onclick="game.hideInfo();">X Close</a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panelBody">
+        <h1 id="d1">*</h1>
+        <h1 id="d2">*</h1>
+        <h1 id="d3">*</h1>
+        <h1 id="d4">*</h1>
+      </div>
+      <br />
+      <br />
+      <div class="panelBody">
+        <a onclick="keypad.pressed('1')">1</a>
+        <a onclick="keypad.pressed('2')">2</a>
+        <a onclick="keypad.pressed('3')">3</a>
+        <a onclick="keypad.pressed('4')">4</a>
+        <a onclick="keypad.pressed('5')">5</a>
+        <a onclick="keypad.pressed('6')">6</a>
+        <a onclick="keypad.pressed('7')">7</a>
+        <a onclick="keypad.pressed('8')">8</a>
+        <a onclick="keypad.pressed('9')">9</a>
+        <a>#</a>
+        <a onclick="keypad.pressed('0')">0</a>
+        <a>*</a>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
   </body>
+
+  <script src="/items/weaponItem.js"></script>
+
+  <script src="/items/keypad.js"></script>
+  <script src="/items/medpack.js"></script>
+  <script src="/items/computer.js"></script>
+
+  <script src="/clock.js"></script>
+
+  <script src="/items/weapons/weapons.js"></script>
+
+  <script src="/weaponCrate.js"></script>
+
+
+  <script src="/guard/noise.js"></script>
+
+  <script src="/guard/guard.js"></script>
+
+
+  <script src="/door.js"></script>
+
+  <script src="/item.js"></script>
+
+  <script src="/room.js"></script>
+  <script src="/bullet.js"></script>
+
+  <script src="/camera.js"></script>
+  <script src="/player.js"></script>
+
+  <script src="/controls.js"></script>
+  <script src="/box.js"></script>
+
+  <script src="/world.js"></script>
+
+  <script src="/images.js"></script>
+
+
+  <script src="/guard/node.js"></script>
+  <script src="/guard/astar.js"></script>
+
+  <script src="/game.js"></script>
+
+
+
+
+
 </html>

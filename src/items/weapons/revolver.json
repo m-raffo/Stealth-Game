@@ -1,0 +1,18 @@
+{
+    "resetTimestamp": 0,
+    "mouseRelease": true,
+    "requireMouseRelease": true,
+    "timeToReset": 500,
+    "ammo": 6,
+    "bulletsPerShot": 1,
+    "accuracy": 2,
+    "ammoPerClip": 6,
+    "ammoTotal": 12,
+    "timeToReload": 3500,
+    "noise": 1250,
+    "damage": 50,
+    "width": 125,
+    "height": 125,
+    "name": "revolver",
+    "img": "revolver"
+}
